@@ -1,3 +1,8 @@
 .idea/
 **/migrations/
 !**/migrations/__init__.py
+frontend/dist/
+frontend/node_modules/
+frontend/src/icons/
+frontend/src/img/
+stock/

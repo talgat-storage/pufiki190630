@@ -1,0 +1,37 @@
+.css-origin-carousel-control {
+  background-color: map_get($grays, "100");
+  &:hover {
+    background-color: map_get($grays, "200");
+    cursor: pointer;
+  }
+}
+
+.css-origin-carousel-zoom-parent {
+  position: relative;
+
+  .css-origin-carousel-zoom {
+    position: absolute;
+    z-index: 4;
+
+    top: $spacer;
+    right: $spacer;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    height: 32px;
+    width: 32px;
+
+    background-image: url("../icons/zoom_in_48px_gray.png");
+  }
+}
+
+.css-origin-collapse {
+  color: map_get($theme-colors, "color-gray-700");
+
+  &:hover {
+    background-color: map_get($grays, "200");
+    color: map_get($theme-colors, "color-black");
+    cursor: pointer;
+  }
+}

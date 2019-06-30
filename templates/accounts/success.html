@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Pufiki.kz | Готово
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row bg-light">
+            <div class="col-12 py-1"></div>
+        </div>
+        <div class="row bg-white px-lg-5">
+            <div class="col-12 my-3">
+                <div class="h2 font-weight-normal">
+                    Готово
+                </div>
+                <div class="d-block">
+                    <hr>
+                </div>
+                <div class="h5 font-weight-normal">
+                    {% autoescape off %}
+                        {{ body }}
+                    {% endautoescape %}
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                    <div class="d-inline-block">
+                        <img class="d-block css-width-100px" src="{% static 'img/checked_125px.png' %}" alt="Готово">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block filler %}
+<div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
+{% endblock %}

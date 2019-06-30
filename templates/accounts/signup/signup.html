@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Pufiki.kz | Создание аккаунта
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row bg-light">
+            <div class="col-12 py-1"></div>
+        </div>
+        <div class="row bg-white px-lg-5">
+            <div class="col-12 my-3">
+                <div class="h2 font-weight-normal">
+                    Создание аккаунта
+                </div>
+                <div class="d-block">
+                    <hr>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% with field=form.name text='Ваше имя' help_text="Пожалуйста, указывайте реальное имя, по которому мы сможем к Вам обращаться." %}
+                        {% include 'accounts/form-group.html' %}
+                    {% endwith %}
+
+                    {% with field=form.email text='Ваша электронная почта' %}
+                        {% include 'accounts/form-group.html' %}
+                    {% endwith %}
+
+                    {% with field=form.password1 text='Придумайте пароль' %}
+                        {% include 'accounts/form-group.html' %}
+                    {% endwith %}
+
+                    {% with field=form.password2 text='Повторите пароль' %}
+                        {% include 'accounts/form-group.html' %}
+                    {% endwith %}
+
+                    {% include 'accounts/form-errors.html' %}
+
+                    <div class="g-recaptcha" data-sitekey="{{ settings.GOOGLE_RECAPTCHA_PUBLIC_KEY }}" data-callback="signup_recaptcha_onload"></div>
+
+                    <div class="text-center text-lg-left mt-3">
+                        <button type="submit" class="btn btn-mobile-block btn-color-2 text-white px-4 py-2 js-signup-submit-button" disabled="disabled" tabindex="-1">
+                            <span class="h6 my-0">Создать аккаунт</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block filler %}
+<div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
+{% endblock %}
+
+{% block postscript %}
+    <script type="text/javascript">
+        var signup_recaptcha_onload = function() {
+            // Enable button
+            var button = $('.js-signup-submit-button');
+            button.removeAttr('disabled');
+            button.removeAttr('tabindex');
+        };
+    </script>
+    <script defer src="https://www.google.com/recaptcha/api.js?hl=ru"></script>
+{% endblock %}

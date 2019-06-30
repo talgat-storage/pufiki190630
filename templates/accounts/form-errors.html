@@ -1,0 +1,10 @@
+{% if form.non_field_errors %}
+<div class="form-group">
+    <input type="hidden" class="form-control is-invalid">
+    {% for error in form.non_field_errors %}
+        <div class="invalid-feedback">
+            {{ error }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

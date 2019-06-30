@@ -1,0 +1,16 @@
+{% load add_css %}
+
+<div class="form-group">
+    <label for="{{ field.id_for_label }}" class="h5 font-weight-normal">{{ text }}</label>
+    {% if field.errors %}
+        {{ field|add_css:"form-control is-invalid" }}
+    {% else %}
+        {{ field|add_css:"form-control" }}
+    {% endif %}
+    <small class="form-text text-muted">{{ help_text }}</small>
+    {% for error in field.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
+        </div>
+    {% endfor %}
+</div>

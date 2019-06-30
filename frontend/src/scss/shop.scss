@@ -1,0 +1,36 @@
+.css-shop-filter-overflow {
+  overflow: auto;
+}
+
+@include media-breakpoint-up(lg) {
+  .css-shop-filter-overflow {
+    overflow: visible;
+  }
+}
+
+.css-shop-filter-field {
+  background-color: map_get($grays, "100");
+  color: map_get($theme-colors, "color-gray-700");
+
+  &:hover {
+    background-color: map_get($grays, "300");
+    color: map_get($theme-colors, "color-black");
+    cursor: pointer;
+  }
+}
+
+.css-size-label {
+  width: 104px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .css-size-label-image {
+    width: 88px;
+  }
+  }
+
+.css-border-thick {
+  border-width: 2px !important;
+}

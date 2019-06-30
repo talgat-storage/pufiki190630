@@ -1,0 +1,12 @@
+.css-carousel-indicator {
+  width: 6px;
+  height: 6px;
+  background-color: map_get($grays, "400");
+  border-radius: 50%;
+}
+
+.css-carousel-indicator-active {
+  width: 8px;
+  height: 8px;
+  background-color: map_get($theme-colors, "color-2");
+}

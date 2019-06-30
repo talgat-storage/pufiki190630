@@ -1,0 +1,69 @@
+body {
+  cursor: default;
+}
+
+.container-fluid-max-width {
+  max-width: 1280px;
+}
+
+.css-display-none {
+  display: none !important;
+}
+
+.css-width-100px {
+  width: 100px;
+}
+
+@media (max-width: 992px) {
+  .btn-mobile-block {
+    display: block;
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .btn-mobile-half-block {
+    display: inline;
+    width: 40%;
+  }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+  .css#{$infix}-overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    background-color: $white;
+  }
+
+  @include media-breakpoint-up($breakpoint) {
+    .css#{$infix}-overlay {
+      display: block !important;
+      position: static;
+      width: auto;
+      height: auto;
+      background-color: inherit;
+    }
+  }
+}
+
+.css-reverse-overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background-color: $white;
+}
