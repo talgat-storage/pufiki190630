@@ -1,0 +1,47 @@
+{% load math %}
+
+<div class="bg-white mt-2 pb-2 js-card">
+    <div class="d-flex flex-column js-carousel-wrapper" {% if selected_product %}data-product-slug="{{ selected_product.slug }}"{% endif %}>
+        {% include 'card/card-carousel.html' %}
+    </div>
+
+    {% if expanded_colors == "true" %}
+        {% include 'card/card-colors.html' %}
+    {% endif %}
+
+    <div class="d-block mx-3">
+        <hr class="mt-2 mb-1">
+    </div>
+
+    <div class="d-block py-1 mx-3">
+        <a href="{{ origin.get_absolute_url }}{% if expanded_colors == "true" %}?color={{ selected_product.color }}{% endif %}" class="text-color-2 js-card-product-link" data-origin-url="{{ origin.get_absolute_url }}">
+        <div class="h5 my-0">
+        <u>
+            {{ origin.name }}
+        </u>
+        </div>
+        </a>
+
+        <div class="h6 my-1 font-weight-normal">
+            Размер: {{ origin.get_size_display|lower }}
+        </div>
+
+        <div class="h6 my-1 font-weight-normal">
+            Материал: {{ origin.get_material_display|lower }}
+        </div>
+
+        <div class="h6 my-1 font-weight-light text-color-1">
+            {{ origin.price }} тг.
+        </div>
+
+        {% if expanded_colors == "false" %}
+        <small class="my-0 text-muted">
+            {{ number_of_products }}
+            {% with remainder=number_of_products|modulo:10 %}
+                {% if remainder == 0 or remainder >= 5 %}цветов{% elif remainder == 1 %}цвет{% else %}цвета{% endif %}
+            {% endwith %}
+        </small>
+        {% endif %}
+    </div>
+
+</div>

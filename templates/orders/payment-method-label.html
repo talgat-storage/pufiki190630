@@ -1,0 +1,11 @@
+{% load static %}
+
+<label for="{{ option.id_for_label }}" class="d-inline-block p-2 {% if forloop.counter == 1 %}mr-1{% else %}ml-1{% endif %} rounded border css-border-thick {% if option.data.selected %}border-color-2{% endif %}">
+    <div class="d-flex align-items-center custom-control custom-checkbox">
+        {{ option.tag }}
+        <div class="custom-control-label">{{ option.choice_label }}</div>
+    </div>
+    <div class="d-flex justify-content-center my-1">
+        <img src="{% static image_location %}" alt="Payment Method Image" style="pointer-events: none;">
+    </div>
+</label>

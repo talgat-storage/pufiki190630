@@ -1,0 +1,51 @@
+<div class="d-flex flex-column js-origin-carousel-wrapper">
+
+<div class="flex-shrink-0">
+<div class="d-flex justify-content-between">
+{#    Carousel Prev Control #}
+    <div class="d-flex flex-column justify-content-center css-origin-carousel-control css-icon-angle-left-parent js-origin-carousel-control" data-direction="prev">
+        <div class="d-inline-block">
+            <div class="css-icon css-icon-40px css-icon-angle-left"></div>
+        </div>
+    </div>
+
+{#    Carousel #}
+    <div class="d-block css-origin-carousel-zoom-parent js-origin-carousel-parent mx-auto">
+        <div id="{{ origin.slug }}-carousel" class="carousel slide" data-ride="carousel" data-interval="86400000" data-keyboard="false" data-touch="false">
+            <div class="carousel-inner">
+                {% for picture in pictures %}
+                <div class="carousel-item {% if forloop.first %}active js-origin-carousel-first-zoom{% endif %}" data-mobile-zoom-src="{{ picture.large_photo.url }}" data-desktop-zoom-src="{{ picture.extralarge_photo.url }}">
+                    <picture>
+                        <source media="(min-width: 575.98px)" {% if not forloop.first %}data-{% endif %}srcset="{{ picture.large_photo.url }}">
+                        <img class="d-block mw-100" {% if not forloop.first %}data-{% endif %}src="{{ picture.medium_photo.url }}" alt="Picture {{ picture.slug }}">
+                    </picture>
+    {#                <img class="d-block w-100" {% if not forloop.first %}data-{% endif %}src="{{ picture.large_photo.url }}" alt="Picture {{ picture.slug }}">#}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="css-origin-carousel-zoom js-origin-carousel-zoom"></div>
+    </div>
+
+{#    Carousel Next Control #}
+    <div class="d-flex flex-column justify-content-center css-origin-carousel-control css-icon-angle-right-parent js-origin-carousel-control" data-direction="next">
+        <div class="d-inline-block">
+            <div class="css-icon css-icon-40px css-icon-angle-right"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="flex-fill"> {# IE bug fix #}
+</div>
+
+{# Carousel Indicators #}
+<div class="flex-shrink-0">
+<div class="d-flex justify-content-center align-items-center py-3 js-origin-carousel-indicators">
+    {% for picture in pictures %}
+        <div class="d-inline-block {% if not forloop.last %}mr-1{% endif %} css-carousel-indicator {% if forloop.first %}css-carousel-indicator-active{% endif %}"></div>
+    {% endfor %}
+</div>
+</div>
+
+</div>

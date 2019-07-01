@@ -1,0 +1,12 @@
+{% load static %}
+
+<label for="{{ option.id_for_label }}"
+       class="d-inline-block px-2 mx-auto css-size-label rounded border css-border-thick {% if option.data.value|stringformat:'i' in form.size.value %}border-color-2{% else %}border-color-gray-300{% endif %}">
+    <div class="d-flex align-items-center custom-control custom-checkbox">
+        {{ option.tag }}
+        <div class="custom-control-label">{{ option.choice_label }}</div>
+    </div>
+    <div class="css-size-label-image my-1">
+        <img class="d-inline w-100" src="{% static image_location %}" alt="Size Image" style="pointer-events: none;">
+    </div>
+</label>

@@ -1,0 +1,27 @@
+<div class="row mt-3">
+
+    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+        <div class="css-cart-product-image">
+            <img class="d-block w-100" src="{{ product.small_photo.url }}" alt="Product {{ product.slug }}">
+        </div>
+    </div>
+    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+        <a href="{{ origin.get_absolute_url }}?color={{ product.color }}">
+            <div class="h5 my-0 text-color-2">
+                <u>{{ origin.name }}</u>
+            </div>
+        </a>
+        <div class="h6 my-0 mt-1 font-weight-normal">
+            {{ product.get_color_display }}
+        </div>
+    </div>
+    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+        <div class="h6 my-0 font-weight-normal">
+            {{ quantity }} шт.
+        </div>
+    </div>
+    <div class="col-12">
+        <hr>
+    </div>
+
+</div>

@@ -1,0 +1,26 @@
+<div class="d-block mt-3">
+    <hr>
+</div>
+
+<ul class="list-group list-group-horizontal-lg">
+    {% for step in '1234' %}
+        {% with step_number=forloop.counter %}
+            <li class="list-group-item">
+                <span class="h6 my-0 border rounded
+                    {% if step_number < current_step_number %} border-color-light-2 bg-color-light-2 text-white
+                    {% elif step_number == current_step_number %} border-color-2 bg-color-2 text-white
+                    {% elif step_number > current_step_number %} border-color-gray-300 bg-color-gray-300 text-white
+                    {% endif %}
+                    px-2">{{ step_number }}</span>
+                <span class="h6 my-0
+                    {% if step_number < current_step_number %} text-color-light-2
+                    {% elif step_number == current_step_number %} text-color-2
+                    {% elif step_number > current_step_number %} text-color-gray-500
+                    {% endif %}
+                ml-1">
+                    {% cycle 'Доставка' 'Подтверждение' 'Оплата' 'Готово' %}
+                </span>
+            </li>
+        {% endwith %}
+    {% endfor %}
+</ul>

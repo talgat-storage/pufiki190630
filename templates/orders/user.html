@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Pufiki.kz | Оформление заказа | Пользователь
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row bg-light">
+            <div class="col-12 py-1"></div>
+        </div>
+        <div class="row bg-white px-lg-5">
+            <div class="col-12 mt-3">
+                <div class="h2 font-weight-normal">
+                    Оформление заказа
+                </div>
+                <div class="d-block">
+                    {% with current_step_number=0 %}
+                        {% include 'orders/header.html' %}
+                    {% endwith %}
+                </div>
+                <div class="h5 font-weight-normal mt-3 text-center text-lg-left">
+                    Перед оформлением заказа мы Вам рекомендуем пройти регистрацию, которая позволит Вам:
+                </div>
+                <ul class="px-4">
+                    {% include 'accounts/signup/advantages.html' %}
+                </ul>
+                <div class="d-flex flex-column flex-lg-row my-3">
+                    <a href="{% url 'orders:details' %}" class="btn btn-light border border-color-gray-500 btn-mobile-block">
+                        Продолжить без регистрации
+                    </a>
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-color-2 btn-mobile-block ml-lg-3 mt-3 mt-lg-0">
+                        Пройти регистрацию
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block filler %}
+<div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
+{% endblock %}

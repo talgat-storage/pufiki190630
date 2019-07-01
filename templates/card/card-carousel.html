@@ -1,0 +1,30 @@
+<div class="d-block flex-shrink-0 js-carousel-parent">
+<div id="{{ origin.slug }}-carousel" class="carousel slide" data-ride="carousel" data-interval="86400000">
+    <div class="carousel-inner">
+        {% for picture in pictures %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img class="d-block w-100" {% if not forloop.first %}data-{% endif %}src="{{ picture.medium_photo.url }}" alt="Picture {{ picture.slug }}">
+        </div>
+        {% endfor %}
+    </div>
+
+    <a class="d-none d-sm-flex carousel-control-prev js-carousel-control {% if controls_hidden %}css-display-none{% endif %}" href="#{{ origin.slug }}-carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Предыдущий</span>
+    </a>
+
+    <a class="d-none d-sm-flex carousel-control-next js-carousel-control {% if controls_hidden %}css-display-none{% endif %}" href="#{{ origin.slug }}-carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Следующий</span>
+    </a>
+</div>
+</div>
+
+<div class="flex-fill"> {# IE bug fix #}
+</div>
+
+<div class="d-flex justify-content-center align-items-center py-3 js-carousel-indicators">
+    {% for picture in pictures %}
+        <div class="d-inline-block {% if not forloop.last %}mr-1{% endif %} css-carousel-indicator {% if forloop.first %}css-carousel-indicator-active{% endif %}"></div>
+    {% endfor %}
+</div>

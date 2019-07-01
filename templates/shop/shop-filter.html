@@ -1,0 +1,88 @@
+<div class="css-lg-overlay js-shop-filter">
+<form method="get" class="d-flex flex-column h-100">
+
+    <div class="d-flex justify-content-between justify-content-lg-center align-items-center mx-3 mt-3">
+        <div class="d-inline-block mt-1">
+            <div class="h5 my-0 font-weight-normal text-center">
+                Поиск по параметрам
+            </div>
+        </div>
+        <div class="d-inline-block d-lg-none mt-1">
+            <div class="css-icon css-icon-hover css-icon-32px css-icon-cancel js-shop-filter-close-toggler"></div>
+        </div>
+    </div>
+
+    <div class="d-block mx-3">
+        <hr>
+    </div>
+
+    <div class="flex-fill css-shop-filter-overflow mx-3 my-2">
+
+        {% with collapse_id="shop-filter-sizes" collapse_name="Размеры" %}
+        <div>
+            {% include 'collapse.html' with expanded="true" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}
+
+            <div id="{{ collapse_id }}" class="collapse show py-3 js-collapsible">
+                <div class="d-flex flex-wrap">
+                    {% for option in search_form.size %}
+                        <div class="d-none">{% cycle 'img/small.png' 'img/medium.png' 'img/large.png' as image_location %}</div>
+                        {% include 'shop/shop-filter-label.html' %}
+                    {% endfor %}
+                    <div class="d-inline-block mx-auto css-size-label" style="height: 0;"></div>
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+
+
+        {% with collapse_id="shop-filter-materials" collapse_name="Материалы" %}
+        <div>
+            {% include 'collapse.html' with expanded="false" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}
+
+            <div id="{{ collapse_id }}" class="collapse py-3 js-collapsible">
+                <div class="d-flex flex-column px-3">
+                    {% for option in search_form.material %}
+                    <div class="custom-control custom-checkbox">
+                        {{ option.tag }}
+                        <label for="{{ option.id_for_label }}" class="custom-control-label">{{ option.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+
+        {% with collapse_id="shop-filter-colors" collapse_name="Цвета" %}
+        <div>
+            {% include 'collapse.html' with expanded="false" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}
+
+            <div id="{{ collapse_id }}" class="collapse py-3 js-collapsible">
+                <div class="d-flex flex-column px-3">
+                    {% for option in search_form.color %}
+                    <div class="custom-control custom-checkbox">
+                        {{ option.tag }}
+                        <label for="{{ option.id_for_label }}" class="custom-control-label">{{ option.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+
+    </div>
+
+    <div class="d-block mx-3">
+        <hr>
+    </div>
+
+    {% for field in sort_form %}
+        {{ field.as_hidden }}
+    {% endfor %}
+
+    <div class="d-flex justify-content-center mb-3">
+        <button type="submit" class="btn btn-light border border-color-gray-500">
+            Поиск
+        </button>
+    </div>
+</form>
+</div>

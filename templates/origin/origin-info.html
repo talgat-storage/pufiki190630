@@ -1,0 +1,82 @@
+<div class="h-100 d-flex flex-column px-3 px-sm-5 px-md-3 px-xl-5">
+    <div class="flex-shrink-0">
+        <div class="d-block mt-md-3">
+            <h1 class="my-0 font-weight-bold">
+                {{ origin.name }}
+            </h1>
+        </div>
+        <div class="d-block mt-2">
+            <div class="h3 my-0 font-weight-light">
+                {{ origin.price }} тг.
+            </div>
+        </div>
+        <div class="d-block my-3">
+            <hr class="my-0">
+        </div>
+        <div class="d-block">
+            <p class="my-0 font-weight-normal">
+                Материал и цвет
+            </p>
+        </div>
+        <div class="d-block mt-2 mx-3">
+            <p class="my-0 font-weight-light">
+                {{ origin.get_material_display }}
+            </p>
+        </div>
+        <div class="d-block mt-2 mx-3">
+            <p class="my-0 font-weight-light">
+                {{ product.get_color_display }}
+            </p>
+        </div>
+        <div class="d-block my-3">
+            <hr class="my-0">
+        </div>
+        <div class="d-flex flex-wrap mt-1 mb-2">
+            {% for product in products %}
+            <div class="d-inline-block mr-1 mt-1">
+                <a href="{{ origin.get_absolute_url }}?color={{ product.color }}">
+                    <div class="css-icon css-icon-hover css-icon-34px rounded border border-color-gray-300">
+                        <img class="d-block w-100 rounded" src="{{ product.color_photo.url }}" alt="Product {{ product.slug }}">
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="flex-fill"></div>
+
+    <div class="flex-shrink-0">
+        <div class="d-block mt-3 mb-2">
+            <hr class="my-0">
+        </div>
+
+        <div class="js-origin-cart-add-mobile-alert"></div>
+
+        <form method="post" action="{% url 'api:cart-add' %}" class="js-cart-add-form">
+            {% csrf_token %}
+            {{ cart_add_form.product_slug.as_hidden }}
+
+            <div class="d-flex justify-content-end align-items-center flex-wrap">
+                {% with quantity_field=cart_add_form.quantity %}
+                <div class="d-inline-block mt-2">
+                    <label for="{{ quantity_field.id_for_label }}" class="my-0">Кол-во</label>
+                </div>
+                <div class="d-inline-block ml-2 mt-2">
+                    {{ quantity_field }}
+                </div>
+                {% endwith %}
+                <div class="d-inline-block ml-2 mt-2">
+                    <button type="submit" class="btn btn-color-1 text-white px-sm-3 js-cart-add-button">
+                        <span class="d-none align-middle spinner-border spinner-border-sm text-white js-spinner"></span>
+                        <span>Добавить в корзину</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="d-block my-3">
+            <div class="my-0 text-right text-muted small">Бесплатная доставка в течение 1-2 недель</div>
+        </div>
+    </div>
+</div>

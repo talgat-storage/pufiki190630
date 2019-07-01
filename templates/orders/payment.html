@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Pufiki.kz | Оформление заказа | Оплата
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row bg-light">
+            <div class="col-12 py-1"></div>
+        </div>
+        <div class="row bg-white px-lg-5">
+            <div class="col-12 mt-3">
+                <div class="h2 font-weight-normal">
+                    Оформление заказа
+                </div>
+                <div class="d-block">
+                    {% with current_step_number=3 %}
+                        {% include 'orders/header.html' %}
+                    {% endwith %}
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-mobile-block btn-color-2 px-3 py-2">
+                        <span class="h6 my-0">Далее</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block filler %}
+<div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
+{% endblock %}

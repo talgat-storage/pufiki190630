@@ -1,0 +1,60 @@
+<div class="row">
+
+{% if is_control_included %}
+<div class="col-4 col-lg-2 order-3 order-lg-6 d-flex align-items-center">
+    <a href="{{ origin.get_absolute_url }}?color={{ product.color }}">
+        <div class="css-icon css-icon-24px css-icon-edit"></div>
+    </a>
+    <div class="ml-3 css-icon css-icon-hover css-icon-24px css-icon-trash js-cart-product-trash" data-product-slug="{{ product.slug }}"></div>
+</div>
+{% endif %}
+
+<div class="col-4 col-lg-2 d-flex align-items-center justify-content-lg-center order-1 order-lg-1">
+    <div class="css-cart-product-image">
+        <img class="d-block w-100" src="{{ product.small_photo.url }}" alt="Product {{ product.slug }}">
+    </div>
+</div>
+
+<div class="col-4 col-lg-2 d-flex flex-column justify-content-center order-2 order-lg-2">
+    <a href="{{ origin.get_absolute_url }}?color={{ product.color }}">
+        <div class="h5 my-0 text-color-2">
+            <u>{{ origin.name }}</u>
+        </div>
+    </a>
+    <div class="h6 my-0 mt-1 font-weight-normal">
+        {{ product.get_color_display }}
+    </div>
+</div>
+
+<div class="col-4 col-lg-2 py-3 py-lg-0 d-flex flex-column justify-content-center order-4 order-lg-3">
+    <div class="d-lg-none h6 my-0">
+        Цена
+    </div>
+    <div class="h6 my-0 mt-2 mt-lg-0 font-weight-normal text-nowrap">
+        {{ origin.price }} тг.
+    </div>
+</div>
+
+<div class="col-4 col-lg-2 py-3 py-lg-0 d-flex flex-column justify-content-center order-5 order-lg-4">
+    <div class="d-lg-none h6 my-0">
+        Количество
+    </div>
+    <div class="h6 my-0 mt-2 mt-lg-0 font-weight-normal">
+        {{ quantity }} шт.
+    </div>
+</div>
+
+<div class="col-4 col-lg-2 py-3 py-lg-0 d-flex flex-column justify-content-center order-6 order-lg-5">
+    <div class="d-lg-none h6 my-0">
+        Всего
+    </div>
+    <div class="h6 my-0 mt-2 mt-lg-0 font-weight-normal">
+        {{ total }} тг.
+    </div>
+</div>
+
+<div class="col-12 order-7">
+    <hr class="my-3">
+</div>
+
+</div>

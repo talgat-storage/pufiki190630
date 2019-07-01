@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Pufiki.kz | Оформление заказа | Подтверждение
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row bg-light">
+            <div class="col-12 py-1"></div>
+        </div>
+        <div class="row bg-white px-lg-5">
+            <div class="col-12 mt-3">
+                <div class="h2 font-weight-normal">
+                    Детали заказа
+                </div>
+                <div class="d-block">
+                    {% with current_step_number=2 %}
+                        {% include 'orders/header.html' %}
+                    {% endwith %}
+                </div>
+            </div>
+
+            <div class="col-12">
+                <hr>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <ul class="list-group">
+                {% for name, value in order_data %}
+                    <li class="list-group-item">
+                        <div class="h5 my-0 font-weight-normal">
+                            {{ name }}
+                        </div>
+                        <div class="h6 my-0 font-weight-light mt-1">
+                            {{ value }}
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                {% for product, origin, quantity, total in results %}
+                    {% include 'orders/cart-product.html' %}
+                {% endfor %}
+            </div>
+
+            <div class="col-12 d-flex flex-column flex-lg-row justify-content-end mb-3 mt-lg-3">
+                <div class="d-inline-block">
+                    <a href="{% url 'orders:details' %}" class="btn btn-mobile-block btn-light border border-color-gray-600 px-4 py-2">
+                        Вернуться назад
+                    </a>
+                </div>
+                <div class="d-inline-block">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="cart" value="{{ cart }}">
+                        <button type="submit" class="btn btn-mobile-block btn-color-2 px-4 py-2 ml-lg-3 mt-3 mt-lg-0">
+                            Продолжить
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block filler %}
+<div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<div class="alert {% if success %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show mt-sm-3 mb-0" role="alert">
+    {% if success %}
+        Вы добавили {{ product.get_color_display|lower }} {{ product.origin.name }}.
+        <br>
+        <a href="{% url 'cart' %}" class="alert-link text-color-2"><u>Перейти в корзину</u></a>
+    {% else %}
+        Произошла ошибка.
+    {% endif %}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="col-12 col-sm-4 px-0 pl-sm-{{ left_padding }} pr-sm-{{ right_padding }} my-2 my-sm-0">
+<div class="h-100 d-flex flex-sm-column align-items-center bg-white py-2">
+    <div class="d-block">
+        <div class="css-home-advantage-img">
+            <img class="d-block w-100" src="{% static img_location %}" alt="{{ alt_description }}">
+        </div>
+    </div>
+    <div class="d-block w-100 my-0 my-sm-3">
+        <div class="d-flex flex-column">
+            <div class="w-100 d-block">
+                <div class="h5 my-0 text-center">
+                    {{ title }}
+                </div>
+            </div>
+            <div class="w-100 d-block text-center px-2 px-sm-3 px-lg-5 mt-2">
+                {{ text }}
+            </div>
+        </div>
+    </div>
+</div>
+</div>

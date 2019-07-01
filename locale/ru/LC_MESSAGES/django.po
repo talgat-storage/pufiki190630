@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-30 17:24+0600\n"
+"POT-Creation-Date: 2019-07-01 19:53+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,3 +39,63 @@ msgstr "пользователь"
 #: .\accounts\models.py:54
 msgid "users"
 msgstr "пользователи"
+
+#: .\orders\models.py:15
+msgid "Cash"
+msgstr "Наличные курьеру"
+
+#: .\orders\models.py:16
+msgid "Card"
+msgstr "Банковская карта"
+
+#: .\orders\models.py:18
+msgid "Please enter a valid phone number. For example, 87771234567890"
+msgstr "Пожалуйста, введите номер телефоне в формате 87001112233"
+
+#: .\shop\models.py:20
+msgid "Small"
+msgstr "Детский"
+
+#: .\shop\models.py:21
+msgid "Medium"
+msgstr "Средний"
+
+#: .\shop\models.py:22
+msgid "Large"
+msgstr "Большой"
+
+#: .\shop\models.py:25
+msgid "Faux Leather"
+msgstr "Кожзаменитель"
+
+#: .\shop\models.py:26
+msgid "Polyester"
+msgstr "Полиэстер"
+
+#: .\shop\models.py:27
+msgid "Velour"
+msgstr "Велюр"
+
+#: .\shop\models.py:82
+msgid "Red"
+msgstr "Красный"
+
+#: .\shop\models.py:83
+msgid "Green"
+msgstr "Зеленый"
+
+#: .\shop\models.py:84
+msgid "Blue"
+msgstr "Синий"
+
+#: .\shop\models.py:85
+msgid "Yellow"
+msgstr "Желтый"
+
+#: .\shop\models.py:86
+msgid "Black"
+msgstr "Черный"
+
+#: .\shop\models.py:87
+msgid "Purple"
+msgstr "Фиолетовый"

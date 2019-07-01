@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load math %}
+
+{% block title %}
+    Pufiki.kz | Корзина
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row py-1">
+        </div>
+        <div class="row py-3 bg-white">
+            <div class="col-12 px-3 px-lg-5">
+                <div class="h2 my-0 font-weight-normal">
+                    Корзина
+                </div>
+            </div>
+            {% if results %}
+            <div class="col-12 col-lg-9">
+                <div class="row">
+                    <div class="d-none d-lg-block col-2 offset-4">
+                        <div class="h6 my-0">
+                            Цена
+                        </div>
+                    </div>
+                    <div class="d-none d-lg-block col-2">
+                        <div class="h6 my-0">
+                            Количество
+                        </div>
+                    </div>
+                    <div class="d-none d-lg-block col-2">
+                        <div class="h6 my-0">
+                            Всего
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="my-3">
+                    </div>
+                    <div class="col-12">
+                    {% with is_control_included=True %}
+                    {% for product, origin, quantity, total in results %}
+                        {% include 'cart/cart-product.html' %}
+                    {% endfor %}
+                    {% endwith %}
+                    </div>
+                    <div class="col-4 col-lg-2 offset-4 offset-lg-6">
+                        <div class="h5 my-0">
+                            Всего:
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-2">
+                        <div class="h5 my-0">
+                            {{ total }} тг.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-3 p-3">
+                {% include 'cart/cart-summary.html' %}
+            </div>
+
+            {% else %}
+            <div class="col-12">
+                <div class="d-flex flex-column align-items-center">
+                    <div class="d-block">
+                        <img class="d-block css-width-100px" src="{% static 'img/shopping_cart_125px.png' %}" alt="Shopping Cart">
+                    </div>
+                    <div class="h5 my-1 font-weight-normal text-center">
+                        Ваша корзина сейчас пуста.
+                    </div>
+                    <div class="h5 my-1 font-weight-normal text-center">
+                        Чтобы перейти в магазин, нажмите <a href="{% url 'shop' %}" class="text-color-2">сюда</a>.
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <form action="{% url 'api:cart-delete' %}" method="post" class="d-none js-cart-delete-form">
+        {% csrf_token %}
+        {{ cart_delete_form.product_slug }}
+    </form>
+{% endblock %}
+
+{% block script %}
+    <script>
+        var api_cart_delivery = '{% url 'api:cart-delivery' %}';
+    </script>
+{% endblock %}
