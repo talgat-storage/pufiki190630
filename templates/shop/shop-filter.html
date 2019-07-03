@@ -37,9 +37,9 @@
 
         {% with collapse_id="shop-filter-materials" collapse_name="Материалы" %}
         <div>
-            {% include 'collapse.html' with expanded="false" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}
+            {% include 'collapse.html' with expanded="true" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}
 
-            <div id="{{ collapse_id }}" class="collapse py-3 js-collapsible">
+            <div id="{{ collapse_id }}" class="collapse show py-3 js-collapsible">
                 <div class="d-flex flex-column px-3">
                     {% for option in search_form.material %}
                     <div class="custom-control custom-checkbox">
@@ -54,9 +54,9 @@
 
         {% with collapse_id="shop-filter-colors" collapse_name="Цвета" %}
         <div>
-            {% include 'collapse.html' with expanded="false" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}
+            {% include 'collapse.html' with expanded="true" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}
 
-            <div id="{{ collapse_id }}" class="collapse py-3 js-collapsible">
+            <div id="{{ collapse_id }}" class="collapse show py-3 js-collapsible">
                 <div class="d-flex flex-column px-3">
                     {% for option in search_form.color %}
                     <div class="custom-control custom-checkbox">

@@ -84,7 +84,10 @@ class Product(models.Model):
         (3, _('Blue')),
         (4, _('Yellow')),
         (5, _('Black')),
-        (6, _('Purple'))
+        (6, _('Purple')),
+        (7, _('White')),
+        (8, _('Gray')),
+        (9, _('Brown')),
     )
     slug = models.CharField(max_length=DEFAULT_SLUG_LENGTH, unique=True, editable=False)  # handled by save method
     origin = models.ForeignKey(Origin, on_delete=models.CASCADE)

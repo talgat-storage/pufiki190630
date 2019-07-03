@@ -33,7 +33,7 @@ module.exports = function () {
 			.addClass('zoomImg')
 			.css({
 				position: 'absolute',
-				'z-index': 6,
+				'z-index': 5,
 				top: 0,
 				left: 0,
 				opacity: 0,

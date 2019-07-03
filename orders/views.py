@@ -3,7 +3,7 @@ from django.core.cache import cache
 
 from .models import Order
 from .forms import AnonymousUserForm, OrderDetailsForm
-from pufiki190630.utilities import get_form_input_value
+from pufiki190630.utilities import get_form_input_value, is_recaptcha_valid
 from accounts.utilities import get_existing_user
 from shop.utilities import parse_cart
 
@@ -38,7 +38,7 @@ def order_details_view(request):
 
         order_details_form = OrderDetailsForm(request.POST)
 
-        if order_user and order_details_form.is_valid():
+        if order_user and order_details_form.is_valid() and (user.is_authenticated or is_recaptcha_valid(request)):
             order = order_details_form.save(commit=False)
             if user.is_anonymous:
                 order.is_fast_checkout = True
@@ -60,7 +60,7 @@ def order_details_view(request):
         anonymous_user_form = AnonymousUserForm() if user.is_anonymous else None
         initial = dict()
         if user.is_authenticated:
-            last_nonfast_order = user.order_set.all().filter(is_fast_checkout=False, payment_done=True).last()
+            last_nonfast_order = user.order_set.all().filter(is_fast_checkout=False, is_payment_done=True).last()
             if last_nonfast_order:
                 initial = {
                     'phone': last_nonfast_order.phone,
@@ -133,6 +133,7 @@ def order_cart_view(request):
     context = dict()
     context['cart'] = str(cart)
     context['results'] = results
+    context['delivery_cost'] = 2900 if order.is_fast_delivery else 0
     context['total'] = total
     context['order_data'] = order_data
 
