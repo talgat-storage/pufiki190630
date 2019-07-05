@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-12 mt-3">
+        <div class="h3 my-0 font-weight-light text-center">
+            Задайте нам Ваш вопрос
+        </div>
+    </div>
+
+    {% with image_location='img/new_post_125px.png' image_alt='Message' text='Напишите нам' action_url='support:message' action_text='Написать сообщение' %}
+        {% include 'support/contact-section.html' %}
+    {% endwith %}
+
+    {% with image_location='img/whatsapp_125px.png' image_alt='WhatsApp' text='Используйте WhatsApp' action_link='#' action_text='Перейти в WhatsApp' %}
+        {% include 'support/contact-section.html' %}
+    {% endwith %}
+
+    {% with image_location='img/message_125px.png' image_alt='SMS' text='Отпраьте нам SMS' action_link='sms:+77077807477' action_text='Написать SMS' %}
+        {% include 'support/contact-section.html' %}
+    {% endwith %}
+
+    {% with image_location='img/call_125px.png' image_alt='Call' text='Позвоните нам' action_link='tel:+77077807477' action_text='Позвонить' %}
+        {% include 'support/contact-section.html' %}
+    {% endwith %}
+</div>

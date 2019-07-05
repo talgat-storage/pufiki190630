@@ -1,63 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-    Pufiki.kz | Поддержка
+    | Поддержка
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
-        </div>
         <div class="row">
-            <div class="col-12 mt-3 px-lg-5">
-                <div class="h2 my-0 font-weight-normal">
-                    Поддержка
-                </div>
-                <div class="d-block">
-                    <hr>
+            <div class="col-12 mt-3">
+                <div class="h3 my-0 font-weight-light text-center">
+                    Популярные вопросы
                 </div>
             </div>
 
-            <!-- Product -->
-            <div class="col-12 col-sm-6 col-md-4 pl-0 py-3">
-                <div class="h-100 d-flex flex-column px-3 py-3 rounded border border-color-gray-500 bg-white">
-                    <div class="d-inline-block">
-                        <img class="d-block w-100" src="{% static img_location %}" alt="{{ alt_description }}">
-                        <div class="css-icon css-icon-100 css-icon-product">
-                        </div>
-                    </div>
-                    <div class="d-inline-block py-2">
-                        <div class="h5 my-0">
-                            Продукция
-                        </div>
-                    </div>
-
-                    <div class="d-inline-block py-1">
-                        <a href="#">
-                            <div class="h6 my-0 font-weight-normal">
-                                Какой наполнитель используется в продукции?
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="d-inline-block py-1">
-                        <a href="#">
-                            <div class="h6 my-0 font-weight-normal">
-                                Почему кресло-мешок сплюснутый при распаковке?
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="d-inline-block py-1">
-                        <a href="#">
-                            <div class="h6 my-0 font-weight-normal">
-                                Можно ли стирать кресло-мешок?
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% for section_name, title, image_location, questions in sections %}
+                {% include 'support/section.html' %}
+            {% endfor %}
         </div>
+
+        {% include 'support/contact.html' %}
     </div>
+{% endblock %}
+
+{% block filler %}
+<div class="flex-fill container-fluid container-fluid-max-width"></div>
 {% endblock %}

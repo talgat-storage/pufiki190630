@@ -1,0 +1,37 @@
+{% load static %}
+{% load math %}
+
+<section class="col-12 col-sm-6 col-lg-4 px-xl-2 my-3">
+    <div class="h-100 d-flex flex-column px-3 py-3 rounded border border-color-gray-300 bg-white">
+
+        <div class="d-inline-block css-width-100px align-self-center">
+            <img class="d-block w-100" src="{% static image_location %}" alt="{{ title }}">
+        </div>
+
+        <div class="d-inline-block my-2">
+            <div class="h5 my-0">
+                {{ title }}
+            </div>
+        </div>
+
+        {% with questions_limit=3 %}
+        {% for question, answer in questions %}
+            <div class="d-inline-block my-1">
+                {% if forloop.counter0 < questions_limit or questions|length == questions_limit|add:"1" %}
+                    <a href="{% url 'support:question' section_name=section_name question_index=forloop.counter0 %}">
+                        <div class="h6 my-0 font-weight-normal">
+                            {{ question }}
+                        </div>
+                    </a>
+                {% elif forloop.counter0 == questions_limit %}
+                    <a href="{% url 'support:question' section_name=section_name question_index=questions_limit %}" class="text-body">
+                        <div class="h6 my-0 font-weight-normal">
+                            Открыть остальные вопросы ({{ questions|length|subtract:questions_limit }})
+                        </div>
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% endwith %}
+    </div>
+</section>

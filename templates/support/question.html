@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load breadcrumb %}
+
+{% block title %}
+    | Поддержка | {{ question }}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        {% with support_url='support:support' %}
+        {% breadcrumb 'Поддержка' support_url name=section.1 as results %}
+            {% include 'breadcrumb.html' %}
+        {% endwith %}
+
+        <div class="row">
+            <div class="col-12">
+                <hr class="mt-0">
+            </div>
+            <div class="col-12 col-lg-3 mt-3 mt-lg-0 order-3 order-lg-2">
+                <div class="h4 font-weight-light">
+                    Вопросы
+                </div>
+                <ul class="list-group my-3">
+                    {% for section_question, section_answer in section.3 %}
+                        <a href="{% url 'support:question' section_name=section.0 question_index=forloop.counter0 %}"
+                           class="list-group-item list-group-item-action {% if forloop.counter0 == question_index %}active{% endif %}">
+                            {{ section_question }}
+                        </a>
+                    {% endfor %}
+                </ul>
+
+                <div class="h4 font-weight-light">
+                    Разделы
+                </div>
+                <ul class="list-group mt-3">
+                    {% for other_section in sections %}
+                        <a href="{% url 'support:question' section_name=other_section.0 question_index=0 %}"
+                           class="list-group-item list-group-item-action {% if other_section.0 == section.0 %}active{% endif %}">
+                            {{ other_section.1 }}
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-12 col-lg-9 order-2 order-lg-3">
+                <div class="h-100 rounded border border-color-gray-300 bg-white p-3">
+                    <div class="h4 font-weight-normal text-center">
+                        {{ question }}
+                    </div>
+                    <div class="h5 font-weight-light mt-3">
+                        {{ answer }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'support/contact.html' %}
+    </div>
+{% endblock %}
+
+{% block filler %}
+<div class="flex-fill container-fluid container-fluid-max-width"></div>
+{% endblock %}
