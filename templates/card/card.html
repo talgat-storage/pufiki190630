@@ -14,7 +14,7 @@
     </div>
 
     <div class="d-block py-1 mx-3">
-        <a href="{{ origin.get_absolute_url }}{% if expanded_colors == "true" %}?color={{ selected_product.color }}{% endif %}" class="text-color-2 js-card-product-link" data-origin-url="{{ origin.get_absolute_url }}">
+        <a href="{{ origin.get_absolute_url }}{% if expanded_colors == "true" %}?color={{ selected_product.color }}{% endif %}" class="text-color-2 text-decoration-none js-card-product-link" data-origin-url="{{ origin.get_absolute_url }}">
         <div class="h5 my-0">
         <u>
             {{ origin.name }}

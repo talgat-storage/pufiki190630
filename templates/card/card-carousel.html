@@ -2,9 +2,9 @@
 <div id="{{ origin.slug }}-carousel" class="carousel slide" data-ride="carousel" data-interval="86400000">
     <div class="carousel-inner">
         {% for picture in pictures %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <a href="{{ origin.get_absolute_url }}?color={{ product.color }}" class="carousel-item {% if forloop.first %}active{% endif %} js-carousel-img-link">
             <img class="d-block w-100" {% if not forloop.first %}data-{% endif %}src="{{ picture.medium_photo.url }}" alt="Picture {{ picture.slug }}">
-        </div>
+        </a>
         {% endfor %}
     </div>
 

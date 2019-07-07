@@ -15,10 +15,14 @@ class UserCreationForm(BaseUserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update({'autofocus': True,
-                                                 'placeholder': 'Например, Дамир Ануарович или Дамир'})
-        self.fields['email'].widget.attrs.update({'autofocus': False,
-                                                  'placeholder': 'Например, damir@mail.ru'})
+        self.fields['name'].widget.attrs.update({
+            'autofocus': True,
+            # 'placeholder': 'Например, Дамир Ануарович или Дамир',
+        })
+        self.fields['email'].widget.attrs.update({
+            'autofocus': False,
+            # 'placeholder': 'Например, damir@mail.ru'
+        })
 
 
 class UserChangeForm(BaseUserChangeForm):
@@ -29,7 +33,9 @@ class UserChangeForm(BaseUserChangeForm):
 class UserPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['email'].widget.attrs.update({'autofocus': True})
+        self.fields['email'].widget.attrs.update({
+            'autofocus': True,
+        })
 
     def save(self, domain_override=None,
              subject_template_name='registration/password_reset_subject.txt',

@@ -14,21 +14,6 @@ body {
   width: 100px;
 }
 
-
-@media (max-width: 992px) {
-  .btn-mobile-block {
-    display: block;
-    width: 100%;
-  }
-}
-
-@media (max-width: 992px) {
-  .btn-mobile-half-block {
-    display: inline;
-    width: 40%;
-  }
-}
-
 @each $breakpoint in map-keys($grid-breakpoints) {
   $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
@@ -67,4 +52,20 @@ body {
   right: 0;
   z-index: 6;
   background-color: $white;
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+  .css-btn#{$infix}-block {
+    display: block;
+    width: 100%;
+  }
+
+  @include media-breakpoint-up($breakpoint) {
+    .css-btn#{$infix}-block {
+      display: inline-block;
+      width: auto;
+    }
+  }
 }

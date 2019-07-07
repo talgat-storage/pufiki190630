@@ -15,16 +15,16 @@
 </head>
 <body class="vh-100 d-flex flex-column bg-light js-body">
     <div class="d-block flex-shrink-0">
-    {% include 'header.html' %}
+        {% include 'header.html' %}
     </div>
 
     <div class="d-block flex-shrink-0">
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
 
     {% block filler %}
-    <div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
+        <div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
     {% endblock %}
 
     <div class="d-block flex-shrink-0">

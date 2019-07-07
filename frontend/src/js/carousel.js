@@ -68,4 +68,9 @@ module.exports = function () {
             });
         });
     });
+
+    $('.js-carousel-img-link').click(function () {
+        var img = $(this);
+        img.addClass('border border-color-gray-400 rounded css-border-thick');
+    });
 };

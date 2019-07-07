@@ -20,6 +20,8 @@ $enable-responsive-font-sizes: true;
 $emphasized-link-hover-darken-percentage: 30%;
 
 $carousel-control-color: map_get($theme-colors, "color-gray-700");
+$carousel-transition-duration: 0s;
+$carousel-transition: none;
 
 $breadcrumb-bg: #f8f9fa;
 $breadcrumb-divider: quote("|");

@@ -23,7 +23,7 @@
                     <hr>
                 </div>
                 <div class="h5 font-weight-normal text-center text-lg-left">
-                    Перед оформлением заказа мы Вам рекомендуем пройти регистрацию, которая позволит Вам:
+                    Перед оформлением заказа мы Вам рекомендуем войти, используя Ваш существующий аккаунт, или пройти регистрацию и создать новый аккаунт, который позволит Вам:
                 </div>
                 <ul class="px-4">
                     {% include 'accounts/signup/advantages.html' %}
@@ -32,8 +32,11 @@
                     <a href="{% url 'orders:details' %}" class="btn btn-light border border-color-gray-500 btn-mobile-block">
                         Продолжить без регистрации
                     </a>
-                    <a href="{% url 'accounts:signup' %}" class="btn btn-color-2 btn-mobile-block ml-lg-3 mt-3 mt-lg-0">
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-light border border-color-gray-500 btn-mobile-block ml-lg-3 mt-3 mt-lg-0">
                         Пройти регистрацию
+                    </a>
+                    <a href="{% url 'accounts:login' %}" class="btn btn-color-2 btn-mobile-block ml-lg-3 mt-3 mt-lg-0">
+                        Войти
                     </a>
                 </div>
             </div>
