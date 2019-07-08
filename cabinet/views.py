@@ -3,6 +3,7 @@ from django.db.models import Prefetch
 
 from orders.models import Order, OrderStatus
 from support.models import Chat, Message
+from .forms import UserChangeForm
 
 
 SECTIONS = [
@@ -106,8 +107,17 @@ def profile_settings_view(request):
     if user.is_anonymous:
         return redirect('accounts:login')
 
+    if request.method == 'POST':
+        user_change_form = UserChangeForm(request.POST, instance=user)
+
+        if user_change_form.is_valid():
+            user = user_change_form.save()
+
+    user_change_form = UserChangeForm(instance=user)
+
     context = dict()
     context['sections'] = SECTIONS
     context['section_name'] = 'settings'
+    context['user_change_form'] = user_change_form
 
     return render(request, 'cabinet/settings.html', context=context)

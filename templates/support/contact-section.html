@@ -6,13 +6,21 @@
             <img class="d-block w-100" src="{% static image_location %}" alt="{{ image_alt }}">
         </div>
 
-        <div class="d-inline-block my-2">
+        <div class="d-inline-block mt-2 mb-3">
             <div class="h5 my-0 text-center">
                 {{ text }}
             </div>
         </div>
 
-        <a href="{% if action_url %}{% url action_url %}{% else %}{{ action_link }}{% endif %}" class="btn btn-block btn-light border border-color-gray-500 mt-2">
+        {% if extra_text %}
+        <div class="d-inline-block mb-3">
+            <div class="h5 font-weight-normal my-0 text-center">
+                {{ extra_text }}
+            </div>
+        </div>
+        {% endif %}
+
+        <a href="{% if action_url %}{% url action_url %}{% else %}{{ action_link }}{% endif %}" class="btn btn-block btn-light border border-color-gray-500 mt-auto">
             {{ action_text }}
         </a>
     </div>

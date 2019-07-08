@@ -13,11 +13,15 @@
         {% include 'support/contact-section.html' %}
     {% endwith %}
 
-    {% with image_location='img/message_125px.png' image_alt='SMS' text='Отпраьте нам SMS' action_link='sms:+77077807477' action_text='Написать SMS' %}
+    {% with image_location='img/telegram_app_125px.png' image_alt='Telegram' text='Используйте Telegram' action_link='#' action_text='Перейти в Telegram' %}
         {% include 'support/contact-section.html' %}
     {% endwith %}
 
-    {% with image_location='img/call_125px.png' image_alt='Call' text='Позвоните нам' action_link='tel:+77077807477' action_text='Позвонить' %}
+    {% with image_location='img/message_125px.png' image_alt='SMS' text='Отправьте нам SMS' action_link='sms:+77077807477' action_text='Написать SMS' %}
+        {% include 'support/contact-section.html' %}
+    {% endwith %}
+
+    {% with image_location='img/call_125px.png' image_alt='Call' text='Позвоните нам' action_link='tel:+77077807477' action_text='Позвонить' extra_text='Пон - Пят: 10:00 - 17:00' %}
         {% include 'support/contact-section.html' %}
     {% endwith %}
 </div>
