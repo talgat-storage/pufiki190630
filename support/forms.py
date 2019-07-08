@@ -1,18 +1,25 @@
 from django import forms
 
-from .models import Message
+from .models import Chat, Message
+
+
+class ChatForm(forms.ModelForm):
+    class Meta:
+        model = Chat
+        fields = ['title']
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'autofocus': True,
+            }),
+        }
 
 
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ['title', 'body']
+        fields = ['body']
         widgets = {
-            'title': forms.TextInput(attrs={
-                'placeholder': 'Например: "Доставка за пределы Казахстана"',
-            }),
             'body': forms.Textarea(attrs={
                 'rows': '5',
-                # 'placeholder': '',
             }),
         }

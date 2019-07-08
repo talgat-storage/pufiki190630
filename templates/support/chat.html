@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    | Поддержка | Вопрос
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row bg-light">
+            <div class="col-12 py-1"></div>
+        </div>
+        <div class="row bg-white px-lg-5">
+            <div class="col-12 my-3">
+                <div class="h2 font-weight-normal">
+                    Написать сообщение
+                </div>
+                <div class="d-block">
+                    <hr>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% with field=chat_form.title text='Тема сообщения' %}
+                        {% include 'accounts/form-group.html' %}
+                    {% endwith %}
+
+                    {% with field=message_form.body text='Текст' %}
+                        {% include 'accounts/form-group.html' %}
+                    {% endwith %}
+
+                    {% with form=chat_form %}
+                        {% include 'accounts/form-errors.html' %}
+                    {% endwith %}
+
+                    {% with form=message_form %}
+                        {% include 'accounts/form-errors.html' %}
+                    {% endwith %}
+
+                    <div class="text-center text-lg-left mt-3">
+                        <button type="submit" class="btn css-btn-lg-block btn-color-2 text-white px-4 py-2">
+                            <span class="h6 my-0">Отправить</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

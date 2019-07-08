@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db import IntegrityError
 
-from pufiki190630.utilities import get_form_input_value, is_recaptcha_valid
-from accounts.utilities import get_existing_user
-from orders.forms import AnonymousUserForm
-from .forms import MessageForm
+from .forms import ChatForm, MessageForm
 
 
 SECTIONS = [
@@ -65,40 +62,40 @@ def question_view(request, **kwargs):
     return render(request, 'support/question.html', context=context)
 
 
-def message_view(request):
+def chat_view(request):
     user = request.user
 
-    if request.method == 'POST':
-        message_user = None
-        if user.is_anonymous:
-            form_email = get_form_input_value(request, 'email')
-            existing_nonactive_user = get_existing_user(form_email, False)
-            anonymous_user_form = AnonymousUserForm(request.POST, instance=existing_nonactive_user)
-            if anonymous_user_form.is_valid():
-                try:
-                    message_user = anonymous_user_form.save()
-                except IntegrityError:
-                    message_user = None
-        else:
-            message_user = user
-            anonymous_user_form = None
+    if user.is_anonymous:
+        return redirect('accounts:login')
 
+    if request.method == 'POST':
+        chat_form = ChatForm(request.POST)
         message_form = MessageForm(request.POST)
 
-        if message_user and message_form.is_valid() and (user.is_authenticated or is_recaptcha_valid(request)):
-            message = message_form.save(commit=False)
-            message.user = message_user
-            message.save()
-
-            return render(request, 'accounts/success.html', context={
-                'body': 'Ваше сообщение успешно отправлено. <br> Наш менеджер скоро свяжется с Вами.'
-            })
+        if chat_form.is_valid() and message_form.is_valid():
+            chat = chat_form.save(commit=False)
+            chat.user = user
+            try:
+                chat.save()
+            except IntegrityError:
+                pass
+            else:
+                message = message_form.save(commit=False)
+                message.chat = chat
+                try:
+                    message.save()
+                except IntegrityError:
+                    pass
+                else:
+                    return render(request, 'accounts/success.html', context={
+                        'body': 'Ваше сообщение успешно отправлено.',
+                    })
     else:
-        anonymous_user_form = AnonymousUserForm() if user.is_anonymous else None
+        chat_form = ChatForm()
         message_form = MessageForm()
 
     context = dict()
-    context['anonymous_user_form'] = anonymous_user_form
+    context['chat_form'] = chat_form
     context['message_form'] = message_form
 
-    return render(request, 'support/message.html', context=context)
+    return render(request, 'support/chat.html', context=context)

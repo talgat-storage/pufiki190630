@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from accounts.models import User
 from shop.models import Product
-from pufiki190630.utilities import generate_slug, args_to_str
+from pufiki190630.utilities import generate_slug_and_save, args_to_str
 
 
 DEFAULT_SLUG_LENGTH = 6
@@ -39,7 +39,7 @@ class Order(models.Model):
     payment_method = models.PositiveSmallIntegerField(choices=PAYMENT_METHOD_CHOICES, default=1)
 
     def save(self, *args, **kwargs):
-        generate_slug(DEFAULT_SLUG_LENGTH, False)
+        generate_slug_and_save(self, Order, *args, slug_length=DEFAULT_SLUG_LENGTH, is_slug_alphanumeric=False, **kwargs)
 
     def __str__(self):
         return args_to_str(self.slug,
