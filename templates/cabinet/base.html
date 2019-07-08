@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    | Мой аккаунт
+    {% block subtitle %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row bg-light">
+            <div class="col-12 py-1"></div>
+        </div>
+        <div class="row bg-white">
+            <div class="col-12 mt-3 px-lg-5">
+                <div class="h2 font-weight-normal">
+                    Мой аккаунт
+                </div>
+                <div>
+                    <hr>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <ul class="list-group">
+                            {% for name, title, link in sections %}
+                                <a href="{% url link %}"
+                                   class="list-group-item list-group-item-action {% if name == section_name %}active{% endif %}">
+                                    {{ title }}
+                                </a>
+                            {% endfor %}
+                                <a href="{% url 'accounts:logout' %}"
+                                   class="list-group-item list-group-item-action">
+                                    Выйти
+                                </a>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        {% block subcontent %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

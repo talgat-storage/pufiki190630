@@ -1,0 +1,96 @@
+{% extends 'cabinet/base.html' %}
+{% load static %}
+
+{% block subtitle %}
+    | Мои заказы | {{ order.slug }}
+{% endblock %}
+
+{% block subcontent %}
+    <div class="h4">
+        Заказ {{ order.slug }}
+    </div>
+    <div class="my-3 font-weight-normal">
+        <span class="font-weight-light">Статус заказа:</span> {{ order.orderstatus_set.first.get_status_display|lower }}
+    </div>
+    <hr>
+    <div class="h5 my-3 font-weight-normal">
+        Заказанные товары
+    </div>
+    {% for product_detail in order.orderproductdetails_set.all %}
+        {% with product=product_detail.product total=product_detail.total quantity=product_detail.quantity %}
+        <div class="d-flex align-items-center">
+            <div class="css-cart-product-image">
+                <img class="d-block w-100" src="{{ product.small_photo.url }}" alt="Product {{ product.slug }}">
+            </div>
+            <div class="d-flex flex-column ml-3">
+                <a href="{{ product.origin.get_absolute_url }}?color={{ product.product.color }}">
+                    <div class="h6 my-0 text-color-2">
+                        <u>{{ product.origin.name }}</u>
+                    </div>
+                </a>
+                <div class="h6 my-0 mt-1 font-weight-light">
+                    {{ product.get_color_display }}
+                </div>
+            </div>
+            <div class="d-flex flex-column ml-3">
+                <div class="h6 my-0 font-weight-light">
+                    {{ total }} тг.
+                </div>
+                <div class="h6 my-0 mt-1 font-weight-light">
+                    {{ quantity }} шт.
+                </div>
+            </div>
+        </div>
+        <hr>
+        {% endwith %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-6">
+            <div class="h5 mb-3 font-weight-normal">
+                Информация о доставке
+            </div>
+            <div class="font-weight-normal">
+                <span class="font-weight-light">Имя:</span> {{ order.user.name }}
+            </div>
+            <div class="font-weight-normal">
+                <span class="font-weight-light">Телефон:</span> {{ order.phone }}
+            </div>
+            <div class="font-weight-normal">
+                <span class="font-weight-light">Адрес:</span> {{ order.address }}
+            </div>
+            <div class="font-weight-normal">
+                <span class="font-weight-light">Быстрая доставка:</span> {% if order.is_fast_delivery %}Да{% else %}Нет{% endif %}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="h5 mb-3 font-weight-normal">
+                Информация об оплате
+            </div>
+            <div class="font-weight-normal">
+                <span class="font-weight-light">Сумма к оплате:</span> {{ order.payment_total }} тг.
+            </div>
+            <div class="font-weight-normal">
+                <span class="font-weight-light">Способ оплаты:</span> {{ order.get_payment_method_display }}
+            </div>
+            <div class="font-weight-normal">
+                <span class="font-weight-light">Оплачено:</span> {% if order.is_payment_done %}Да{% else %}Нет{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="my-3">
+        <hr>
+        <div class="h5 font-weight-normal">
+            История заказа
+        </div>
+        <table class="table my-3">
+            <tbody>
+                {% for status in order.orderstatus_set.all %}
+                <tr>
+                    <th scope="row">{{ status.get_status_display }}</th>
+                    <td>{{ status.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

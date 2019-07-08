@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 23:18+0600\n"
+"POT-Creation-Date: 2019-07-08 22:51+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,26 @@ msgstr "Банковская карта"
 #: .\orders\models.py:19
 msgid "Please enter a valid phone number. For example, 87771234567890"
 msgstr "Пожалуйста, введите номер телефоне в формате 87001112233"
+
+#: .\orders\models.py:61
+msgid "Issued"
+msgstr "Оформлено"
+
+#: .\orders\models.py:62
+msgid "Packaged"
+msgstr "Упаковано"
+
+#: .\orders\models.py:63
+msgid "Done"
+msgstr "Выполнено"
+
+#: .\orders\models.py:64
+msgid "Exchanged"
+msgstr "Заменено"
+
+#: .\orders\models.py:65
+msgid "Canceled"
+msgstr "Возвращено"
 
 #: .\shop\models.py:20
 msgid "Small"
@@ -111,3 +131,11 @@ msgstr "Серый"
 #: .\shop\models.py:90
 msgid "Brown"
 msgstr "Коричневый"
+
+#: .\support\models.py:11
+msgid "Open"
+msgstr "Открыто"
+
+#: .\support\models.py:12
+msgid "Closed"
+msgstr "Закрыто"

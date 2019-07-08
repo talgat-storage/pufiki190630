@@ -14,5 +14,4 @@ urlpatterns = [
     path('password/set/<user_email_b64>/<token>/', views.password_set_view, name='password-set'),
     path('password/change/', views.password_change_view, name='password-change'),
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('home')), name='logout'),
-    path('', views.account_view, name='account'),
 ]

@@ -53,7 +53,7 @@
         <div class="d-none d-md-inline-block ml-3">
             {% if user.is_authenticated %}
                 <div class="dropdown">
-                    <a href="{% url 'accounts:account' %}" class="text-decoration-none text-color-gray-700 dropdown-toggle" data-toggle="dropdown">
+                    <a href="{% url 'profile:orders' %}" class="text-decoration-none text-color-gray-700 dropdown-toggle" data-toggle="dropdown">
                         <div class="d-flex align-items-center justify-content-center px-2 py-1 css-icon-user-parent">
                             <div class="d-none d-md-inline-block h6 my-0">
                                 Мой аккаунт
@@ -64,9 +64,9 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Мои заказы</a>
-                        <a class="dropdown-item" href="#">Мои сообщения</a>
-                        <a class="dropdown-item" href="#">Мои настройки</a>
+                        <a class="dropdown-item" href="{% url 'profile:orders' %}">Мои заказы</a>
+                        <a class="dropdown-item" href="{% url 'profile:chats' %}">Мои сообщения</a>
+                        <a class="dropdown-item" href="{% url 'profile:settings' %}">Мои настройки</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'accounts:logout' %}">Выйти</a>
                     </div>
@@ -117,21 +117,21 @@
 
                 {% if user.is_authenticated %}
                     <div class="d-block">
-                        <a href="#" class="text-decoration-none text-color-gray-700">
+                        <a href="{% url 'profile:orders' %}" class="text-decoration-none text-color-gray-700">
                             <div class="h6 my-0 text-center py-2">
                                 Мои заказы
                             </div>
                         </a>
                     </div>
                     <div class="d-block mt-3">
-                        <a href="#" class="text-decoration-none text-color-gray-700">
+                        <a href="{% url 'profile:chats' %}" class="text-decoration-none text-color-gray-700">
                             <div class="h6 my-0 text-center py-2">
-                                Мои cообщения
+                                Мои сообщения
                             </div>
                         </a>
                     </div>
                     <div class="d-block mt-3">
-                        <a href="#" class="text-decoration-none text-color-gray-700">
+                        <a href="{% url 'profile:settings' %}" class="text-decoration-none text-color-gray-700">
                             <div class="h6 my-0 text-center py-2">
                                 Мои настройки
                             </div>

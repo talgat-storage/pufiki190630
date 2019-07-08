@@ -1,0 +1,40 @@
+{% extends 'cabinet/base.html' %}
+{% load static %}
+
+{% block subtitle %}
+    | Мои заказы
+{% endblock %}
+
+{% block subcontent %}
+    {% if not orders %}
+        <div class="h5 font-weight-normal text-center">
+            Заказов пока нет
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <div class="d-inline-block">
+                <img class="d-block css-width-100px" src="{% static 'img/web_search_125px.png' %}" alt="Web Search">
+            </div>
+        </div>
+    {% else %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Номер</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Сумма</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <th scope="row"><a href="{% url 'profile:order' order_slug=order.slug %}">{{ order.slug }}</a></th>
+                <td>{{ order.orderstatus_set.first.date }}</td>
+                <td>{{ order.orderstatus_set.first.get_status_display }}</td>
+                <td>{{ order.payment_total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

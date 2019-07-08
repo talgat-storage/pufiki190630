@@ -222,15 +222,6 @@ def password_set_view(request, **kwargs):
     return render(request, 'accounts/password/set.html', context)
 
 
-def account_view(request):
-    user = request.user
-
-    if user.is_anonymous:
-        return redirect('accounts:login')
-
-    return render(request, 'accounts/account/account.html')
-
-
 def password_change_view(request):
     user = request.user
 

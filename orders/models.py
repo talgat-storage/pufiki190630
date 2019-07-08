@@ -19,11 +19,10 @@ class Order(models.Model):
     PHONE_ERROR_MESSAGE = _('Please enter a valid phone number. For example, 87771234567890')
 
     slug = models.CharField(max_length=DEFAULT_SLUG_LENGTH, unique=True, editable=False)  # handled by save method
-    date_submitted = models.DateTimeField(default=timezone.now)
 
     # Internal
     is_fast_checkout = models.BooleanField(default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through='OrderProductDetails')
     payment_total = models.PositiveIntegerField(default=0)
     is_payment_done = models.BooleanField(default=True)  # Change later
@@ -55,3 +54,17 @@ class OrderProductDetails(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField()
     total = models.PositiveIntegerField()
+
+
+class OrderStatus(models.Model):
+    STATUS_CHOICES = (
+        (1, _('Issued')),
+        (2, _('Packaged')),
+        (3, _('Done')),
+        (4, _('Exchanged')),
+        (5, _('Canceled')),
+    )
+
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=1)
+    date = models.DateTimeField(default=timezone.now)
