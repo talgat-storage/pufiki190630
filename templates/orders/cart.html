@@ -94,7 +94,7 @@
 
             <div class="col-12 d-flex flex-column flex-lg-row justify-content-end mb-3 mt-lg-3">
                 <div class="d-inline-block">
-                    <a href="{% url 'orders:details' %}" class="btn btn-mobile-block btn-light border border-color-gray-600 px-4 py-2">
+                    <a href="{% url 'orders:details' %}" class="btn css-btn-lg-block btn-light border border-color-gray-600 px-4 py-2">
                         Вернуться назад
                     </a>
                 </div>
@@ -102,7 +102,7 @@
                     <form method="post">
                         {% csrf_token %}
                         <input type="hidden" name="cart" value="{{ cart }}">
-                        <button type="submit" class="btn btn-mobile-block btn-color-2 px-4 py-2 ml-lg-3 mt-3 mt-lg-0">
+                        <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2 ml-lg-3 mt-3 mt-lg-0">
                             Продолжить
                         </button>
                     </form>

@@ -1,20 +1,14 @@
 from django import forms
 
-from accounts.models import User
 from .models import Order
 
 
-class AnonymousUserForm(forms.ModelForm):
+class NameForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['name', 'email']
+        model = Order
+        fields = ['name']
         widgets = {
-            'name': forms.TextInput(attrs={
-                'placeholder': 'Например, Дамир Ануарович или Дамир',
-            }),
-            'email': forms.TextInput(attrs={
-                'placeholder': 'Например, damir@mail.ru',
-            }),
+            'name': forms.TextInput(),
         }
 
 
