@@ -95,7 +95,7 @@
             <div class="col-12 d-flex flex-column flex-lg-row justify-content-end mb-3 mt-lg-3">
                 <div class="d-inline-block">
                     <a href="{% url 'orders:details' %}" class="btn css-btn-lg-block btn-light border border-color-gray-600 px-4 py-2">
-                        Вернуться назад
+                        <span class="h6 my-0">Вернуться назад</span>
                     </a>
                 </div>
                 <div class="d-inline-block">
@@ -103,7 +103,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="cart" value="{{ cart }}">
                         <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2 ml-lg-3 mt-3 mt-lg-0">
-                            Продолжить
+                            <span class="h6 my-0">Продолжить</span>
                         </button>
                     </form>
                 </div>
@@ -111,8 +111,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block filler %}
-<div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
 {% endblock %}

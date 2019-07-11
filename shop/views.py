@@ -178,6 +178,7 @@ class OriginView(TemplateView):
 
 def cart_view(request):
     session = request.session
+    print('Session:', [item for item in session.items()])
 
     results = None
     total = None

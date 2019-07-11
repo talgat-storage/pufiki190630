@@ -23,15 +23,18 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     name = models.CharField(max_length=64, default='')
 
-    is_fast_delivery = models.BooleanField(default=False)
-    products = models.ManyToManyField(Product, through='OrderProduct')
-
     # Details
+    is_fast_delivery = models.BooleanField(default=False)
     phone = models.CharField(max_length=11, validators=[PHONE_REGEX_VALIDATOR])
     address = models.TextField(max_length=254)
     payment_method = models.PositiveSmallIntegerField(choices=PAYMENT_METHOD_CHOICES, default=1)
 
+    products = models.ManyToManyField(Product, through='OrderProduct')
+
+    bank_id = models.CharField(max_length=36, default='')
+
     date_created = models.DateTimeField(default=timezone.now)
+    is_valid = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         generate_slug_and_save(self, Order, *args,
@@ -53,13 +56,12 @@ class OrderProduct(models.Model):
 
 class OrderStatus(models.Model):
     STATUS_CHOICES = (
-        (1, _('Issued')),
-        (2, _('Paid')),
-        (3, _('Packaged')),
-        (4, _('Delivered')),
-        (5, _('Exchanged')),
-        (6, _('Returned')),
-        (7, _('Canceled')),
+        (1, _('Paid')),
+        (2, _('Packaged')),
+        (3, _('Delivered')),
+        (4, _('Exchanged')),
+        (5, _('Returned')),
+        (6, _('Canceled')),
     )
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE)

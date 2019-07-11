@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Pufiki.kz | Оформление заказа | Готово
+    | Оформление заказа | Оплата
 {% endblock %}
 
 {% block content %}
@@ -11,35 +11,28 @@
             <div class="col-12 py-1"></div>
         </div>
         <div class="row bg-white px-lg-5">
-            <div class="col-12 mt-3">
+            <div class="col-12 my-3">
                 <div class="h2 font-weight-normal">
-                    Оформление заказа
+                    Ошибка
                 </div>
                 <div class="d-block">
-                    {% with current_step_number=4 %}
-                        {% include 'orders/header.html' %}
-                    {% endwith %}
-                </div>
-
-                <hr>
-
-                <div class="h5">
-                    Спасибо!
-                </div>
-
-                <div class="h5 font-weight-normal">
-                    Ваш заказ №{{ order_slug }} успешно оформлен и принят в обработку.
+                    <hr>
                 </div>
                 <div class="h5 font-weight-normal">
-                    Наш менеджер с Вами скоро свяжется.
+                    Произошла ошибка.
                 </div>
                 <div class="h5 font-weight-normal">
-                    Хорошего Вам дня!
+                    {{ error_message }}
+                    {% if error_code %}
+                        (код: {{ error_code }}).
+                    {% endif %}
                 </div>
-
+                <div class="h5 font-weight-normal">
+                    Попробуйте оформить заказ заново. Для этого нажмите <a href="{% url 'orders:details' %}">сюда</a>.
+                </div>
                 <div class="d-flex justify-content-center mt-3">
                     <div class="d-inline-block">
-                        <img class="d-block css-width-100px" src="{% static 'img/checked_125px.png' %}" alt="Готово">
+                        <img class="d-block css-width-100px" src="{% static 'img/box_important_125px.png' %}" alt="Ошибка">
                     </div>
                 </div>
             </div>

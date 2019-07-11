@@ -66,22 +66,18 @@
                     <div class="d-flex flex-column flex-lg-row justify-content-end my-3">
                         <div class="d-inline-block">
                             <a href="{% url 'cart' %}" class="btn css-btn-lg-block btn-light border border-color-gray-600 px-4 py-2">
-                                Вернуться в корзину
+                                <span class="h6 my-0">Вернуться в корзину</span>
                             </a>
                         </div>
                         <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2 ml-lg-3 mt-3 mt-lg-0
                             {% if user.is_anonymous %}js-orders-details-submit-button" disabled="disabled" tabindex="-1{% endif %}">
-                            Продолжить
+                            <span class="h6 my-0">Продолжить</span>
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block filler %}
-<div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
 {% endblock %}
 
 {% block postscript %}

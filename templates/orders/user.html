@@ -30,20 +30,16 @@
                 </ul>
                 <div class="d-flex flex-column flex-lg-row my-3">
                     <a href="{% url 'orders:details' %}" class="btn btn-light border border-color-gray-500 btn-mobile-block">
-                        Продолжить без регистрации
+                        <span class="h6 my-0">Продолжить без регистрации</span>
                     </a>
                     <a href="{% url 'accounts:signup' %}" class="btn btn-light border border-color-gray-500 btn-mobile-block ml-lg-3 mt-3 mt-lg-0">
-                        Пройти регистрацию
+                        <span class="h6 my-0">Пройти регистрацию</span>
                     </a>
                     <a href="{% url 'accounts:login' %}" class="btn btn-color-2 btn-mobile-block ml-lg-3 mt-3 mt-lg-0">
-                        Войти
+                        <span class="h6 my-0">Войти</span>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block filler %}
-<div class="flex-fill container-fluid container-fluid-max-width bg-white"></div>
 {% endblock %}
