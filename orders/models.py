@@ -12,7 +12,7 @@ DEFAULT_SLUG_LENGTH = 6
 
 
 class Order(models.Model):
-    PHONE_ERROR_MESSAGE = _('Please enter a valid phone number. For example, 87771234567890')
+    PHONE_ERROR_MESSAGE = _('Please enter a valid phone number. For example, 87001112233')
     PHONE_REGEX_VALIDATOR = RegexValidator(regex=r'^8\d{10}$', message=PHONE_ERROR_MESSAGE, code='invalid_phone_number')
     PAYMENT_METHOD_CHOICES = (
         (1, _('Cash')),

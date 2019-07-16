@@ -1,114 +1,89 @@
-{% extends 'base.html' %}
+{% extends 'orders/base.html' %}
 
-{% block title %}
-    Pufiki.kz | Оформление заказа | Подтверждение
+{% block subtitle %}
+    | Подтверждение
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
+{% block subcontent %}
+    <div class="col-12 col-lg-5 col-xl-6 pl-sm-4 pl-lg-5 mb-3">
+        <div class="h5 font-weight-normal text-center">
+            Детали
         </div>
-        <div class="row bg-white px-lg-5">
-            <div class="col-12 mt-3">
-                <div class="h2 font-weight-normal">
-                    Оформление заказа
+        <ul class="list-group mt-3">
+        {% for name, value in order_data %}
+            <li class="list-group-item">
+                <div class="h6 my-0 font-weight-normal">
+                    {{ name }}
                 </div>
-                <div class="d-block">
-                    {% with current_step_number=2 %}
-                        {% include 'orders/header.html' %}
-                    {% endwith %}
+                <div class="h6 my-0 font-weight-light mt-1">
+                    {{ value }}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-12 col-lg-7 col-xl-6 pr-sm-4 pr-lg-5 mb-3">
+        <div class="h5 font-weight-normal text-center">
+            Счёт
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-3 offset-6 d-flex flex-column justify-content-center align-items-center px-1">
+                <div class="h6 my-0 font-weight-normal">
+                    Кол-во
                 </div>
             </div>
-
+            <div class="col-3 d-flex flex-column justify-content-center align-items-center px-1">
+                <div class="h6 my-0 font-weight-normal">
+                    Всего
+                </div>
+            </div>
             <div class="col-12">
                 <hr>
             </div>
 
-            <div class="col-12 col-lg-5 col-xl-6">
-                <div class="h5 my-0 text-center">
-                    Детали
-                </div>
-                <ul class="list-group mt-3">
-                {% for name, value in order_data %}
-                    <li class="list-group-item">
-                        <div class="h5 my-0 font-weight-normal">
-                            {{ name }}
-                        </div>
-                        <div class="h6 my-0 font-weight-light mt-1">
-                            {{ value }}
-                        </div>
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
+            {% for product, origin, quantity, total in results %}
+                {% include 'orders/cart-product.html' %}
+            {% endfor %}
 
-            <div class="col-12 col-lg-7 col-xl-6">
-                <div class="h5 my-0 text-center mt-3 mt-lg-0">
-                    Счёт
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <hr>
-                    </div>
-                    <div class="col-3 offset-6 d-flex flex-column justify-content-center align-items-center px-1">
-                        <div class="h6 my-0">
-                            Кол-во
-                        </div>
-                    </div>
-                    <div class="col-3 d-flex flex-column justify-content-center align-items-center px-1">
-                        <div class="h6 my-0">
-                            Всего
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <hr>
-                    </div>
-                </div>
-                {% for product, origin, quantity, total in results %}
-                    {% include 'orders/cart-product.html' %}
-                {% endfor %}
-                <div class="row">
-                    <div class="col-3 offset-6">
-                        <div class="h6 my-0 text-right">
-                            Доставка:
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="h6 my-0 font-weight-normal text-center">
-                            {{ delivery_cost }} тг.
-                        </div>
-                    </div>
-                    <div class="col-3 offset-6 my-3">
-                        <div class="h6 my-0 text-right">
-                            Итого:
-                        </div>
-                    </div>
-                    <div class="col-3 my-3">
-                        <div class="h6 my-0 font-weight-normal text-center">
-                            {{ total }} тг.
-                        </div>
-                    </div>
+            <div class="col-9 px-1">
+                <div class="h6 my-0 font-weight-normal text-right">
+                    Доставка:
                 </div>
             </div>
-
-            <div class="col-12 d-flex flex-column flex-lg-row justify-content-end mb-3 mt-lg-3">
-                <div class="d-inline-block">
-                    <a href="{% url 'orders:details' %}" class="btn css-btn-lg-block btn-light border border-color-gray-600 px-4 py-2">
-                        <span class="h6 my-0">Вернуться назад</span>
-                    </a>
-                </div>
-                <div class="d-inline-block">
-                    <form method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="cart" value="{{ cart }}">
-                        <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2 ml-lg-3 mt-3 mt-lg-0">
-                            <span class="h6 my-0">Продолжить</span>
-                        </button>
-                    </form>
+            <div class="col-3 px-1">
+                <div class="h6 my-0 font-weight-normal text-center">
+                    {{ delivery_cost }} тг.
                 </div>
             </div>
+            <div class="col-9 my-3 px-1">
+                <div class="h6 my-0 text-right">
+                    Итого:
+                </div>
+            </div>
+            <div class="col-3 my-3 px-1">
+                <div class="h6 my-0 font-weight-normal text-center">
+                    {{ total }} тг.
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="col-12 d-flex flex-column flex-lg-row justify-content-end px-sm-4 px-lg-5 mb-3">
+        <div class="d-inline-block">
+            <a href="{% url 'orders:details' %}" class="btn css-btn-lg-block btn-light border border-color-gray-500 px-4 py-2">
+                <span class="h6 my-0">Вернуться назад</span>
+            </a>
+        </div>
+        <div class="d-inline-block">
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="cart" value="{{ cart }}">
+                <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2 ml-0 ml-lg-3 mt-3 mt-lg-0">
+                    <span class="h6 my-0">Продолжить</span>
+                </button>
+            </form>
         </div>
     </div>
 {% endblock %}

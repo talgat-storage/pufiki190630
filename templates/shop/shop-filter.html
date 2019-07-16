@@ -25,7 +25,7 @@
             <div id="{{ collapse_id }}" class="collapse show py-3 js-collapsible">
                 <div class="d-flex flex-wrap">
                     {% for option in search_form.size %}
-                        <div class="d-none">{% cycle 'img/small.png' 'img/medium.png' 'img/large.png' as image_location %}</div>
+                        {% cycle 'img/small.png' 'img/medium.png' 'img/large.png' as image_location silent %}
                         {% include 'shop/shop-filter-label.html' %}
                     {% endfor %}
                     <div class="d-inline-block mx-auto css-size-label" style="height: 0;"></div>

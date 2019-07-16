@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    | Оформление заказа
+    {% block subtitle %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width">
+        <div class="row bg-light">
+            <div class="col-12 py-1"></div>
+        </div>
+        <div class="row bg-white">
+            <div class="col-12 px-sm-4 px-lg-5 mt-3">
+                <div class="h2 font-weight-normal">
+                    Оформление заказа
+                </div>
+                <hr>
+                {% include 'orders/header.html' %}
+                <hr>
+            </div>
+            {% block subcontent %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

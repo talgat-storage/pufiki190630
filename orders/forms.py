@@ -8,7 +8,9 @@ class NameForm(forms.ModelForm):
         model = Order
         fields = ['name']
         widgets = {
-            'name': forms.TextInput(),
+            'name': forms.TextInput(attrs={
+                'autofocus': True,
+            }),
         }
 
 
@@ -19,7 +21,8 @@ class OrderDetailsForm(forms.ModelForm):
         widgets = {
             'phone': forms.TextInput(attrs={
                 'type': 'tel',
-                'placeholder': 'Например, 87001112233',
+                'placeholder': 'Например: 87001112233',
+                'autofocus': True,
             }),
             'address': forms.Textarea(attrs={
                 'rows': '3',

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-15 23:53+0600\n"
+"POT-Creation-Date: 2019-07-17 00:40+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,8 +41,10 @@ msgid "users"
 msgstr "пользователи"
 
 #: .\orders\models.py:15
-msgid "Please enter a valid phone number. For example, 87771234567890"
-msgstr "Пожалуйста, введите номер телефоне в формате 87001112233"
+#, fuzzy
+#| msgid "Please enter a valid phone number. For example, 87771234567890"
+msgid "Please enter a valid phone number. For example, 87001112233"
+msgstr "Пожалуйста, введите номер телефона в формате 87001112233"
 
 #: .\orders\models.py:18
 msgid "Cash"

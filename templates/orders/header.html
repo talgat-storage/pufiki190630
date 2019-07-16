@@ -1,24 +1,20 @@
-<div class="d-block mt-3">
-    <hr>
-</div>
-
 <ul class="list-group list-group-horizontal">
-    {% for step in '1234' %}
-        {% with step_number=forloop.counter %}
+    {% for order_step in order_steps %}
+        {% with order_step_number=forloop.counter %}
             <li class="list-group-item px-2 px-sm-4">
                 <span class="h6 my-0 border rounded
-                    {% if step_number < current_step_number %} border-color-light-2 bg-color-light-2 text-white
-                    {% elif step_number == current_step_number %} border-color-2 bg-color-2 text-white
-                    {% elif step_number > current_step_number %} border-color-gray-300 bg-color-gray-300 text-white
+                    {% if order_step_number < current_order_step_number %} border-color-light-2 bg-color-light-2 text-white
+                    {% elif order_step_number == current_order_step_number %} border-color-2 bg-color-2 text-white
+                    {% else %} border-color-gray-300 bg-color-gray-300 text-white
                     {% endif %}
-                    px-2">{{ step_number }}</span>
+                    px-2">{{ order_step_number }}</span>
                 <span class="d-md-inline h6 my-0
-                    {% if step_number < current_step_number %} d-none text-color-light-2
-                    {% elif step_number == current_step_number %} text-color-2
-                    {% elif step_number > current_step_number %} d-none text-color-gray-500
+                    {% if order_step_number < current_order_step_number %} d-none text-color-light-2
+                    {% elif order_step_number == current_order_step_number %} text-color-2
+                    {% else %} d-none text-color-gray-500
                     {% endif %}
                 ml-1">
-                    {% cycle 'Доставка' 'Подтверждение' 'Оплата' 'Готово' %}
+                    {{ order_step }}
                 </span>
             </li>
         {% endwith %}

@@ -1,87 +1,69 @@
-{% extends 'base.html' %}
+{% extends 'orders/base.html' %}
 
-{% block title %}
-    Pufiki.kz | Оформление заказа | Доставка
+{% block subtitle %}
+    | Доставка
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
-        </div>
-        <div class="row bg-white px-lg-5">
-            <div class="col-12 mt-3">
-                <div class="h2 font-weight-normal">
-                    Оформление заказа
-                </div>
-                <div class="d-block">
-                    {% with current_step_number=1 %}
-                        {% include 'orders/header.html' %}
-                    {% endwith %}
-                </div>
-                <div>
-                    <hr>
-                </div>
-                <form method="post">
-                    {% csrf_token %}
-                    {% if user.is_anonymous %}
-                        {% with field=name_form.name text='Ваше имя' help_text='Пожалуйста, указывайте реальное имя, по которому мы сможем к Вам обращаться.' %}
-                            {% include 'accounts/form-group.html' %}
-                        {% endwith %}
+{% block subcontent %}
+    <div class="col-12 px-sm-4 px-lg-5 mb-3">
+        <form method="post">
+            {% csrf_token %}
 
-                        {% with form=name_form %}
-                            {% include 'accounts/form-errors.html' %}
-                        {% endwith %}
-                    {% endif %}
+            {% if not user.is_authenticated %}
+                {% with field=name_form.name text='Ваше имя' help_text='Пожалуйста, указывайте реальное имя, по которому мы сможем к Вам обращаться. Например, Дамир или Дамир Ануарович.' %}
+                    {% include 'accounts/form-group.html' %}
+                {% endwith %}
 
-                    {% with field=order_details_form.phone text='Ваш телефон' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+                {% with form=name_form %}
+                    {% include 'accounts/form-errors.html' %}
+                {% endwith %}
+            {% endif %}
 
-                    {% with field=order_details_form.address text='Адрес доставки' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+            {% with field=order_details_form.phone text='Ваш телефон' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    <div class="h5 font-weight-normal">
-                        Способ оплаты
-                    </div>
-                    <div class="d-flex">
-                        {% with field=order_details_form.payment_method %}
-                        {% for option in field %}
-{#                            <div class="d-none">{% cycle 'Наличные курьеру' 'Банковская карта' as option_text %}</div>#}
-                            <div class="d-none">{% cycle 'img/cash_in_hand_48px.png' 'img/bank_cards_48px.png' as image_location %}</div>
-                            {% include 'orders/payment-method-label.html' %}
-                        {% endfor %}
-                        {% endwith %}
-                    </div>
+            {% with field=order_details_form.address text='Адрес доставки' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    {% with form=order_details_form %}
-                        {% include 'accounts/form-errors.html' %}
-                    {% endwith %}
-
-                    {% if user.is_anonymous %}
-                        <div class="g-recaptcha my-3" data-sitekey="{{ settings.GOOGLE_RECAPTCHA_PUBLIC_KEY }}" data-callback="orders_details_recaptcha_onload"></div>
-                    {% endif %}
-
-                    <div class="d-flex flex-column flex-lg-row justify-content-end my-3">
-                        <div class="d-inline-block">
-                            <a href="{% url 'cart' %}" class="btn css-btn-lg-block btn-light border border-color-gray-600 px-4 py-2">
-                                <span class="h6 my-0">Вернуться в корзину</span>
-                            </a>
-                        </div>
-                        <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2 ml-lg-3 mt-3 mt-lg-0
-                            {% if user.is_anonymous %}js-orders-details-submit-button" disabled="disabled" tabindex="-1{% endif %}">
-                            <span class="h6 my-0">Продолжить</span>
-                        </button>
-                    </div>
-                </form>
+            <div class="h5 font-weight-normal">
+                Способ оплаты
             </div>
-        </div>
+            <div class="d-flex">
+                {% with field=order_details_form.payment_method %}
+                {% for option in field %}
+                    {% cycle 'img/cash_in_hand_48px.png' 'img/bank_cards_48px.png' as image_location silent %}
+                    {% include 'orders/payment-method-label.html' %}
+                {% endfor %}
+                {% endwith %}
+            </div>
+
+            {% with form=order_details_form %}
+                {% include 'accounts/form-errors.html' %}
+            {% endwith %}
+
+            {% if not user.is_authenticated %}
+                <div class="g-recaptcha my-3" data-sitekey="{{ settings.GOOGLE_RECAPTCHA_PUBLIC_KEY }}" data-callback="orders_details_recaptcha_onload"></div>
+            {% endif %}
+
+            <div class="d-flex flex-column flex-lg-row justify-content-end mt-3">
+                <div class="d-inline-block">
+                    <a href="{% url 'cart' %}" class="btn css-btn-lg-block btn-light border border-color-gray-500 px-4 py-2">
+                        <span class="h6 my-0">Вернуться в корзину</span>
+                    </a>
+                </div>
+                <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2 ml-0 ml-lg-3 mt-3 mt-lg-0
+                    {% if not user.is_authenticated %}js-orders-details-submit-button" disabled="disabled" tabindex="-1{% endif %}">
+                    <span class="h6 my-0">Продолжить</span>
+                </button>
+            </div>
+        </form>
     </div>
 {% endblock %}
 
 {% block postscript %}
-    {% if user.is_anonymous %}
+{% if not user.is_authenticated %}
     <script type="text/javascript">
         var orders_details_recaptcha_onload = function() {
             // Enable button
@@ -91,5 +73,5 @@
         };
     </script>
     <script defer src="https://www.google.com/recaptcha/api.js?hl=ru"></script>
-    {% endif %}
+{% endif %}
 {% endblock %}

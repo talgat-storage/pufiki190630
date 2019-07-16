@@ -1,40 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'orders/base.html' %}
 {% load static %}
 
-{% block title %}
-    | Оформление заказа | Оплата
+{% block subtitle %}
+    | Оплата | Ошибка
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
+{% block subcontent %}
+    <div class="col-12 px-sm-4 px-lg-5 mb-3">
+        <div class="h4 font-weight-normal">
+            Ошибка
         </div>
-        <div class="row bg-white px-lg-5">
-            <div class="col-12 my-3">
-                <div class="h2 font-weight-normal">
-                    Ошибка
-                </div>
-                <div class="d-block">
-                    <hr>
-                </div>
-                <div class="h5 font-weight-normal">
-                    Произошла ошибка.
-                </div>
-                <div class="h5 font-weight-normal">
-                    {{ error_message }}
-                    {% if error_code %}
-                        (код: {{ error_code }}).
-                    {% endif %}
-                </div>
-                <div class="h5 font-weight-normal">
-                    Попробуйте оформить заказ заново. Для этого нажмите <a href="{% url 'orders:details' %}">сюда</a>.
-                </div>
-                <div class="d-flex justify-content-center mt-3">
-                    <div class="d-inline-block">
-                        <img class="d-block css-width-100px" src="{% static 'img/box_important_125px.png' %}" alt="Ошибка">
-                    </div>
-                </div>
+        {% if error_message %}
+            <div class="h5 font-weight-normal">
+                {{ error_message }}
+                {% if error_code %}
+                    (код: {{ error_code }}).
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="h5 font-weight-normal">
+            Попробуйте оформить заказ заново. Для этого нажмите <a href="{% url 'orders:details' %}">сюда</a>.
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <div class="d-inline-block">
+                <img class="d-block css-width-100px" src="{% static 'img/box_important_125px.png' %}" alt="Ошибка">
             </div>
         </div>
     </div>
