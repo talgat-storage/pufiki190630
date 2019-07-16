@@ -24,7 +24,7 @@ def signup_view(request):
     if request.method == 'POST':
         form_email = get_form_input_value(request, 'email')
         existing_nonactive_user = get_existing_user(form_email, False)
-        form = UserCreationForm(request.POST, instance=existing_nonactive_user)
+        form = UserCreationForm(data=request.POST, instance=existing_nonactive_user)
 
         if form.is_valid() and is_recaptcha_valid(request):
             # Process data
@@ -39,7 +39,7 @@ def signup_view(request):
             # Check if already processed
             if 'signup_user' not in cache_context:
                 token = user_token_generator.make_token(user)
-                domain = get_current_site(request).domain
+                domain = '{}://{}'.format(request.scheme, get_current_site(request).domain)
 
                 # Modify context and save in cache
                 cache_context['signup_user'] = user
@@ -57,10 +57,14 @@ def signup_view(request):
                     'Failed sending account activation email to {}'.format(user_email)
                 )
 
-            return render(request, 'accounts/check.html', context={
+            return render(request, 'accounts/success.html', context={
                 'title': 'Подтверждение',
-                'body': 'Письмо для подтвеждения Вашего электронного адреса было отправлено на почту '
-                        '<strong>{}</strong>.'.format(user_email),
+                'lines': [
+                    'Письмо для подтвеждения Вашего электронного адреса было отправлено на почту '
+                    '<strong>{}</strong>.'.format(user_email),
+                    'Пожалуйста, проверьте Вашу почту и следуйте инструкциям в письме.',
+                    'Если почта пуста, то проверьте спам.',
+                ],
             })
     else:
         form = UserCreationForm()
@@ -108,8 +112,11 @@ def activate_view(request, **kwargs):
             login(request, user)
 
         return render(request, 'accounts/success.html', context={
-            'body': 'Подтверждение Вашего электронного адреса '
-                    '<strong>{}</strong> прошло успешно.'.format(user_email),
+            'title': 'Готово',
+            'lines': [
+                'Подтверждение Вашего электронного адреса '
+                '<strong>{}</strong> прошло успешно.'.format(user_email),
+            ],
         })
 
     return redirect('accounts:signup')
@@ -153,15 +160,22 @@ def password_reset_view(request):
 
             # Check cache and send email if not already sent
             cache_context = cache.get(user_email)
+            if cache_context is None:
+                cache_context = dict()
+
             if user and 'password_reset_user' not in cache_context:
                 cache_context['password_reset_user'] = user
                 cache.set(user_email, cache_context, 3600)  # one hour
-                form.save(domain_override=get_current_site(request).domain)  # Validate form and send email
+                form.save(domain_override='{}://{}'.format(request.scheme, get_current_site(request).domain))  # Validate form and send email
 
-            return render(request, 'accounts/check.html', context={
+            return render(request, 'accounts/success.html', context={
                 'title': 'Восстановление пароля',
-                'body': 'Письмо для восстановления пароля от Вашего аккаунта было отправлено на почту '
-                        '<strong>{}</strong>.'.format(user_email),
+                'lines': [
+                    'Письмо для восстановления Вашего пароля было отправлено на почту '
+                    '<strong>{}</strong>.'.format(user_email),
+                    'Пожалуйста, проверьте Вашу почту и следуйте инструкциям в письме.',
+                    'Если почта пуста, то проверьте спам.',
+                ]
             })
 
     else:
@@ -211,7 +225,10 @@ def password_set_view(request, **kwargs):
 
             login(request, user)
             return render(request, 'accounts/success.html', context={
-                'body': 'Вы успешно изменили пароль от своего аккаунта.',
+                'title': 'Готово',
+                'lines': [
+                    'Вы успешно изменили пароль от своего аккаунта.',
+                ]
             })
     else:
         form = SetPasswordForm(user)
@@ -235,7 +252,10 @@ def password_change_view(request):
             form.save()
             login(request, user)
             return render(request, 'accounts/success.html', context={
-                'body': 'Вы успешно изменили пароль от своего аккаунта.',
+                'title': 'Готово',
+                'lines': [
+                    'Вы успешно изменили пароль от своего аккаунта.',
+                ],
             })
     else:
         form = PasswordChangeForm(user)

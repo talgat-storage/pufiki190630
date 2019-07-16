@@ -40,7 +40,7 @@
         <div class="d-none d-md-inline-block ml-3">
             <a href="{% url 'support:support' %}" class="text-decoration-none text-color-gray-700">
                 <div class="d-flex align-items-center justify-content-center px-2 py-1 css-icon-help-parent">
-                    <div class="d-none d-md-inline-block h6 my-0">
+                    <div class="d-inline-block h6 my-0">
                         Поддержка
                     </div>
                     <div class="d-inline-block">
@@ -55,7 +55,7 @@
                 <div class="dropdown">
                     <a href="{% url 'profile:orders' %}" class="text-decoration-none text-color-gray-700 dropdown-toggle" data-toggle="dropdown">
                         <div class="d-flex align-items-center justify-content-center px-2 py-1 css-icon-user-parent">
-                            <div class="d-none d-md-inline-block h6 my-0">
+                            <div class="d-inline-block h6 my-0">
                                 Мой аккаунт
                             </div>
                             <div class="d-inline-block">
@@ -74,7 +74,7 @@
             {% else %}
                 <a href="{% url 'accounts:login' %}" class="text-decoration-none text-color-gray-700">
                     <div class="d-flex align-items-center justify-content-center px-2 py-1 css-icon-user-parent">
-                        <div class="d-none d-md-inline-block h6 my-0 text-nowrap">
+                        <div class="d-inline-block h6 my-0 text-nowrap">
                             Войти / Регистрация
                         </div>
                         <div class="d-inline-block">
@@ -88,8 +88,8 @@
 
     <aside class="d-md-none">
         <div class="css-md-overlay js-header-menu">
-            <div class="d-flex justify-content-end mr-3 mt-3 bg-white">
-                <div class="d-inline-block d-md-none p-1 css-icon-hover css-icon-cancel-parent js-header-menu-close-toggler">
+            <div class="d-flex justify-content-end mr-3 mt-3">
+                <div class="d-inline-block px-1 px-sm-2 py-1 css-icon-hover css-icon-cancel-parent js-header-menu-close-toggler">
                     <div class="css-icon css-icon-32px css-icon-cancel"></div>
                 </div>
             </div>
@@ -98,10 +98,11 @@
                 <div>
                     <hr>
                 </div>
+
                 <div class="d-block">
                     <a href="{% url 'support:support' %}" class="text-decoration-none text-color-gray-700">
-                        <div class="d-flex align-items-center justify-content-center py-1 css-icon-help-parent">
-                            <div class="d-inline-block h6 my-0">
+                        <div class="d-flex align-items-center justify-content-center py-0 css-icon-help-parent">
+                            <div class="d-inline-block h6 my-2">
                                 Поддержка
                             </div>
                             <div class="d-inline-block">
@@ -150,8 +151,8 @@
                 {% else %}
                     <div class="d-block">
                         <a href="{% url 'accounts:login' %}" class="text-decoration-none text-color-gray-700">
-                            <div class="d-flex align-items-center justify-content-center py-2 css-icon-user-parent">
-                                <div class="d-inline-block h6 my-0">
+                            <div class="d-flex align-items-center justify-content-center py-0 css-icon-user-parent">
+                                <div class="d-inline-block h6 my-2">
                                     Войти / Регистрация
                                 </div>
                                 <div class="d-inline-block">

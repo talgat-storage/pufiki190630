@@ -30,6 +30,7 @@ class Order(models.Model):
     payment_method = models.PositiveSmallIntegerField(choices=PAYMENT_METHOD_CHOICES, default=1)
 
     products = models.ManyToManyField(Product, through='OrderProduct')
+    total_to_pay = models.PositiveIntegerField(default=0)
 
     bank_id = models.CharField(max_length=36, default='')
 
@@ -56,8 +57,8 @@ class OrderProduct(models.Model):
 
 class OrderStatus(models.Model):
     STATUS_CHOICES = (
-        (1, _('Paid')),
-        (2, _('Packaged')),
+        (1, _('Packaged')),
+        (2, _('Shipped')),
         (3, _('Delivered')),
         (4, _('Exchanged')),
         (5, _('Returned')),

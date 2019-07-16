@@ -41,7 +41,9 @@ module.exports = function () {
         }
     }
 
-    $('.js-carousel-wrapper').on('slide.bs.carousel', '.carousel', function (e) {
+    var carousel_wrapper = $('.js-carousel-wrapper');
+
+    carousel_wrapper.on('slide.bs.carousel', '.carousel', function (e) {
         var carousel = $(this);
         var wrapper = $(e.target).closest('.js-carousel-wrapper');
         var from_index = e.from;
@@ -69,7 +71,7 @@ module.exports = function () {
         });
     });
 
-    $('.js-carousel-img-link').click(function () {
+    carousel_wrapper.on('click', '.js-carousel-img-link', function () {
         var img = $(this);
         img.addClass('border border-color-gray-400 rounded css-border-thick');
     });

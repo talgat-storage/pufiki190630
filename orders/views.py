@@ -121,7 +121,19 @@ def order_cart_view(request):
                 for product, origin, quantity, _ in results
             ])
 
-            return redirect('orders:payment')
+            # Calculate total sum to pay
+            # total = order.orderproduct_set.all() \
+            #     .aggregate(
+            #     total=Sum(F('current_price') * F('quantity'), output_field=PositiveIntegerField())
+            # )['total']
+            # total += settings.FAST_DELIVERY_COST if order.is_fast_delivery else 0
+            order.total_to_pay = total
+            try:
+                order.save()
+            except IntegrityError:
+                pass
+            else:
+                return redirect('orders:payment')
 
     order_data = list()
     # Show user name if anonymous
@@ -174,12 +186,8 @@ def order_payment_view(request):
     # if 'bank_form_url' in session:
     #     return redirect(session['form_url'])
 
-    # Calculate total sum to pay
-    total = order.orderproduct_set.all() \
-        .aggregate(total=Sum(F('current_price') * F('quantity'), output_field=PositiveIntegerField()))['total']
-
     # Register a new bank order
-    bank_result = bank_register_order(order_slug, total, request.build_absolute_uri(reverse('orders:payment-check')))
+    bank_result = bank_register_order(order_slug, order.total_to_pay, request.build_absolute_uri(reverse('orders:payment-check')))
 
     # If success, save order ID and form URL in session and redirect to bank form url
     if 'orderId' in bank_result and 'formUrl' in bank_result:

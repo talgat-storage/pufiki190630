@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.db.models import Prefetch
+from django.db import IntegrityError
 
-from orders.models import Order, OrderStatus
-from support.models import Chat, Message
+from orders.models import OrderStatus
+from support.models import Message
 from .forms import UserChangeForm
 
 
@@ -19,10 +20,10 @@ def profile_orders_view(request):
     if user.is_anonymous:
         return redirect('accounts:login')
 
-    orders = Order.objects.all() \
-        .filter(user=user) \
+    orders = user.order_set.all() \
+        .filter(is_valid=True) \
         .order_by('-id') \
-        .prefetch_related(Prefetch('orderstatus_set', OrderStatus.objects.order_by('-date')))
+        .prefetch_related(Prefetch('orderstatus_set', OrderStatus.objects.order_by('date')))
 
     context = dict()
     context['sections'] = SECTIONS
@@ -40,12 +41,14 @@ def profile_order_view(request, **kwargs):
 
     order_slug = kwargs['order_slug']
 
-    order = Order.objects.all() \
-        .filter(slug=order_slug, user=user) \
-        .prefetch_related(Prefetch('orderstatus_set', OrderStatus.objects.order_by('-date'))) \
-        .prefetch_related('products') \
-        .prefetch_related('products__origin') \
-        .prefetch_related('products__origin__name') \
+    order = user.order_set.all() \
+        .filter(slug=order_slug, is_valid=True) \
+        .prefetch_related(Prefetch('orderstatus_set', OrderStatus.objects.order_by('date'))) \
+        .prefetch_related('orderproduct_set') \
+        .prefetch_related('orderproduct_set__product') \
+        .prefetch_related('orderproduct_set__product__origin') \
+        .prefetch_related('orderproduct_set__product__origin__name') \
+        .prefetch_related('orderstatus_set') \
         .select_related('user') \
         .first()
 
@@ -65,10 +68,9 @@ def profile_chats_view(request):
     if user.is_anonymous:
         return redirect('accounts:login')
 
-    chats = Chat.objects.all() \
-        .filter(user=user) \
+    chats = user.chat_set.all() \
         .order_by('-id') \
-        .prefetch_related(Prefetch('message_set', Message.objects.order_by('-date')))
+        .prefetch_related(Prefetch('message_set', Message.objects.order_by('date')))
 
     context = dict()
     context['sections'] = SECTIONS
@@ -86,8 +88,8 @@ def profile_chat_view(request, **kwargs):
 
     chat_slug = kwargs['chat_slug']
 
-    chat = Chat.objects.all() \
-        .filter(user=user, slug=chat_slug) \
+    chat = user.chat_set.all() \
+        .filter(slug=chat_slug) \
         .prefetch_related(Prefetch('message_set', Message.objects.order_by('date'))) \
         .first()
 
@@ -111,9 +113,12 @@ def profile_settings_view(request):
         user_change_form = UserChangeForm(request.POST, instance=user)
 
         if user_change_form.is_valid():
-            user = user_change_form.save()
-
-    user_change_form = UserChangeForm(instance=user)
+            try:
+                user_change_form.save()
+            except IntegrityError:
+                pass
+    else:
+        user_change_form = UserChangeForm(instance=user)
 
     context = dict()
     context['sections'] = SECTIONS

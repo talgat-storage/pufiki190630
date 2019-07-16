@@ -1,5 +1,6 @@
 {% extends 'cabinet/base.html' %}
 {% load static %}
+{% load math %}
 
 {% block subtitle %}
     | Мои заказы | {{ order.slug }}
@@ -7,23 +8,25 @@
 
 {% block subcontent %}
     <div class="h4">
-        Заказ {{ order.slug }}
+        Заказ №{{ order.slug }}
     </div>
+    {% with last_order_status=order.orderstatus_set.last %}
     <div class="my-3 font-weight-normal">
-        <span class="font-weight-light">Статус заказа:</span> {{ order.orderstatus_set.first.get_status_display|lower }}
+        Статус заказа: <span class="font-weight-bold">{% if last_order_status %}{{ last_order_status.get_status_display|lower }}{% else %}Оформлено{% endif %}</span>
     </div>
+    {% endwith %}
     <hr>
     <div class="h5 my-3 font-weight-normal">
         Заказанные товары
     </div>
-    {% for product_detail in order.orderproductdetails_set.all %}
-        {% with product=product_detail.product total=product_detail.total quantity=product_detail.quantity %}
+    {% for orderproduct in order.orderproduct_set.all %}
+        {% with product=orderproduct.product %}
         <div class="d-flex align-items-center">
             <div class="css-cart-product-image">
                 <img class="d-block w-100" src="{{ product.small_photo.url }}" alt="Product {{ product.slug }}">
             </div>
             <div class="d-flex flex-column ml-3">
-                <a href="{{ product.origin.get_absolute_url }}?color={{ product.product.color }}">
+                <a href="{{ product.origin.get_absolute_url }}?color={{ product.color }}">
                     <div class="h6 my-0 text-color-2">
                         <u>{{ product.origin.name }}</u>
                     </div>
@@ -34,10 +37,10 @@
             </div>
             <div class="d-flex flex-column ml-3">
                 <div class="h6 my-0 font-weight-light">
-                    {{ total }} тг.
+                    {{ orderproduct.current_price|multiply:orderproduct.quantity }} тг.
                 </div>
                 <div class="h6 my-0 mt-1 font-weight-light">
-                    {{ quantity }} шт.
+                    {{ orderproduct.quantity }} шт.
                 </div>
             </div>
         </div>
@@ -45,52 +48,68 @@
         {% endwith %}
     {% endfor %}
     <div class="row">
-        <div class="col-6">
-            <div class="h5 mb-3 font-weight-normal">
+        <div class="col-12 col-md-6">
+            <div class="h5 font-weight-normal">
                 Информация о доставке
             </div>
-            <div class="font-weight-normal">
-                <span class="font-weight-light">Имя:</span> {{ order.user.name }}
-            </div>
-            <div class="font-weight-normal">
-                <span class="font-weight-light">Телефон:</span> {{ order.phone }}
-            </div>
-            <div class="font-weight-normal">
-                <span class="font-weight-light">Адрес:</span> {{ order.address }}
-            </div>
-            <div class="font-weight-normal">
-                <span class="font-weight-light">Быстрая доставка:</span> {% if order.is_fast_delivery %}Да{% else %}Нет{% endif %}
-            </div>
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <th scope="row">Имя</th>
+                        <td>{{ order.user.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Телефон</th>
+                        <td>{{ order.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Адрес</th>
+                        <td>{{ order.address }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Быстрая доставка</th>
+                        <td>{% if order.is_fast_delivery %}Да{% else %}Нет{% endif %}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="col-6">
-            <div class="h5 mb-3 font-weight-normal">
+        <div class="col-12 col-md-6 mt-3 mt-md-0">
+{#            <hr class="d-md-none">#}
+            <div class="h5 font-weight-normal">
                 Информация об оплате
             </div>
-            <div class="font-weight-normal">
-                <span class="font-weight-light">Сумма к оплате:</span> {{ order.payment_total }} тг.
-            </div>
-            <div class="font-weight-normal">
-                <span class="font-weight-light">Способ оплаты:</span> {{ order.get_payment_method_display }}
-            </div>
-            <div class="font-weight-normal">
-                <span class="font-weight-light">Оплачено:</span> {% if order.is_payment_done %}Да{% else %}Нет{% endif %}
-            </div>
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <th scope="row">Сумма к оплате</th>
+                        <td>{{ order.total_to_pay }} тг.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Способ оплаты</th>
+                        <td>{{ order.get_payment_method_display }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
-    <div class="my-3">
-        <hr>
-        <div class="h5 font-weight-normal">
-            История заказа
+        <div class="col-12 col-md-6 mt-3">
+{#            <hr>#}
+            <div class="h5 font-weight-normal">
+                История заказа
+            </div>
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <th scope="row">Оформлено</th>
+                        <td>{{ order.date_created }}</td>
+                    </tr>
+                    {% for status in order.orderstatus_set.all %}
+                    <tr>
+                        <th scope="row">{{ status.get_status_display }}</th>
+                        <td>{{ status.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <table class="table my-3">
-            <tbody>
-                {% for status in order.orderstatus_set.all %}
-                <tr>
-                    <th scope="row">{{ status.get_status_display }}</th>
-                    <td>{{ status.date }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
 {% endblock %}

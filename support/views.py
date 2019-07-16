@@ -88,7 +88,11 @@ def chat_view(request):
                     pass
                 else:
                     return render(request, 'accounts/success.html', context={
-                        'body': 'Ваше сообщение успешно отправлено. <br> Проверьте Ваши сообщения.',
+                        'title': 'Готово',
+                        'lines': [
+                            'Ваше сообщение успешно отправлено.',
+                            'Проверьте Ваше сообщение в разделе "Мои сообщения".',
+                        ],
                     })
     else:
         chat_form = ChatForm()

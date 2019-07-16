@@ -5,28 +5,28 @@
 {% endblock %}
 
 {% block subcontent %}
-    <div class="h4 font-weight-normal mt-3 mt-lg-0">
+    <div class="h4">
         Данные
     </div>
     <hr>
-    <div class="my-3">
-        <form method="post">
-            {% csrf_token %}
+    <form method="post">
+        {% csrf_token %}
 
-            {% with form=user_change_form %}
-                {% with field=form.name text='Ваше имя' %}
-                    {% include 'accounts/form-group.html' %}
-                {% endwith %}
-
-                {% include 'accounts/form-errors.html' %}
+        {% with form=user_change_form %}
+            {% with field=form.name text='Ваше имя' %}
+                {% include 'accounts/form-group.html' %}
             {% endwith %}
 
+            {% include 'accounts/form-errors.html' %}
+        {% endwith %}
+
+        <div class="d-flex justify-content-end">
             <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2">
-                <span class="h6 my-0">Изменить данные</span>
+                <span class="h6 my-0">Сохранить</span>
             </button>
-        </form>
-    </div>
-    <div class="h4 font-weight-normal my-3">
+        </div>
+    </form>
+    <div class="h4 mt-3">
         Пароль
     </div>
     <hr>

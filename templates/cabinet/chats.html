@@ -6,38 +6,46 @@
 {% endblock %}
 
 {% block subcontent %}
-    <div class="d-flex justify-content-end my-3">
-        <a href="{% url 'support:chat' %}" class="btn btn-color-2 css-btn-lg-block">
-            <span class="h6 my-0">Написать сообщение</span>
-        </a>
-    </div>
-    {% if not chats %}
-        <div class="h5 font-weight-normal text-center">
-            Сообщений пока нет
-        </div>
-        <div class="d-flex justify-content-center mt-3">
-            <div class="d-inline-block">
-                <img class="d-block css-width-100px" src="{% static 'img/web_search_125px.png' %}" alt="Web Search">
+    <div class="row">
+        <div class="col-12 order-2 order-lg-1">
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{% url 'support:chat' %}" class="btn btn-color-2 css-btn-lg-block">
+                    <span class="h6 my-0">Написать сообщение</span>
+                </a>
             </div>
         </div>
-    {% else %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Тема</th>
-                <th scope="col">Последняя активность</th>
-                <th scope="col">Статус</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for chat in chats %}
-            <tr>
-                <th scope="row"><a href="{% url 'profile:chat' chat_slug=chat.slug %}">{{ chat.title }}</a></th>
-                <td>{{ chat.message_set.first.date }}</td>
-                <td>{{ chat.get_status_display }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% endif %}
+        <div class="col-12 order-1 order-lg-2">
+        {% if not chats %}
+            <div class="h5 font-weight-normal text-center">
+                Сообщений пока нет
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <div class="d-inline-block">
+                    <img class="d-block css-width-100px" src="{% static 'img/web_search_125px.png' %}" alt="Ничего не найдено">
+                </div>
+            </div>
+        {% else %}
+            <div class="table-responsive-sm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Тема</th>
+                        <th scope="col">Последняя активность</th>
+                        <th scope="col">Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for chat in chats %}
+                    <tr>
+                        <th scope="row"><a href="{% url 'profile:chat' chat_slug=chat.slug %}"><span class="text-nowrap">{{ chat.title }}</span></a></th>
+                        <td><span class="text-nowrap">{{ chat.message_set.last.date }}</span></td>
+                        <td>{{ chat.get_status_display }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}

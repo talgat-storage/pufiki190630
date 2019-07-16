@@ -19,6 +19,7 @@ class ShopCardCarouselView(TemplateView):
 
         # queries_count = 0
 
+        product = None
         origin = None
         pictures = list()
 
@@ -41,6 +42,7 @@ class ShopCardCarouselView(TemplateView):
         #
         # print('Total queries:', queries_count)
 
+        context['product'] = product
         context['origin'] = origin
         context['pictures'] = pictures
         context['controls_hidden'] = True
@@ -137,16 +139,9 @@ class CartDeliveryView(View):
         session = request.session
 
         checked = get_form_input_value(request, 'checked')
-        print(checked)
         if checked == 'true':
             session['is_fast_delivery'] = True
         else:
             session['is_fast_delivery'] = False
-
-        is_fast_delivery = session['is_fast_delivery']
-        print(is_fast_delivery)
-
-        context = dict()
-        context['is_fast_delivery'] = is_fast_delivery
 
         return HttpResponse(status=200)

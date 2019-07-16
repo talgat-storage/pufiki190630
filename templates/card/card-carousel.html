@@ -1,3 +1,4 @@
+{% if product %}
 <div class="d-block flex-shrink-0 js-carousel-parent">
 <div id="{{ origin.slug }}-carousel" class="carousel slide" data-ride="carousel" data-interval="86400000">
     <div class="carousel-inner">
@@ -25,6 +26,7 @@
 
 <div class="d-flex justify-content-center align-items-center py-3 js-carousel-indicators">
     {% for picture in pictures %}
-        <div class="d-inline-block {% if not forloop.last %}mr-1{% endif %} css-carousel-indicator {% if forloop.first %}css-carousel-indicator-active{% endif %}"></div>
+        <div class="d-inline-block {% if not forloop.first %}ml-1{% endif %} css-carousel-indicator {% if forloop.first %}css-carousel-indicator-active{% endif %}"></div>
     {% endfor %}
 </div>
+{% endif %}
