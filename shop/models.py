@@ -55,15 +55,6 @@ class Origin(models.Model):
         return reverse_lazy('origin', kwargs={'origin_slug': self.slug})
 
 
-# class Detail(models.Model):
-#     origin = models.ForeignKey(Origin, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=64)
-#     value = models.CharField(max_length=64)
-#
-#     def __str__(self):
-#         return get_str(str(self.origin), self.name, self.value)
-
-
 def image_path(instance, filename, type_path):
     _, ext = os.path.splitext(filename)
     return f'img/{type_path}/{instance.slug}{ext}'

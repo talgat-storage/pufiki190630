@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{#    Showcase #}
+    <section class="container-fluid container-fluid-max-width px-0 bg-white">
+        <div class="d-flex justify-content-center">
+            <div class="d-block">
+                <picture>
+                    <source media="(max-width: 575.98px)" srcset="{% static 'img/home-showcase-mobile.jpg' %}">
+                    <img class="d-block w-100" src="{% static 'img/home-showcase-desktop.jpg' %}" alt="Home Showcase">
+                </picture>
+            </div>
+        </div>
+    </section>
+
+{#    USP #}
+    <main class="container-fluid container-fluid-max-width bg-white">
+        <div class="row">
+            <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 my-3">
+{#                Proposition #}
+                <h1 class="h4 font-weight-normal text-center my-0">
+                    Казахстанский <span class="text-nowrap">интернет-магазин</span>
+                    <span class="text-nowrap"><strong>пуфиков</strong>, <strong>бинбагов</strong> и</span>
+                    <span class="text-nowrap"><strong>кресло-мешков</strong></span>
+                </h1>
+
+{#                CTA #}
+                <div class="d-flex justify-content-center mt-3">
+                    <div class="d-inline-block">
+                        <a href="{% url 'shop' %}" class="btn btn-color-1 rounded-pill text-white px-4 py-2">
+                            <span class="h5 my-0">Перейти в каталог</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{#    Break #}
+    <div class="d-block py-2"></div>
+
+{#    Advantages #}
+    <section class="container-fluid container-fluid-max-width py-1 py-sm-3">
+    <div class="row">
+{#        Delivery #}
+        {% with left_padding=0 right_padding=3 %}
+        {% with img_location='img/delivery_125px.png' alt_description='Delivery Advantage' %}
+        {% with title='Доставка' text='Бесплатная доставка по Казахстану в течение <span class="text-nowrap">1-2 недель</span>' %}
+            {% include 'home/home-advantage.html' %}
+        {% endwith %}
+        {% endwith %}
+        {% endwith %}
+
+{#        Selection #}
+        {% with left_padding=2 right_padding=2 %}
+        {% with img_location='img/wallet_125px.png' alt_description='Payment Advantage' %}
+        {% with title='Способ оплаты' text='Вы можете оплатить покупки наличными, а также банковской картой через интернет' %}
+            {% include 'home/home-advantage.html' %}
+        {% endwith %}
+        {% endwith %}
+        {% endwith %}
+
+{#        Support #}
+        {% with left_padding=3 right_padding=0 %}
+        {% with img_location='img/support_125px.png' alt_description='Support Advantage' %}
+        {% with title='Поддержка' text='Помощь клиентам в выборе и оформлении заказа' %}
+            {% include 'home/home-advantage.html' %}
+        {% endwith %}
+        {% endwith %}
+        {% endwith %}
+
+    </div>
+    </section>
+
+{#    Most popular products #}
+    <section class="d-block">
+    <div class="container-fluid container-fluid-max-width py-1 py-sm-3">
+    <div class="row pt-2 pb-3">
+{#        Popular #}
+        <div class="col-12">
+            <div class="d-block">
+                <div class="h2 my-0 font-weight-light">
+                    Популярные
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 py-2">
+        <div class="row d-flex flex-nowrap overflow-auto">
+            {% for result in results %}
+            <div class="col-7 col-sm-5 col-md-4 col-lg-4 col-xl-4 px-3 px-sm-3 px-md-3 px-lg-4 px-xl-5 py-3">
+                {% with expanded_colors="false" %}
+                {% with origin=result.0 number_of_products=result.1 pictures=result.2 %}
+                    {% include 'card/card.html' %}
+                {% endwith %}
+                {% endwith %}
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+
+        <div class="col-12">
+{#        CTA #}
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'shop' %}" class="btn btn-color-1 text-white px-3 py-2 css-btn-md-block">
+                <span class="h6 my-0">Посмотреть все</span>
+            </a>
+        </div>
+        </div>
+    </div>
+
+    </div>
+    </section>
+
+{#    Product Description #}
+{#    <article class="d-block">#}
+{#    <div class="container-fluid container-fluid-max-width py-1 py-sm-3">#}
+{#    <div class="row pt-2 pb-3">#}
+{#        Picture #}
+{#        <div class="d-none d-md-block col-4">#}
+{#        </div>#}
+{#        Text #}
+{#        <div class="col-12 col-md-8 col-lg-6 d-flex flex-column justify-content-center px-md-4 px-xl-5 border border-info">#}
+{#            <h1 class="text-center text-md-left">#}
+{#                Кресло-мешки#}
+{#            </h1>#}
+{#            <p class="h5 font-weight-normal">#}
+{#                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus autem cum eius error est illo ipsam libero magnam molestiae nobis possimus quae, qui quia, reprehenderit.#}
+{#            </p>#}
+{#        </div>#}
+{#    </div>#}
+{#    </div>#}
+{#    </article>#}
+{% endblock %}

@@ -87,9 +87,8 @@ function watch(cb) {
 exports.clean = gulp.series(clean);
 exports.js = gulp.series(processJS);
 exports.scss = gulp.series(processSCSS);
-exports.spinner = gulp.series(processSpinner);
 exports.icons = gulp.series(copyIcons);
 exports.img = gulp.series(copyImages);
 exports.build = gulp.series(processJS, processSCSS, processSpinner, copyIcons, copyImages);
-exports.default = gulp.series(clean, processJS, processSCSS, processSpinner, copyIcons, copyImages);
-exports.watch = gulp.series(clean, processJS, processSCSS, processSpinner, copyIcons, copyImages, watch);
+exports.default = gulp.series(clean, processJS, processSCSS, copyIcons, copyImages);
+exports.watch = gulp.series(clean, processJS, processSCSS, copyIcons, copyImages, watch);
