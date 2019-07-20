@@ -9,7 +9,7 @@
     <aside class="d-block">
     <div class="container-fluid container-fluid-max-width">
         {% with home_url='home' shop_url='shop' %}
-        {% breadcrumb 'Главная,Магазин' home_url shop_url name=origin.name as results %}
+        {% breadcrumb 'Главная,Каталог' home_url shop_url name=origin.name as results %}
             {% include 'breadcrumb.html' %}
         {% endwith %}
     </div>

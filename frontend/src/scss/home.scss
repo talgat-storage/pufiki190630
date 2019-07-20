@@ -9,31 +9,37 @@
 
 @media (min-width: 360px) {
   .css-home-showcase-image {
-    margin: -20% 0 -10% 0;
+    margin: -20% 0 -15% 0;
   }
 }
 
 @media (min-width: 400px) {
   .css-home-showcase-image {
-    margin: -20% 0 -20% 0;
+    margin: -25% 0 -25% 0;
   }
 }
 
 @media (min-width: 460px) {
   .css-home-showcase-image {
-    margin: -20% 0 -30% 0;
+    margin: -25% 0 -30% 0;
   }
 }
 
 @media (min-width: 500px) {
   .css-home-showcase-image {
-    margin: -20% 0 -40% 0;
+    margin: -30% 0 -40% 0;
   }
 }
 
 @include media-breakpoint-up(sm) {
   .css-home-showcase-image {
     margin: -10% 0 -30% 0;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .css-home-showcase-image {
+    margin: -15% 0 -35% 0;
   }
 }
 

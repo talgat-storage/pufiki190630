@@ -70,9 +70,9 @@
         </div>
     </div>
 
-    <div class="col-12 d-flex flex-column flex-lg-row justify-content-end px-sm-4 px-lg-5 mb-3">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-end px-sm-4 px-lg-5 mb-3">
         <div class="d-inline-block">
-            <a href="{% url 'orders:details' %}" class="btn css-btn-lg-block btn-light border border-color-gray-500 px-4 py-2">
+            <a href="{% url 'orders:details' %}" class="btn css-btn-sm-block btn-light border border-color-gray-500 px-4 py-2">
                 <span class="h6 my-0">Вернуться назад</span>
             </a>
         </div>
@@ -80,7 +80,7 @@
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" name="cart" value="{{ cart }}">
-                <button type="submit" class="btn css-btn-lg-block btn-color-2 px-4 py-2 ml-0 ml-lg-3 mt-3 mt-lg-0">
+                <button type="submit" class="btn css-btn-sm-block btn-color-2 px-4 py-2 ml-0 ml-sm-3 mt-3 mt-sm-0">
                     <span class="h6 my-0">Продолжить</span>
                 </button>
             </form>

@@ -10,6 +10,21 @@ from .models import Origin, Product, Picture
 from .utilities import parse_cart
 
 
+HOME_ADVANTAGES = [
+    ('Доставка', 'Бесплатная доставка по Казахстану в течение <span class="text-nowrap">1-2 недель</span>', 'img/delivery_125px.png'),
+    ('Способ оплаты', 'Вы можете оплатить покупку наличными, а также банковской картой через интернет', 'img/wallet_125px.png'),
+    ('Замена или возврат', 'Вы легко можете заменить или вернуть товар в течение 14 дней после получения товара', 'img/refresh_125px.png'),
+    ('Поддержка', 'Помощь покупателям в выборе и оформлении заказа', 'img/support_125px.png'),
+]
+
+HOME_STEPS = [
+    ('Выберите товары, которые Вам понравились, и добавьте их в <strong>корзину</strong>.', 'img/1_circle_125px.png'),
+    ('Проверьте <strong>корзину</strong> и перейдите к <strong>оформлению заказа</strong>.', 'img/2_circle_125px.png'),
+    ('Укажите <strong>адрес доставки</strong> и удобный <strong>способ оплаты</strong>.', 'img/3_circle_125px.png'),
+    ('<strong>Готово!</strong> Ваш заказ оформлен и находится в обработке.', 'img/checked_circle_125px.png'),
+]
+
+
 class HomeView(TemplateView):
     template_name = 'home/home.html'
     CARDS_COUNT = 3
@@ -32,13 +47,13 @@ class HomeView(TemplateView):
         # print('Origins:', len(origins), 'queries:', len(connection.queries) - queries_count)
         # queries_count = len(connection.queries)
 
-        results = list()
+        popular_results = list()
         for origin in origins:
             products = origin.product_set.all()
             number_of_products = len(products)
-            product = products[0]
-            pictures = product.picture_set.all()
-            results.append((origin, number_of_products, pictures))
+            selected_product = products[0]
+            pictures = selected_product.picture_set.all()
+            popular_results.append((origin, selected_product, number_of_products, pictures))
 
         # print(results)
         # print('Results:', len(results), 'queries:', len(connection.queries) - queries_count)
@@ -46,7 +61,9 @@ class HomeView(TemplateView):
 
         # print('Total queries:', queries_count)
 
-        context['results'] = results
+        context['advantages'] = HOME_ADVANTAGES
+        context['popular_results'] = popular_results
+        context['steps'] = HOME_STEPS
 
         return context
 

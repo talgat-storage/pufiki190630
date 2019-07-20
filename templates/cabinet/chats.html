@@ -7,14 +7,14 @@
 
 {% block subcontent %}
     <div class="row">
-        <div class="col-12 order-2 order-lg-1">
+        <div class="col-12 order-2 order-sm-1">
             <div class="d-flex justify-content-end mb-3">
-                <a href="{% url 'support:chat' %}" class="btn btn-color-2 css-btn-lg-block">
+                <a href="{% url 'support:chat' %}" class="btn btn-color-2 css-btn-sm-block">
                     <span class="h6 my-0">Написать сообщение</span>
                 </a>
             </div>
         </div>
-        <div class="col-12 order-1 order-lg-2">
+        <div class="col-12 order-1 order-sm-2">
         {% if not chats %}
             <div class="h5 font-weight-normal text-center">
                 Сообщений пока нет

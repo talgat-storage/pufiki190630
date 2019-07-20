@@ -1,6 +1,6 @@
 {% load math %}
 
-<div class="bg-white mt-2 pb-2 js-card">
+<div class="h-100 bg-white mt-2 pb-2 js-card">
     <div class="d-flex flex-column js-carousel-wrapper" {% if selected_product %}data-product-slug="{{ selected_product.slug }}"{% endif %}>
         {% with product=selected_product %}
         {% include 'card/card-carousel.html' %}

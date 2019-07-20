@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="col-12 col-md-3 mt-3 px-sm-2">
+<div class="h-100 d-flex flex-md-column align-items-center py-3 bg-white border border-color-gray-300 rounded">
+    <div class="d-block">
+        <div class="css-width-75px">
+            <img class="d-block w-100" src="{% static img_location %}" alt="Шаг {{ forloop.counter }}">
+        </div>
+    </div>
+    <div class="flex-fill text-center px-1 px-md-2 px-lg-3 mt-md-2">
+        {% autoescape off %}
+            {{ text }}
+        {% endautoescape %}
+    </div>
+</div>
+</div>

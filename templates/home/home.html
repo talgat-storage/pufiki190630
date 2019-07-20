@@ -25,33 +25,145 @@
 {#    Advantages #}
     <section class="container-fluid container-fluid-max-width py-1 py-sm-3">
     <div class="row">
-{#        Delivery #}
-        {% with left_padding=0 right_padding=3 %}
-        {% with img_location='img/delivery_125px.png' alt_description='Delivery Advantage' %}
-        {% with title='Доставка' text='Бесплатная доставка по Казахстану в течение <span class="text-nowrap">1-2 недель</span>' %}
-            {% include 'home/home-advantage.html' %}
-        {% endwith %}
-        {% endwith %}
-        {% endwith %}
+        {% for title, text, img_location in advantages %}
+            {% if forloop.counter == 1 %}
+                {% with sm_pl=0 sm_pr=3 lg_pl=0 lg_pr=2 sm_my=0 %}
+                    {% include 'home/home-advantage.html' %}
+                {% endwith %}
+            {% elif forloop.counter == 2 %}
+                {% with sm_pl=3 sm_pr=3 lg_pl=2 lg_pr=2 sm_my=0 %}
+                    {% include 'home/home-advantage.html' %}
+                {% endwith %}
+            {% elif forloop.counter == 3 %}
+                {% with sm_pl=0 sm_pr=3 lg_pl=2 lg_pr=2 sm_my=3 %}
+                    {% include 'home/home-advantage.html' %}
+                {% endwith %}
+            {% elif forloop.counter == 4 %}
+                {% with sm_pl=3 sm_pr=0 lg_pl=2 lg_pr=0 sm_my=3 %}
+                    {% include 'home/home-advantage.html' %}
+                {% endwith %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    </section>
 
-{#        Selection #}
-        {% with left_padding=2 right_padding=2 %}
-        {% with img_location='img/wallet_125px.png' alt_description='Payment Advantage' %}
-        {% with title='Способ оплаты' text='Вы можете оплатить покупки наличными, а также банковской картой через интернет' %}
-            {% include 'home/home-advantage.html' %}
-        {% endwith %}
-        {% endwith %}
-        {% endwith %}
+{#    Break #}
+    <div class="d-block py-2"></div>
 
-{#        Support #}
-        {% with left_padding=3 right_padding=0 %}
-        {% with img_location='img/support_125px.png' alt_description='Support Advantage' %}
-        {% with title='Поддержка' text='Помощь клиентам в выборе и оформлении заказа' %}
-            {% include 'home/home-advantage.html' %}
-        {% endwith %}
-        {% endwith %}
-        {% endwith %}
+{#    Most popular products #}
+    <section class="container-fluid container-fluid-max-width">
+    <div class="row">
+        <div class="col-12">
+            <div class="h2 my-0 font-weight-light">
+                Популярные
+            </div>
+        </div>
 
+        <div class="col-12">
+        <div class="row d-flex flex-nowrap overflow-auto">
+            {% for result in popular_results %}
+            <div class="col-7 col-sm-5 col-md-4 col-lg-4 col-xl-4 {% if forloop.first %}pl-0 pr-3 pl-md-0 pr-md-4{% elif forloop.last %}pl-3 pl-md-4 pr-0 pr-md-0{% else %}px-3 px-md-4{% endif %} py-3">
+                {% with expanded_colors="false" %}
+                {% with origin=result.0 selected_product=result.1 number_of_products=result.2 pictures=result.3 %}
+                    {% include 'card/card.html' %}
+                {% endwith %}
+                {% endwith %}
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+
+        <div class="col-12 my-3">
+{#        CTA #}
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'shop' %}" class="btn btn-color-1 text-white px-4 py-2 css-btn-sm-block">
+                <span class="h6 my-0">Посмотреть все</span>
+            </a>
+        </div>
+        </div>
+    </div>
+    </section>
+
+{#    Break #}
+    <div class="d-block py-2"></div>
+
+{#    Steps #}
+    <section class="container-fluid container-fluid-max-width">
+    <div class="row">
+        <div class="col-12 mt-2">
+            <div class="h2 my-0 font-weight-light">
+                Оформление заказа
+            </div>
+        </div>
+
+        {% for text, img_location in steps %}
+            {% include 'home/home-step.html' %}
+        {% endfor %}
+
+{#        <div class="col-12 my-3">#}
+{#        CTA #}
+{#        <div class="d-flex justify-content-center">#}
+{#            <a href="{% url 'shop' %}" class="btn btn-color-1 text-white px-4 py-2 css-btn-sm-block">#}
+{#                <span class="h6 my-0">Начать</span>#}
+{#            </a>#}
+{#        </div>#}
+{#        </div>#}
+    </div>
+    </section>
+
+{#    Break #}
+{#    <div class="d-block py-2"></div>#}
+
+{#    Counter #}
+    <section class="container-fluid container-fluid-max-width">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center justify-content-center bg-white py-4 my-3">
+                <div class="d-inline-block">
+                    <div class="h3 my-0 font-weight-normal text-center">
+                        Мы уже доставили <span class="h3 my-0">53</span> заказа нашим покупателям!
+                    </div>
+                </div>
+                <div class="d-inline-block">
+                    <img class="css-width-50px p-1" src="{% static 'img/smiling_filled_125px.png' %}" alt="Улыбка">
+                </div>
+            </div>
+        </div>
+    </section>
+
+{#    Break #}
+    <div class="d-block py-2"></div>
+
+{#    Product Description #}
+    <section class="container-fluid container-fluid-max-width">
+    <div class="row my-3">
+        <div class="col-12 col-md-5" style="height: 360px;">
+        </div>
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+            <p>
+                Кресло-мешки в нашем интернет-магазине представлены в нескольких цветах и выполнены из разных материалов.
+                А удобный поиск по материалам и цветам в каталоге позволяет нашим покупателям выбрать себе кресло-мешки,
+                которые гармонично впишутся в интерьер любого помещения не только дома, но и в офисе. Наши кресло-мешки
+                отлично смотрятся как в детской, так и в гостиной комнатах, а также в комнате отдыха на работе.
+            </p>
+        </div>
+        <div class="col-12 col-md-6 offset-md-1 d-flex flex-column justify-content-center">
+            <p>
+                Кресло-мешки иногда также называются бинбэгами или кресло-пуфами и являются бескаркасной мебелью, что
+                делает ее легкой для перемещения и безопасной для детей. Также, отсутствие каркаса позволяет
+                кресло-пуфу принимать различные формы и подстраиваться под Ваше тело. Удобно расположившись в
+                кресле, Вы можете насладиться комфортом при чтении книги после рабочего дня или при просмотре фильма
+                в кругу семьи или друзей, а также при общении с коллегами во время перерыва на работе.
+            </p>
+        </div>
+        <div class="col-12 col-md-5" style="height: 360px;">
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <a href="{% url 'shop' %}" class="btn btn-color-1 text-white px-4 py-2 css-btn-sm-block">
+                    <span class="h6 my-0">Перейти в каталог</span>
+                </a>
+            </div>
+        </div>
     </div>
     </section>
 {% endblock %}

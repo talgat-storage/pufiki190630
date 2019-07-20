@@ -30,11 +30,11 @@
 
                     {% include 'accounts/form-errors.html' %}
 
-                    <div class="d-flex flex-column flex-lg-row align-items-center mt-3">
-                        <button type="submit" class="btn css-btn-lg-block btn-color-2 text-white px-4 py-2">
+                    <div class="d-flex flex-column flex-sm-row align-items-center mt-3">
+                        <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2">
                             <span class="h6 my-0">Войти</span>
                         </button>
-                        <div class="d-inline-block ml-lg-3 mt-3 mt-lg-0">
+                        <div class="d-inline-block ml-sm-3 mt-3 mt-sm-0">
                             <a href="{% url 'accounts:password-reset' %}" class="h6 my-0 text-body">Забыли пароль?</a>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                     </ul>
                 </div>
                 <div class="mt-2">
-                    <a href="{% url 'accounts:signup' %}" class="btn css-btn-lg-block btn-color-2 text-white px-4 py-2">
+                    <a href="{% url 'accounts:signup' %}" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2">
                         <span class="h6 my-0">Создать аккаунт</span>
                     </a>
                 </div>
