@@ -1,36 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base.html' %}
 
 {% block title %}
-    | Восстановление пароля
+    {{ title }} |
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
-        </div>
-        <div class="row bg-white">
-            <div class="col-12 col-lg-6 my-3 px-sm-4 px-lg-5">
-                <div class="h2 font-weight-normal">
-                    Восстановление пароля
-                </div>
-                <div>
-                    <hr>
-                </div>
-                <form method="post">
-                    {% csrf_token %}
+{% block heading %}
+    {{ title }}
+{% endblock %}
 
-                    {% with field=form.email text='Ваш Email адрес' help_text='Введите адрес электронной почты, который Вы указали при регистрации, и на него будет отправлена ссылка на восстановление пароля.' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+{% block subcontent %}
+    <div class="col-12 col-lg-6 px-sm-4 px-lg-5">
+        <form method="post">
+            {% csrf_token %}
 
-                    {% include 'accounts/form-errors.html' %}
+            {% with field=form.email text='Ваш Email адрес' help_text='Введите адрес электронной почты, который Вы указали при регистрации, и на него будет отправлена ссылка на восстановление пароля.' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2 mt-2">
-                        <span class="h6 my-0">Отправить</span>
-                    </button>
-                </form>
-            </div>
-        </div>
+            {% include 'accounts/form-errors.html' %}
+
+            <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2 mt-2">
+                <span class="h6 my-0">Отправить</span>
+            </button>
+        </form>
     </div>
 {% endblock %}

@@ -1,11 +1,5 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    {% block subtitle %}
-    {% endblock %}
-    Оформление заказа
-{% endblock %}
-
 {% block content %}
     <div class="container-fluid container-fluid-max-width">
         <div class="row bg-light">
@@ -17,8 +11,6 @@
                     {% block heading %}
                     {% endblock %}
                 </div>
-                <hr>
-                {% include 'orders/header.html' %}
                 <hr>
             </div>
             {% block subcontent %}

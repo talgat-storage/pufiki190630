@@ -1,44 +1,35 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base.html' %}
 
 {% block title %}
-    | Изменение пароля
+    {{ title }} |
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
-        </div>
-        <div class="row bg-white">
-            <div class="col-12 col-lg-6 my-3 px-sm-4 px-lg-5">
-                <div class="h2 font-weight-normal">
-                    Изменение пароля
-                </div>
-                <div>
-                    <hr>
-                </div>
-                <form method="post">
-                    {% csrf_token %}
+{% block heading %}
+    {{ title }}
+{% endblock %}
 
-                    {% with field=form.old_password text='Старый пароль' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+{% block subcontent %}
+    <div class="col-12 col-lg-6 px-sm-4 px-lg-5">
+        <form method="post">
+            {% csrf_token %}
 
-                    {% with field=form.new_password1 text='Придумайте пароль' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+            {% with field=form.old_password text='Старый пароль' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    {% with field=form.new_password2 text='Повторите пароль' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+            {% with field=form.new_password1 text='Придумайте пароль' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    {% include 'accounts/form-errors.html' %}
+            {% with field=form.new_password2 text='Повторите пароль' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2">
-                        <span class="h6 my-0">Изменить пароль</span>
-                    </button>
-                </form>
-            </div>
-        </div>
+            {% include 'accounts/form-errors.html' %}
+
+            <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2">
+                <span class="h6 my-0">Изменить пароль</span>
+            </button>
+        </form>
     </div>
 {% endblock %}

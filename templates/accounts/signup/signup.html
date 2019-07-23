@@ -1,53 +1,44 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base.html' %}
 
-{% block title %}
-    | Создание аккаунта
+{% block pretitle %}
+    {{ title }} |
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
-        </div>
-        <div class="row bg-white">
-            <div class="col-12 col-lg-6 my-3 px-sm-4 px-lg-5">
-                <div class="h2 font-weight-normal">
-                    Создание аккаунта
-                </div>
-                <div>
-                    <hr>
-                </div>
-                <form method="post">
-                    {% csrf_token %}
+{% block heading %}
+    {{ title }}
+{% endblock %}
 
-                    {% with field=form.name text='Ваше имя' help_text="Пожалуйста, указывайте реальное имя, по которому мы сможем к Вам обращаться. Например, Дамир или Дамир Ануарович." %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+{% block subcontent %}
+    <div class="col-12 col-lg-6 px-sm-4 px-lg-5">
+        <form method="post">
+            {% csrf_token %}
 
-                    {% with field=form.email text='Ваша электронная почта' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+            {% with field=form.name text='Ваше имя' help_text="Пожалуйста, указывайте реальное имя, по которому мы сможем к Вам обращаться. Например, Дамир или Дамир Ануарович." %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    {% with field=form.password1 text='Придумайте пароль' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+            {% with field=form.email text='Ваша электронная почта' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    {% with field=form.password2 text='Повторите пароль' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
+            {% with field=form.password1 text='Придумайте пароль' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    {% include 'accounts/form-errors.html' %}
+            {% with field=form.password2 text='Повторите пароль' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
 
-                    <div class="g-recaptcha" data-sitekey="{{ settings.GOOGLE_RECAPTCHA_PUBLIC_KEY }}" data-callback="signup_recaptcha_onload"></div>
+            {% include 'accounts/form-errors.html' %}
 
-                    <div class="mt-3">
-                        <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2 js-signup-submit-button" disabled="disabled" tabindex="-1">
-                            <span class="h6 my-0">Создать аккаунт</span>
-                        </button>
-                    </div>
-                </form>
+            <div class="g-recaptcha" data-sitekey="{{ settings.GOOGLE_RECAPTCHA_PUBLIC_KEY }}" data-callback="signup_recaptcha_onload"></div>
+
+            <div class="mt-3">
+                <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2 js-signup-submit-button" disabled="disabled" tabindex="-1">
+                    <span class="h6 my-0">Создать аккаунт</span>
+                </button>
             </div>
-        </div>
+        </form>
     </div>
 {% endblock %}
 

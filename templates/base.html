@@ -6,19 +6,22 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% if meta_description %}
+        <meta name="description" content="{{ meta_description }}">
+    {% endif %}
     <title>
-        Pufiki.kz | Казахстанский интернет-магазин | Кресло-мешки, бинбаги и пуфики
-        {% block title %}
-        {% endblock %}
+        {% block pretitle %}{% endblock %}
+        Кресло-мешки, пуфики и бинбэги | Казахстанский интернет-магазин | Pufiki.kz
+        {% block posttitle %}{% endblock %}
     </title>
+    {% block canonical_link %}
+    {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body class="vh-100 d-flex flex-column bg-light js-body">
     <div class="d-block flex-shrink-0">
         {% include 'header.html' %}
-    </div>
 
-    <div class="d-block flex-shrink-0">
         {% block content %}
         {% endblock %}
     </div>
@@ -28,7 +31,7 @@
     {% endblock %}
 
     <div class="d-block flex-shrink-0">
-{#    {% include 'footer.html' %}#}
+        {% include 'footer.html' %}
     </div>
 
     {% block script %}

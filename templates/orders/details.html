@@ -1,7 +1,7 @@
 {% extends 'orders/base.html' %}
 
 {% block subtitle %}
-    | Доставка
+    Доставка |
 {% endblock %}
 
 {% block subcontent %}
@@ -24,6 +24,10 @@
             {% endwith %}
 
             {% with field=order_details_form.address text='Адрес доставки' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
+
+            {% with field=order_details_form.comment text='Комментарий' help_text='Необязательно для заполнения' %}
                 {% include 'accounts/form-group.html' %}
             {% endwith %}
 

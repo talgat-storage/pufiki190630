@@ -14,7 +14,6 @@ imagesLoaded.makeJQueryPlugin(window.$);
 var apps = [
     require('./zoom'),
     require('./common'),
-    // require('./spinner'),
     require('./header'),
     require('./carousel'),
     require('./shop'),

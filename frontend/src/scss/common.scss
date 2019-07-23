@@ -3,23 +3,19 @@ body {
 }
 
 .container-fluid-max-width {
-  max-width: 1280px;
+  max-width: 1160px;
 }
 
 .css-display-none {
   display: none !important;
 }
 
-.css-width-50px {
-  width: 50px;
-}
+$width-sizes: 50px, 75px, 80px, 100px;
 
-.css-width-75px {
-  width: 75px;
-}
-
-.css-width-100px {
-  width: 100px;
+@each $size in $width-sizes {
+  .css-width-#{$size} {
+    width: $size;
+  }
 }
 
 @each $breakpoint in map-keys($grid-breakpoints) {
@@ -47,19 +43,6 @@ body {
       background-color: inherit;
     }
   }
-}
-
-.css-reverse-overlay {
-  display: none;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 6;
-  background-color: $white;
 }
 
 @each $breakpoint in map-keys($grid-breakpoints) {

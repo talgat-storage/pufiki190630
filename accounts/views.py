@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, SetPasswordForm, PasswordChangeForm
 from django.contrib.auth import login
 from django.core.cache import cache
-from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from django.db import IntegrityError
@@ -12,7 +11,7 @@ from .forms import UserCreationForm, UserPasswordResetForm
 from .utilities import get_existing_user
 from .tokens import user_token_generator
 from .tasks import send_async_email
-from pufiki190630.utilities import is_recaptcha_valid, get_form_input_value
+from pufiki190630.utilities import get_form_input_value, is_recaptcha_valid, get_domain
 
 
 def signup_view(request):
@@ -39,7 +38,7 @@ def signup_view(request):
             # Check if already processed
             if 'signup_user' not in cache_context:
                 token = user_token_generator.make_token(user)
-                domain = '{}://{}'.format(request.scheme, get_current_site(request).domain)
+                domain = get_domain(request)
 
                 # Modify context and save in cache
                 cache_context['signup_user'] = user
@@ -58,7 +57,7 @@ def signup_view(request):
                 )
 
             return render(request, 'accounts/success.html', context={
-                'title': 'Подтверждение',
+                'title': 'Подтверждение электронного адреса',
                 'lines': [
                     'Письмо для подтвеждения Вашего электронного адреса было отправлено на почту '
                     '<strong>{}</strong>.'.format(user_email),
@@ -70,6 +69,7 @@ def signup_view(request):
         form = UserCreationForm()
 
     context = dict()
+    context['title'] = 'Создание аккаунта'
     context['form'] = form
 
     return render(request, 'accounts/signup/signup.html', context)
@@ -134,11 +134,11 @@ def login_view(request):
         if form.is_valid():
             login(request, form.get_user())
             return redirect('shop')
-
     else:
         form = AuthenticationForm()
 
     context = dict()
+    context['title'] = 'Войти / Регистрация'
     context['form'] = form
 
     return render(request, 'accounts/login/login.html', context)
@@ -166,7 +166,7 @@ def password_reset_view(request):
             if user and 'password_reset_user' not in cache_context:
                 cache_context['password_reset_user'] = user
                 cache.set(user_email, cache_context, 3600)  # one hour
-                form.save(domain_override='{}://{}'.format(request.scheme, get_current_site(request).domain))  # Validate form and send email
+                form.save(domain_override=get_domain(request))  # Validate form and send email
 
             return render(request, 'accounts/success.html', context={
                 'title': 'Восстановление пароля',
@@ -182,6 +182,7 @@ def password_reset_view(request):
         form = UserPasswordResetForm()
 
     context = dict()
+    context['title'] = 'Восстановление пароля'
     context['form'] = form
 
     return render(request, 'accounts/password/reset.html', context)
@@ -234,6 +235,7 @@ def password_set_view(request, **kwargs):
         form = SetPasswordForm(user)
 
     context = dict()
+    context['title'] = 'Новый пароль'
     context['form'] = form
 
     return render(request, 'accounts/password/set.html', context)
@@ -242,7 +244,7 @@ def password_set_view(request, **kwargs):
 def password_change_view(request):
     user = request.user
 
-    if user.is_anonymous:
+    if not user.is_authenticated:
         return redirect('accounts:login')
 
     if request.method == 'POST':
@@ -261,6 +263,7 @@ def password_change_view(request):
         form = PasswordChangeForm(user)
 
     context = dict()
+    context['title'] = 'Изменение пароля'
     context['form'] = form
 
     return render(request, 'accounts/password/change.html', context)

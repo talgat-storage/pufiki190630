@@ -20,13 +20,14 @@ class Order(models.Model):
     )
 
     slug = models.CharField(max_length=DEFAULT_SLUG_LENGTH, unique=True, editable=False)  # handled by save method
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, default=None)
     name = models.CharField(max_length=64, default='')
 
     # Details
     is_fast_delivery = models.BooleanField(default=False)
     phone = models.CharField(max_length=11, validators=[PHONE_REGEX_VALIDATOR])
     address = models.TextField(max_length=254)
+    comment = models.TextField(max_length=254, blank=True, default='')
     payment_method = models.PositiveSmallIntegerField(choices=PAYMENT_METHOD_CHOICES, default=1)
 
     products = models.ManyToManyField(Product, through='OrderProduct')

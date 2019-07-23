@@ -12,6 +12,5 @@ def breadcrumb(names, *args, **kwargs):
     urls.append('')
 
     results = list(zip(names, urls))
-    # print(results)
 
     return results

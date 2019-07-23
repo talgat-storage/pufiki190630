@@ -11,8 +11,8 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    'delete-unissued-orders': {
-        'task': 'orders.tasks.delete_unissued_orders',
+    'delete-old-invalid-orders': {
+        'task': 'orders.tasks.delete_old_invalid_orders',
         'schedule': crontab(minute=0, hour='*/1'),  # every hour
     },
 }

@@ -1,64 +1,13 @@
 .css-home-showcase-wrapper {
   position: relative;
-  overflow: hidden;
-}
-
-.css-home-showcase-image {
-  margin: -20% 0 0 0;
-}
-
-@media (min-width: 360px) {
-  .css-home-showcase-image {
-    margin: -20% 0 -15% 0;
-  }
-}
-
-@media (min-width: 400px) {
-  .css-home-showcase-image {
-    margin: -25% 0 -25% 0;
-  }
-}
-
-@media (min-width: 460px) {
-  .css-home-showcase-image {
-    margin: -25% 0 -30% 0;
-  }
-}
-
-@media (min-width: 500px) {
-  .css-home-showcase-image {
-    margin: -30% 0 -40% 0;
-  }
-}
-
-@include media-breakpoint-up(sm) {
-  .css-home-showcase-image {
-    margin: -10% 0 -30% 0;
-  }
-}
-
-@include media-breakpoint-up(md) {
-  .css-home-showcase-image {
-    margin: -15% 0 -35% 0;
-  }
 }
 
 .css-home-showcase-text {
   position: absolute;
-  top: 50%;
+  top: percentage(480/840);
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-@media (min-width: 420px) {
-  .css-home-showcase-text {
-    position: absolute;
-    top: 60%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
 }
 
 @include media-breakpoint-up(sm) {

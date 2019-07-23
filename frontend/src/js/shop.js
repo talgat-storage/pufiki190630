@@ -34,22 +34,4 @@ module.exports = function () {
             label.addClass(unchecked_border_color);
         }
     });
-
-    // var dropdown = $('.js-shop-sort-dropdown');
-    // var dropdown_overlay = $('.js-shop-sort-dropdown-overlay');
-    //
-    // dropdown.on('show.bs.dropdown', function () {
-    //     // position= $(window).scrollTop();
-    //     // html.addClass('overflow-hidden');
-    //     // body.addClass('overflow-hidden');
-    //     dropdown_overlay.show(0);
-    // });
-    // dropdown.on('hide.bs.dropdown', function () {
-    //     // body.removeClass('overflow-hidden');
-    //     // html.removeClass('overflow-hidden');
-    //     // if (position) {
-    //     //     $(window).scrollTop(position);
-    //     // }
-    //     dropdown_overlay.hide(0);
-    // });
 };

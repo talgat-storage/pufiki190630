@@ -17,7 +17,7 @@
                 <div class="carousel-item {% if forloop.first %}active js-origin-carousel-first-zoom{% endif %}" data-mobile-zoom-src="{{ picture.large_photo.url }}" data-desktop-zoom-src="{{ picture.extralarge_photo.url }}">
                     <picture>
                         <source media="(min-width: 575.98px)" {% if not forloop.first %}data-{% endif %}srcset="{{ picture.large_photo.url }}">
-                        <img class="d-block mw-100" {% if not forloop.first %}data-{% endif %}src="{{ picture.medium_photo.url }}" alt="Picture {{ picture.slug }}">
+                        <img class="d-block mw-100" {% if not forloop.first %}data-{% endif %}src="{{ picture.medium_photo.url }}" alt="{{ product.get_color_display|capfirst }} {{ origin.name }} кресло-мешок бинбэг пуфик {{ forloop.counter }}">
                     </picture>
     {#                <img class="d-block w-100" {% if not forloop.first %}data-{% endif %}src="{{ picture.large_photo.url }}" alt="Picture {{ picture.slug }}">#}
                 </div>

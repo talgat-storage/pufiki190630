@@ -3,55 +3,53 @@
 {% load query %}
 {% load breadcrumb %}
 
-{% block title %}
-    Pufiki.kz | Магазин
+{% block pretitle %}
+    Каталог |
 {% endblock %}
 
 {% block content %}
-    <aside class="d-block">
-    <div class="container-fluid container-fluid-max-width">
+    <aside class="container-fluid container-fluid-max-width">
         {% with home_url='home' %}
         {% breadcrumb 'Главная,Каталог' home_url as results %}
             {% include 'breadcrumb.html' %}
         {% endwith %}
-    </div>
     </aside>
 
-    <main class="d-block">
-    <div class="container-fluid container-fluid-max-width bg-white">
+    <main class="container-fluid container-fluid-max-width">
         <div class="row">
 
-            <div class="col-12 col-lg-3 col-xl-3">
+            <div class="col-12 col-lg-3 pl-0 d-flex flex-column">
                 {% include 'shop/shop-filter.html' %}
+                <div class="flex-fill bg-white"></div>
             </div>
 
-            <div class="col-12 col-lg-9 col-xl-9">
-            <div class="row">
-                <div class="col-12 my-3">
-                    <div class="h2 font-weight-normal">
-                        Кресло-мешки
-                    </div>
+            <div class="col-12 col-lg-9">
+            <div class="row bg-white">
+                <div class="col-12 mt-3">
+                    <h1 class="h2 my-0 font-weight-normal">
+                        Пуфики, бинбэги и кресло-мешки
+                    </h1>
                 </div>
-                <div class="col-12 px-0">
+                <div class="col-12 px-0 mt-3">
                     <picture>
-                        <source media="(max-width: 575.98px)" srcset="{% static 'img/shop-showcase-mobile.jpg' %}">
-                        <img class="d-block w-100" src="{% static 'img/shop-showcase-desktop.jpg' %}" alt="Shop Showcase">
+                        <source media="(max-width: 575.98px)" srcset="{% static 'img/new-home-showcase-desktop.jpg' %}">
+                        <img class="d-block w-100" src="{% static 'img/new-home-showcase-desktop.jpg' %}" alt="Каталог пуфиков, бинбэгов и кресло-мешков">
                     </picture>
                 </div>
                 <div class="col-12 mt-3">
-                    <div class="d-flex justify-content-start justify-content-lg-end">
-                        <button class="d-lg-none btn btn-light css-icon-sorting-options-parent border border-color-gray-600 px-2 js-shop-filter-open-toggler">
-                            <span class="d-inline-block align-middle">Поиск</span>
+                    <div class="d-flex justify-content-between justify-content-lg-end">
+                        <button class="d-lg-none btn btn-light border border-color-gray-500 px-3 py-2 css-icon-sorting-options-parent js-shop-filter-open-toggler">
+                            <span class="h6 my-0 d-inline-block align-middle">Поиск</span>
                             <span class="d-inline-block align-middle css-icon css-icon-24px css-icon-sorting-options"></span>
                         </button>
                         <div class="dropdown">
-                            <button class="btn btn-light css-icon-sort-parent border border-color-gray-600 dropdown-toggle ml-3 px-2" type="button" id="dropdownSortButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-inline-block align-middle">Упорядочить</span>
+                            <button class="btn btn-light border border-color-gray-500 px-3 py-2 css-icon-sort-parent dropdown-toggle" type="button" id="dropdownSortButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="h6 my-0 d-inline-block align-middle">Упорядочить</span>
                                 <span class="d-inline-block align-middle css-icon css-icon-24px css-icon-sort"></span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSortButton">
                             {% with sort_value=sort_form.sort.value|stringformat:"s" %}
-                                <h6 class="dropdown-header">По цене</h6>
+                                <div class="h6 my-0 dropdown-header">По цене</div>
                                 <a class="dropdown-item {% if sort_value == '1' %}bg-color-gray-600 text-white{% endif %}" href="?{% param_replace sort=1 %}">Сначала недорогие</a>
                                 <a class="dropdown-item {% if sort_value == '2' %}bg-color-gray-600 text-white{% endif %}" href="?{% param_replace sort=2 %}">Сначала дорогие</a>
                                 <div class="dropdown-divider"></div>
@@ -60,7 +58,6 @@
                             {% endwith %}
                             </div>
                         </div>
-{#                        <div class="css-reverse-overlay js-shop-sort-dropdown-overlay" style="z-index: 5; background-color: rgba(0,0,0,0.2);"></div>#}
                     </div>
                 </div>
 {#                {% if results %}#}
@@ -71,7 +68,7 @@
 {#                </div>#}
 {#                {% endif %}#}
                 {% for result in results %}
-                <div class="col-6 col-md-4 px-0 px-sm-3 my-3">
+                <div class="col-6 col-md-4 px-2 px-sm-3 my-3">
                     {% with origin=result.0 products=result.1 selected_product=result.2 pictures=result.3 %}
                     {% with expanded_colors="true" number_of_products=products|length %}
                         {% include 'card/card.html' %}
@@ -84,8 +81,8 @@
                         <div class="d-block">
                             <img class="d-block w-100" src="{% static 'img/web_search_125px.png' %}" alt="Ничего не найдено">
                         </div>
-                        <div class="d-block">
-                            <div class="h5 my-0 font-weight-light text-center">Ничего не найдено</div>
+                        <div class="d-block mt-3">
+                            <div class="h5 my-0 font-weight-normal text-center">Ничего не найдено</div>
                         </div>
                     </div>
                 </div>
@@ -93,9 +90,12 @@
             </div>
             </div>
         </div>
-
-    </div>
     </main>
+{% endblock %}
+
+{% block filler %}
+<div class="flex-fill container-fluid container-fluid-max-width bg-light">
+</div>
 {% endblock %}
 
 {% block script %}

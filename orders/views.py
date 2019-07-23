@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.db import IntegrityError
 
-from pufiki190630.utilities import is_recaptcha_valid, get_form_input_value
+from pufiki190630.utilities import get_form_input_value, is_recaptcha_valid
 from shop.utilities import parse_cart
 from .models import Order, OrderProduct
 from .forms import NameForm, OrderDetailsForm

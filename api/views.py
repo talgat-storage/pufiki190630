@@ -3,7 +3,6 @@ from django.template.response import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
-from django.db import connection
 from django.db.models import Prefetch
 
 from shop.models import Product, Picture
@@ -16,8 +15,6 @@ class ShopCardCarouselView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        # queries_count = 0
 
         product = None
         origin = None
@@ -36,11 +33,6 @@ class ShopCardCarouselView(TemplateView):
             if product:
                 origin = product.origin
                 pictures = product.picture_set.all()
-
-        # print('Pictures:', len(pictures), 'queries:', len(connection.queries) - queries_count)
-        # queries_count = len(connection.queries)
-        #
-        # print('Total queries:', queries_count)
 
         context['product'] = product
         context['origin'] = origin
@@ -68,7 +60,6 @@ class CartAddView(View):
             product = \
                 Product.objects.all() \
                 .filter(origin__is_active=True, slug=form_product_slug) \
-                .select_related('origin__name') \
                 .first()
 
         quantity = None
@@ -116,7 +107,6 @@ class CartDeleteView(View):
             product = \
                 Product.objects.all() \
                 .filter(origin__is_active=True, slug=form_product_slug) \
-                .select_related('origin__name') \
                 .first()
 
         if product:

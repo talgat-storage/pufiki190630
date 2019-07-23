@@ -1,38 +1,39 @@
-<div class="css-lg-overlay js-shop-filter">
-<form method="get" class="d-flex flex-column h-100">
+<div class="css-lg-overlay js-shop-filter bg-white">
+<form method="get" class="h-100 d-flex flex-column">
 
-    <div class="d-flex justify-content-between justify-content-lg-center align-items-center mx-3 mt-3">
-        <div class="d-inline-block mt-1">
-            <div class="h5 my-0 font-weight-normal text-center">
+    <div class="d-flex justify-content-between justify-content-lg-center align-items-center mx-3 mx-lg-1 mt-3">
+        <div class="d-inline-block my-1">
+            <div class="h5 my-0 font-weight-normal">
                 Поиск по параметрам
             </div>
         </div>
-        <div class="d-inline-block d-lg-none mt-1">
-            <div class="css-icon css-icon-hover css-icon-32px css-icon-cancel js-shop-filter-close-toggler"></div>
+        <div class="d-inline-block d-lg-none px-1 px-sm-2 py-1 css-icon-hover css-icon-cancel-parent js-shop-filter-close-toggler">
+            <div class="css-icon css-icon-32px css-icon-cancel"></div>
         </div>
     </div>
 
-    <div class="d-block mx-3">
+    <div>
         <hr>
     </div>
 
+{#    <div class="mx-3 my-2">#}
     <div class="flex-fill css-shop-filter-overflow mx-3 my-2">
 
-        {% with collapse_id="shop-filter-sizes" collapse_name="Размеры" %}
-        <div>
-            {% include 'collapse.html' with expanded="true" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}
-
-            <div id="{{ collapse_id }}" class="collapse show py-3 js-collapsible">
-                <div class="d-flex flex-wrap">
-                    {% for option in search_form.size %}
-                        {% cycle 'img/small.png' 'img/medium.png' 'img/large.png' as image_location silent %}
-                        {% include 'shop/shop-filter-label.html' %}
-                    {% endfor %}
-                    <div class="d-inline-block mx-auto css-size-label" style="height: 0;"></div>
-                </div>
-            </div>
-        </div>
-        {% endwith %}
+{#        {% with collapse_id="shop-filter-sizes" collapse_name="Размеры" %}#}
+{#        <div>#}
+{#            {% include 'collapse.html' with expanded="true" extra_style="css-shop-filter-field px-3 py-2" font="h6 font-weight-normal my-0" %}#}
+{##}
+{#            <div id="{{ collapse_id }}" class="collapse show py-3 js-collapsible">#}
+{#                <div class="d-flex flex-wrap">#}
+{#                    {% for option in search_form.size %}#}
+{#                        {% cycle 'img/small.png' 'img/medium.png' 'img/large.png' as image_location silent %}#}
+{#                        {% include 'shop/shop-filter-label.html' %}#}
+{#                    {% endfor %}#}
+{#                    <div class="d-inline-block mx-auto css-size-label" style="height: 0;"></div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endwith %}#}
 
 
         {% with collapse_id="shop-filter-materials" collapse_name="Материалы" %}
@@ -71,7 +72,7 @@
 
     </div>
 
-    <div class="d-block mx-3">
+    <div class="d-block">
         <hr>
     </div>
 
@@ -80,8 +81,8 @@
     {% endfor %}
 
     <div class="d-flex justify-content-center mb-3">
-        <button type="submit" class="btn btn-light border border-color-gray-500">
-            Поиск
+        <button type="submit" class="btn btn-light border border-color-gray-500 px-3 py-2">
+            <span class="h6 my-0">Поиск</span>
         </button>
     </div>
 </form>

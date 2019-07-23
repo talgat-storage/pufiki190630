@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Name, Origin, Product, Picture
+from .models import Origin, Product, Picture
 
 
 class OriginAdmin(admin.ModelAdmin):
@@ -37,6 +37,5 @@ class ProductAdmin(admin.ModelAdmin):
     get_origin_material.short_description = 'Material'
 
 
-admin.site.register(Name)
 admin.site.register(Origin, OriginAdmin)
 admin.site.register(Product, ProductAdmin)

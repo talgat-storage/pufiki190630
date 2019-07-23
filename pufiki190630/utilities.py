@@ -3,6 +3,7 @@ import json
 import urllib
 
 from django.utils.crypto import get_random_string
+from django.contrib.sites.shortcuts import get_current_site
 from django.db import IntegrityError
 from django.conf import settings
 
@@ -12,30 +13,27 @@ DEFAULT_SLUG_LENGTH = 4
 DEFAULT_SLUG_ERROR_LIMIT = 8
 
 
-def generate_alphanumeric_slug(slug_length):
-    number_of_pairs = int(slug_length/2)
-    return ''.join([
-        ch
-        for pair in zip(
-            get_random_string(number_of_pairs, string.ascii_lowercase),
-            get_random_string(number_of_pairs, string.digits))
-        for ch in pair
-    ])
-
-
-def generate_numeric_slug(slug_length):
-    return get_random_string(slug_length, string.digits)
-
-
-def generate_slug(slug_length, is_slug_alphanumeric):
-    return generate_alphanumeric_slug(slug_length) if is_slug_alphanumeric else generate_numeric_slug(slug_length)
-
-
 def generate_slug_and_save(obj, obj_class, *args,
                            slug_length=DEFAULT_SLUG_LENGTH, is_slug_alphanumeric=True,
                            slug_error_limit=DEFAULT_SLUG_ERROR_LIMIT, **kwargs):
+    def generate_alphanumeric_slug():
+        number_of_pairs = int(slug_length / 2)
+        return ''.join([
+            ch
+            for pair in zip(
+                get_random_string(number_of_pairs, string.ascii_lowercase),
+                get_random_string(number_of_pairs, string.digits))
+            for ch in pair
+        ])
+
+    def generate_numeric_slug():
+        return get_random_string(slug_length, string.digits)
+
+    def generate_slug():
+        return generate_alphanumeric_slug() if is_slug_alphanumeric else generate_numeric_slug()
+
     if not obj.slug:
-        obj.slug = generate_slug(slug_length, is_slug_alphanumeric)
+        obj.slug = generate_slug()
 
     success = False
     errors = 0
@@ -47,7 +45,7 @@ def generate_slug_and_save(obj, obj_class, *args,
             if errors > slug_error_limit:
                 raise IntegrityError
             else:
-                obj.slug = generate_slug(slug_length, is_slug_alphanumeric)
+                obj.slug = generate_slug()
         else:
             success = True
 
@@ -66,9 +64,9 @@ def get_form_input_value(request, form_input_name):
 
 def is_recaptcha_valid(request):
     recaptcha_result = None
-    if 'g-recaptcha-response' in request.POST:
+    recaptcha_response = get_form_input_value(request, 'g-recaptcha-response')
+    if recaptcha_response:
         # Recaptcha
-        recaptcha_response = request.POST['g-recaptcha-response']
         url = 'https://www.google.com/recaptcha/api/siteverify'
         values = {
             'secret': settings.GOOGLE_RECAPTCHA_PRIVATE_KEY,
@@ -80,3 +78,8 @@ def is_recaptcha_valid(request):
         recaptcha_result = json.loads(response.read().decode())
 
     return recaptcha_result and 'success' in recaptcha_result and recaptcha_result['success'] is True
+
+
+def get_domain(request):
+    domain = '{}://{}'.format(request.scheme, get_current_site(request).domain)
+    return domain

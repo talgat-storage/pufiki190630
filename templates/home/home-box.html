@@ -1,0 +1,6 @@
+<div class="col-12 col-sm-6 col-lg-3 px-lg-2 {% if forloop.first %}pl-xl-0 pr-xl-2{% elif forloop.last %}pl-xl-2 pr-xl-0{% else %}px-xl-2{% endif %} my-2">
+<div class="h-100 d-flex flex-sm-column align-items-center bg-white py-3 border border-color-gray-200 rounded">
+    {% block box_content %}
+    {% endblock %}
+</div>
+</div>

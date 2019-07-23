@@ -4,14 +4,14 @@
     {% with number_of_products=products|length products_limit=3 %}
     {% for product in products %}
 
-    <div class="{% if forloop.counter < products_limit or forloop.counter == products_limit and number_of_products == products_limit %}d-inline-block{% else %}d-none{% endif %} mr-1 mt-1 js-card-color" data-product-slug="{{ product.slug }}" data-product-color="{{ product.color }}">
+    <div class="{% if forloop.counter < products_limit or forloop.counter == products_limit and number_of_products == products_limit %}d-inline-block{% else %}d-none{% endif %} {% if not forloop.last %}mr-1{% endif %} mt-1 js-card-color" data-product-slug="{{ product.slug }}" data-product-color="{{ product.color }}">
         <div class="css-icon css-icon-hover css-icon-34px rounded border border-gray-300">
             <img class="d-block w-100 rounded" src="{{ product.color_photo.url }}" alt="Product {{ product.slug }}">
         </div>
     </div>
 
     {% if number_of_products > products_limit and forloop.counter == products_limit %}
-    <div class="css-icon css-icon-hover css-icon-34px rounded border border-color-gray-300 d-inline-flex justify-content-center align-items-center bg-light mr-1 mt-1 border border-info js-card-more-colors">
+    <div class="css-icon css-icon-hover css-icon-34px rounded border border-color-gray-300 d-inline-flex justify-content-center align-items-center bg-light mt-1 js-card-more-colors">
         <div class="d-block text-center">+{{ number_of_products|add:"1"|subtract:products_limit }}</div>
     </div>
     {% endif %}

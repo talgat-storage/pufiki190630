@@ -51,18 +51,6 @@ function processSCSS(cb) {
     cb();
 }
 
-function processSpinner(cb) {
-    gulp.src('src/scss/spinner-show.scss')
-        .pipe(sass({
-            outputStyle: 'compressed'
-        }))
-        .pipe(autoprefixer('last 2 version'))
-        .pipe(uglifyCSS())
-        .pipe(gulp.dest('dist/css'));
-
-    cb();
-}
-
 function copyIcons(cb) {
     gulp.src('src/icons/*')
         .pipe(gulp.dest('dist/icons'));
@@ -89,6 +77,6 @@ exports.js = gulp.series(processJS);
 exports.scss = gulp.series(processSCSS);
 exports.icons = gulp.series(copyIcons);
 exports.img = gulp.series(copyImages);
-exports.build = gulp.series(processJS, processSCSS, processSpinner, copyIcons, copyImages);
+exports.build = gulp.series(processJS, processSCSS, copyIcons, copyImages);
 exports.default = gulp.series(clean, processJS, processSCSS, copyIcons, copyImages);
 exports.watch = gulp.series(clean, processJS, processSCSS, copyIcons, copyImages, watch);

@@ -22,7 +22,7 @@
     {% for orderproduct in order.orderproduct_set.all %}
         {% with product=orderproduct.product %}
         <div class="d-flex align-items-center">
-            <div class="css-cart-product-image">
+            <div class="css-width-80px">
                 <img class="d-block w-100" src="{{ product.small_photo.url }}" alt="Product {{ product.slug }}">
             </div>
             <div class="d-flex flex-column ml-3">

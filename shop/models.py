@@ -3,31 +3,22 @@ from django.db import models
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 
-from pufiki190630.utilities import args_to_str, generate_slug_and_save
-
-DEFAULT_SLUG_LENGTH = 4
-
-
-class Name(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-
-    def __str__(self):
-        return args_to_str(self.name)
+from pufiki190630.utilities import args_to_str, generate_slug_and_save, DEFAULT_SLUG_LENGTH
 
 
 class Origin(models.Model):
     SIZE_CHOICES = (
         (1, _('Small')),
         (2, _('Medium')),
-        (3, _('Large')),
+        # (3, _('Large')),
     )
     MATERIAL_CHOICES = (
         (1, _('Faux Leather')),
-        (2, _('Polyester')),
-        (3, _('Velour')),
+        (2, _('Velour')),
+        # (3, _('Polyester')),
     )
     slug = models.CharField(max_length=DEFAULT_SLUG_LENGTH, unique=True, editable=False)  # handled by save method
-    name = models.ForeignKey(Name, on_delete=models.CASCADE)
+    name = models.CharField(max_length=64)
     size = models.PositiveSmallIntegerField(choices=SIZE_CHOICES)
     material = models.PositiveSmallIntegerField(choices=MATERIAL_CHOICES)
     price = models.PositiveIntegerField()
@@ -48,8 +39,7 @@ class Origin(models.Model):
         generate_slug_and_save(self, Origin, *args, **kwargs)
 
     def __str__(self):
-        return args_to_str(self.slug, str(self.name),
-                           self.get_size_display(), self.get_material_display(), str(self.price))
+        return args_to_str(self.slug, str(self.name), self.get_size_display(), self.get_material_display(), str(self.price))
 
     def get_absolute_url(self):
         return reverse_lazy('origin', kwargs={'origin_slug': self.slug})

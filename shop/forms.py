@@ -4,13 +4,13 @@ from .models import Origin, Product
 
 
 class ShopSearchForm(forms.Form):
-    size = forms.MultipleChoiceField(
-        required=False,
-        choices=Origin.SIZE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={
-            'class': 'custom-control-input js-shop-filter-size-input',
-        })
-    )
+    # size = forms.MultipleChoiceField(
+    #     required=False,
+    #     choices=Origin.SIZE_CHOICES,
+    #     widget=forms.CheckboxSelectMultiple(attrs={
+    #         'class': 'custom-control-input js-shop-filter-size-input',
+    #     })
+    # )
     material = forms.MultipleChoiceField(
         required=False,
         choices=Origin.MATERIAL_CHOICES,

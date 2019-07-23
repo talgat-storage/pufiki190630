@@ -1,69 +1,58 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base.html' %}
 
 {% block title %}
-    | Войти / Регистрация
+    {{ title }} |
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
+{% block heading %}
+    {{ title }}
+{% endblock %}
+
+{% block subcontent %}
+    <div class="col-12 col-lg-6 px-sm-4 px-lg-5">
+        <form method="post">
+            {% csrf_token %}
+
+            {% with field=form.username text='Ваш Email адрес' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
+
+            {% with field=form.password text='Пароль' %}
+                {% include 'accounts/form-group.html' %}
+            {% endwith %}
+
+            {% include 'accounts/form-errors.html' %}
+
+            <div class="d-flex flex-column flex-sm-row align-items-center mt-3">
+                <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2">
+                    <span class="h6 my-0">Войти</span>
+                </button>
+                <div class="d-inline-block ml-sm-3 mt-3 mt-sm-0">
+                    <a href="{% url 'accounts:password-reset' %}" class="h6 my-0 text-body">Забыли пароль?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-12 d-lg-none py-1 my-3 bg-light"></div>
+
+    <div class="col-12 col-lg-6 px-sm-4 px-lg-5 d-flex flex-column justify-content-between">
+        <div>
+            <div class="h2 font-weight-normal">
+                Новые пользователи
+            </div>
+            <hr>
+            <div class="h5 font-weight-normal">
+                Создание аккаунта позволит Вам:
+            </div>
+            <ul>
+                {% include 'accounts/signup/advantages.html' %}
+            </ul>
         </div>
-        <div class="row bg-white">
-            <div class="col-12 col-lg-6 my-3 px-sm-4 px-lg-5">
-                <div class="h2 font-weight-normal">
-                    Войти
-                </div>
-                <div>
-                    <hr>
-                </div>
-                <form method="post">
-                    {% csrf_token %}
-
-                    {% with field=form.username text='Ваш Email адрес' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
-
-                    {% with field=form.password text='Пароль' %}
-                        {% include 'accounts/form-group.html' %}
-                    {% endwith %}
-
-                    {% include 'accounts/form-errors.html' %}
-
-                    <div class="d-flex flex-column flex-sm-row align-items-center mt-3">
-                        <button type="submit" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2">
-                            <span class="h6 my-0">Войти</span>
-                        </button>
-                        <div class="d-inline-block ml-sm-3 mt-3 mt-sm-0">
-                            <a href="{% url 'accounts:password-reset' %}" class="h6 my-0 text-body">Забыли пароль?</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-12 d-lg-none py-1 bg-light"></div>
-
-            <div class="col-12 col-lg-6 d-flex flex-column justify-content-between my-3 px-sm-4 px-lg-5">
-                <div>
-                    <div class="h2 font-weight-normal">
-                        Новые пользователи
-                    </div>
-                    <div>
-                        <hr>
-                    </div>
-                    <div class="h5 font-weight-normal">
-                        Создание аккаунта позволит Вам:
-                    </div>
-                    <ul>
-                        {% include 'accounts/signup/advantages.html' %}
-                    </ul>
-                </div>
-                <div class="mt-2">
-                    <a href="{% url 'accounts:signup' %}" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2">
-                        <span class="h6 my-0">Создать аккаунт</span>
-                    </a>
-                </div>
-            </div>
+        <div class="mt-2">
+            <a href="{% url 'accounts:signup' %}" class="btn css-btn-sm-block btn-color-2 text-white px-4 py-2">
+                <span class="h6 my-0">Создать аккаунт</span>
+            </a>
         </div>
     </div>
 {% endblock %}

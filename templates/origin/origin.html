@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 {% load breadcrumb %}
 
-{% block title %}
-    Pufiki.kz | Магазин | {{ origin.name }}
+{% block pretitle %}
+    {{ origin.name }} |
+{% endblock %}
+
+{% block canonical_link %}
+    <link rel="canonical" href="{{ origin.get_absolute_url }}">
 {% endblock %}
 
 {% block content %}
-    <aside class="d-block">
-    <div class="container-fluid container-fluid-max-width">
+    <aside class="container-fluid container-fluid-max-width">
         {% with home_url='home' shop_url='shop' %}
         {% breadcrumb 'Главная,Каталог' home_url shop_url name=origin.name as results %}
             {% include 'breadcrumb.html' %}
         {% endwith %}
-    </div>
     </aside>
 
-    <main class="d-block">
-    <div class="container-fluid container-fluid-max-width bg-white">
+    <main class="container-fluid container-fluid-max-width bg-white">
         <div class="row">
             <div class="col-12">
                 <div class="js-origin-cart-add-desktop-alert"></div>
@@ -28,14 +29,11 @@
                 {% include 'origin/origin-info.html' %}
             </div>
         </div>
-    </div>
     </main>
 
-    <section>
-    <div class="container-fluid container-fluid-max-width my-3">
+    <section class="container-fluid container-fluid-max-width my-3">
         <div class="row">
-            <div class="col-12 col-md-8 px-0">
-            <div class="d-flex flex-column">
+            <div class="col-12 col-md-8 d-flex flex-column px-0">
                 <div class="d-block bg-white">
                     {% with collapse_id="origin-collapse-description" collapse_name="Описание" %}
                         {% include 'collapse.html' with expanded="false" extra_style="css-origin-collapse px-3 py-3" font="h6 my-0" %}
@@ -77,18 +75,17 @@
                     {% endwith %}
                 </div>
             </div>
-            </div>
 
             <div class="col-12 col-md-4 px-0">
-            <div class="d-flex flex-column bg-white py-3 ml-0 ml-md-3 mt-3 mt-md-0 rounded">
+            <div class="d-flex flex-column bg-white py-3 ml-0 ml-md-3 mt-3 mt-md-0">
                 <div class="d-block mx-3">
-                    <p class="font-weight-normal text-center">
+                    <p class="my-0 font-weight-normal text-center">
                         Задайте нам Ваш вопрос
                         <br>
                         Напишите или позвоните нам!
                     </p>
                 </div>
-                <div class="d-flex justify-content-center mx-3">
+                <div class="d-flex justify-content-center mx-3 mt-3">
                     <a href="{% url 'support:support' %}" class="btn btn-outline-color-gray-700 px-3">
                         Перейти в поддержку
                     </a>
@@ -96,10 +93,10 @@
             </div>
             </div>
         </div>
-    </div>
     </section>
 {% endblock %}
 
 {% block filler %}
-<div class="flex-fill container-fluid container-fluid-max-width"></div>
+<div class="flex-fill container-fluid container-fluid-max-width bg-light">
+</div>
 {% endblock %}

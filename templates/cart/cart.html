@@ -2,8 +2,8 @@
 {% load static %}
 {% load math %}
 
-{% block title %}
-    | Корзина
+{% block pretitle %}
+    Корзина |
 {% endblock %}
 
 {% block content %}
@@ -37,14 +37,17 @@
                     <div class="col-12">
                         <hr class="my-3">
                     </div>
-                    <div class="col-12">
                     {% with is_control_included=True %}
                     {% for product, origin, quantity, total in results %}
+                    <div class="col-12 col-sm-9 col-lg-12">
                         {% include 'cart/cart-product.html' %}
+                    </div>
+                    <div class="col-12">
+                        <hr class="my-3">
+                    </div>
                     {% endfor %}
                     {% endwith %}
-                    </div>
-                    <div class="col-4 col-lg-2 offset-4 offset-lg-6">
+                    <div class="col-4 col-sm-3 col-lg-2 offset-4 offset-sm-3 offset-lg-6">
                         <div class="h5 my-0">
                             Всего:
                         </div>
@@ -65,7 +68,7 @@
             <div class="col-12">
                 <div class="d-flex flex-column align-items-center">
                     <div class="d-block">
-                        <img class="d-block css-width-100px" src="{% static 'img/shopping_cart_125px.png' %}" alt="Shopping Cart">
+                        <img class="d-block css-width-100px" src="{% static 'img/shopping_cart_125px.png' %}" alt="Корзина">
                     </div>
                     <div class="h5 my-1 font-weight-normal text-center">
                         Ваша корзина сейчас пуста.

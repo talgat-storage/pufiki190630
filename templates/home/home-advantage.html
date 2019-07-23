@@ -1,23 +1,20 @@
+{% extends 'home/home-box.html' %}
 {% load static %}
 
-<div class="col-12 col-sm-6 col-lg-3 px-0 pl-sm-{{ sm_pl }} pr-sm-{{ sm_pr }} pl-lg-{{ lg_pl }} pr-lg-{{ lg_pr }} my-2 my-sm-{{ sm_my }} my-lg-0">
-<div class="h-100 d-flex flex-sm-column align-items-center bg-white py-3">
-    <div class="d-block">
-        <div class="css-width-100px">
-            <img class="d-block w-100" src="{% static img_location %}" alt="{{ title }}">
-        </div>
+{% block box_content %}
+    <div class="css-width-100px ml-3 ml-sm-0">
+        <img class="d-block w-100" src="{% static img_location %}" alt="{{ title }}">
     </div>
-    <div class="d-block my-0 my-sm-3">
+    <div class="w-100 d-block my-0 my-sm-3">
         <div class="d-flex flex-column">
             <div class="h5 my-0 text-center">
                 {{ title }}
             </div>
-            <div class="d-block text-center px-2 px-sm-4 px-md-5 px-lg-3 mt-2">
+            <div class="text-center px-3 px-sm-4 px-md-5 px-lg-3 mt-2">
                 {% autoescape off %}
                     {{ text }}
                 {% endautoescape %}
             </div>
         </div>
     </div>
-</div>
-</div>
+{% endblock %}

@@ -1,35 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base.html' %}
 {% load static %}
 
 {% block title %}
-    | {{ title }}
+    {{ title }}
 {% endblock %}
 
-{% block content %}
-    <div class="container-fluid container-fluid-max-width">
-        <div class="row bg-light">
-            <div class="col-12 py-1"></div>
-        </div>
-        <div class="row bg-white px-sm-4 px-lg-5">
-            <div class="col-12 my-3">
-                <div class="h2 font-weight-normal">
-                    {{ title }}
-                </div>
-                <div>
-                    <hr>
-                </div>
-                {% for line in lines %}
-                    <div class="h5 font-weight-normal">
-                        {% autoescape off %}
-                            {{ line }}
-                        {% endautoescape %}
-                    </div>
-                {% endfor %}
-                <div class="d-flex justify-content-center mt-3">
-                    <div class="d-inline-block">
-                        <img class="d-block css-width-100px" src="{% static 'img/checked_125px.png' %}" alt="Готово">
-                    </div>
-                </div>
+{% block heading %}
+    {{ title }}
+{% endblock %}
+
+{% block subcontent %}
+    <div class="col-12 px-sm-4 px-lg-5">
+        {% for line in lines %}
+            <div class="h5 font-weight-normal">
+                {% autoescape off %}
+                    {{ line }}
+                {% endautoescape %}
+            </div>
+        {% endfor %}
+        <div class="d-flex justify-content-center mt-3">
+            <div class="d-inline-block">
+                <img class="d-block css-width-100px" src="{% static 'img/checked_125px.png' %}" alt="Готово">
             </div>
         </div>
     </div>

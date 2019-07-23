@@ -1,15 +1,15 @@
 {% extends 'orders/base.html' %}
 
-{% block subtitle %}
-    | Пользователь
+{% block heading %}
+    Оформление заказа
 {% endblock %}
 
 {% block subcontent %}
-    <div class="col-12 px-sm-4 px-lg-5 mb-3">
+    <div class="col-12 px-sm-4 px-lg-5">
         <div class="h5 font-weight-normal">
             Перед оформлением заказа мы Вам рекомендуем выполнить вход или создать аккаунт, который позволит Вам:
         </div>
-        <ul class="px-4">
+        <ul>
             {% include 'accounts/signup/advantages.html' %}
         </ul>
         <div class="d-flex flex-column flex-sm-row mt-3">
