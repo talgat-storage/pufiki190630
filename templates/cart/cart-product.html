@@ -3,9 +3,9 @@
 {% if is_control_included %}
 <div class="col-4 col-lg-2 order-3 order-lg-6 d-flex align-items-center">
     <a href="{{ origin.get_absolute_url }}?color={{ product.color }}">
-        <div class="css-icon css-icon-24px css-icon-edit"></div>
+        <div class="css-icon css-icon-24px css-icon-edit css-icon-hover"></div>
     </a>
-    <div class="ml-3 css-icon css-icon-hover css-icon-24px css-icon-trash js-cart-product-trash" data-product-slug="{{ product.slug }}"></div>
+    <div class="ml-3 css-icon css-icon-hover css-icon-24px css-icon-trash css-icon-hover js-cart-product-trash" data-product-slug="{{ product.slug }}"></div>
 </div>
 {% endif %}
 

@@ -6,6 +6,11 @@
 
 {% block subcontent %}
     <div class="col-12 px-sm-4 px-lg-5 mb-3">
+        <div class="bg-warning border border-warning rounded p-3 mb-3">
+            <div class="h6 my-0">
+                <strong>Внимание!</strong> В данный момент способ оплаты банковской картой находится в <strong>тестовом</strong> режиме.
+            </div>
+        </div>
         <form method="post">
             {% csrf_token %}
 
@@ -19,12 +24,30 @@
                 {% endwith %}
             {% endif %}
 
-            {% with field=order_details_form.phone text='Ваш телефон' %}
+            <div class="form-row">
+                {% with field=address_form.city text='Город' form_group_class='col-12 col-md-3' datalist=address_form_city_datalist %}
+                    {% include 'accounts/form-group.html' %}
+                {% endwith %}
+
+                {% with field=address_form.street text='Улица' form_group_class='col-12 col-md-3' %}
+                    {% include 'accounts/form-group.html' %}
+                {% endwith %}
+
+                {% with field=address_form.house text='Дом' form_group_class='col-12 col-md-3' %}
+                    {% include 'accounts/form-group.html' %}
+                {% endwith %}
+
+                {% with field=address_form.flat text='Кваритира / Офис' form_group_class='col-12 col-md-3' %}
+                    {% include 'accounts/form-group.html' %}
+                {% endwith %}
+            </div>
+
+            {% with field=address_form.phone text='Телефон' help_text='Например: 87001112233 или +77001112233' %}
                 {% include 'accounts/form-group.html' %}
             {% endwith %}
 
-            {% with field=order_details_form.address text='Адрес доставки' %}
-                {% include 'accounts/form-group.html' %}
+            {% with form=address_form %}
+                {% include 'accounts/form-errors.html' %}
             {% endwith %}
 
             {% with field=order_details_form.comment text='Комментарий' help_text='Необязательно для заполнения' %}

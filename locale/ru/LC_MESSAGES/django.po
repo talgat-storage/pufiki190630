@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-17 00:40+0600\n"
+"POT-Creation-Date: 2019-08-19 18:40+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,103 +40,149 @@ msgstr "пользователь"
 msgid "users"
 msgstr "пользователи"
 
-#: .\orders\models.py:15
-#, fuzzy
-#| msgid "Please enter a valid phone number. For example, 87771234567890"
-msgid "Please enter a valid phone number. For example, 87001112233"
-msgstr "Пожалуйста, введите номер телефона в формате 87001112233"
+#: .\orders\forms.py:20
+msgid "Almaty"
+msgstr "Алматы"
 
-#: .\orders\models.py:18
+#: .\orders\forms.py:20
+msgid "Nur-Sultan"
+msgstr "Нур-Султан (Астана)"
+
+#: .\orders\forms.py:20
+msgid "Aktau"
+msgstr "Актау"
+
+#: .\orders\forms.py:20
+msgid "Aktobe"
+msgstr "Актобе"
+
+#: .\orders\forms.py:20
+msgid "Atyrau"
+msgstr "Атырау"
+
+#: .\orders\forms.py:21
+msgid "Zhezkazgan"
+msgstr "Жезказган"
+
+#: .\orders\forms.py:21
+msgid "Karaganda"
+msgstr "Караганда"
+
+#: .\orders\forms.py:21
+msgid "Kokshetau"
+msgstr "Кокшетау"
+
+#: .\orders\forms.py:21
+msgid "Kostanay"
+msgstr "Костанай"
+
+#: .\orders\forms.py:21
+msgid "Kyzylorda"
+msgstr "Кызылорда"
+
+#: .\orders\forms.py:22
+msgid "Taldykorgan"
+msgstr "Талдыкорган"
+
+#: .\orders\forms.py:22
+msgid "Taraz"
+msgstr "Тараз"
+
+#: .\orders\forms.py:22
+msgid "Temirtau"
+msgstr "Темиртау"
+
+#: .\orders\forms.py:22
+msgid "Uralsk"
+msgstr "Уральск"
+
+#: .\orders\forms.py:22
+msgid "Ust-Kamenogorsk"
+msgstr "Усть-Каменогорск"
+
+#: .\orders\forms.py:23
+msgid "Pavlodar"
+msgstr "Павлодар"
+
+#: .\orders\forms.py:23
+msgid "Petropavlovsk"
+msgstr "Петропавловск"
+
+#: .\orders\forms.py:23
+msgid "Semey"
+msgstr "Семей"
+
+#: .\orders\forms.py:23
+msgid "Shymkent"
+msgstr "Шымкент"
+
+#: .\orders\models.py:31
 msgid "Cash"
 msgstr "Наличные курьеру"
 
-#: .\orders\models.py:19
+#: .\orders\models.py:32
 msgid "Card"
 msgstr "Банковская карта"
 
-#: .\orders\models.py:60
+#: .\orders\models.py:73
 msgid "Packaged"
 msgstr "Упаковано"
 
-#: .\orders\models.py:61
+#: .\orders\models.py:74
 msgid "Shipped"
 msgstr "Отправлено"
 
-#: .\orders\models.py:62
+#: .\orders\models.py:75
 msgid "Delivered"
 msgstr "Доставлено"
 
-#: .\orders\models.py:63
+#: .\orders\models.py:76
 msgid "Exchanged"
 msgstr "Заменено"
 
-#: .\orders\models.py:64
+#: .\orders\models.py:77
 msgid "Returned"
 msgstr "Возвращено"
 
-#: .\orders\models.py:65
+#: .\orders\models.py:78
 msgid "Canceled"
 msgstr "Отменено"
 
-#: .\shop\models.py:20
+#: .\shop\models.py:13
 msgid "Small"
 msgstr "Детский"
 
-#: .\shop\models.py:21
+#: .\shop\models.py:14
 msgid "Medium"
 msgstr "Средний"
 
-#: .\shop\models.py:22
-msgid "Large"
-msgstr "Большой"
-
-#: .\shop\models.py:25
+#: .\shop\models.py:18
 msgid "Faux Leather"
 msgstr "Кожзаменитель"
 
-#: .\shop\models.py:26
-msgid "Polyester"
-msgstr "Полиэстер"
-
-#: .\shop\models.py:27
+#: .\shop\models.py:19
 msgid "Velour"
 msgstr "Велюр"
 
-#: .\shop\models.py:82
+#: .\shop\models.py:65
 msgid "Red"
 msgstr "Красный"
 
-#: .\shop\models.py:83
-msgid "Green"
-msgstr "Зеленый"
-
-#: .\shop\models.py:84
+#: .\shop\models.py:66
 msgid "Blue"
 msgstr "Синий"
 
-#: .\shop\models.py:85
-msgid "Yellow"
-msgstr "Желтый"
+#: .\shop\models.py:67
+msgid "Green"
+msgstr "Зеленый"
 
-#: .\shop\models.py:86
-msgid "Black"
-msgstr "Черный"
-
-#: .\shop\models.py:87
+#: .\shop\models.py:68
 msgid "Purple"
 msgstr "Фиолетовый"
 
-#: .\shop\models.py:88
-msgid "White"
-msgstr "Белый"
-
-#: .\shop\models.py:89
-msgid "Gray"
-msgstr "Серый"
-
-#: .\shop\models.py:90
-msgid "Brown"
-msgstr "Коричневый"
+#: .\shop\models.py:69
+msgid "Azure"
+msgstr "Голубой"
 
 #: .\support\models.py:11
 msgid "Open"
@@ -145,9 +191,3 @@ msgstr "Открыто"
 #: .\support\models.py:12
 msgid "Closed"
 msgstr "Закрыто"
-
-#~ msgid "Issued"
-#~ msgstr "Оформлено"
-
-#~ msgid "Done"
-#~ msgstr "Выполнено"

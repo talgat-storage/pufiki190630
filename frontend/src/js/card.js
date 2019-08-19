@@ -12,6 +12,12 @@ module.exports = function () {
         var target = $(this);
         var product_slug = target.attr('data-product-slug');
         var product_color = target.attr('data-product-color');
+        
+        // Select color icon and unselect others
+        var prev_selected_color_icons = target.parent().find('.css-icon.border-color-2');
+        prev_selected_color_icons.removeClass('border-color-2').addClass('border-color-gray-300');
+        var current_selected_color_icon = target.find('.css-icon');
+        current_selected_color_icon.removeClass('border-color-gray-300').addClass('border-color-2');
 
         var wrapper = target.parent().parent().find('.js-carousel-wrapper');
 

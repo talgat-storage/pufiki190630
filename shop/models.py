@@ -2,6 +2,8 @@ import os
 from django.db import models
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 from pufiki190630.utilities import args_to_str, generate_slug_and_save, DEFAULT_SLUG_LENGTH
 
@@ -23,7 +25,7 @@ class Origin(models.Model):
     material = models.PositiveSmallIntegerField(choices=MATERIAL_CHOICES)
     price = models.PositiveIntegerField()
     popularity = models.SmallIntegerField(default=0)
-    description = models.TextField()
+    description = models.TextField(default='', blank=True)
     weight = models.PositiveSmallIntegerField()
     width = models.PositiveSmallIntegerField()
     length = models.PositiveSmallIntegerField()
@@ -61,14 +63,10 @@ def small_photo_path(instance, filename):
 class Product(models.Model):
     COLOR_CHOICES = (
         (1, _('Red')),
-        (2, _('Green')),
-        (3, _('Blue')),
-        (4, _('Yellow')),
-        (5, _('Black')),
-        (6, _('Purple')),
-        (7, _('White')),
-        (8, _('Gray')),
-        (9, _('Brown')),
+        (2, _('Blue')),
+        (3, _('Green')),
+        (4, _('Purple')),
+        (5, _('Azure')),
     )
     slug = models.CharField(max_length=DEFAULT_SLUG_LENGTH, unique=True, editable=False)  # handled by save method
     origin = models.ForeignKey(Origin, on_delete=models.CASCADE)
@@ -85,7 +83,13 @@ class Product(models.Model):
         generate_slug_and_save(self, Product, *args, **kwargs)
 
     def __str__(self):
-        return args_to_str(self.slug, 'Origin:', str(self.origin), 'Color:', self.get_color_display())
+        return args_to_str(self.slug, 'Origin:', str(self.origin), 'Color:', str(self.get_color_display()))
+
+
+@receiver(post_delete, sender=Product)
+def product_post_delete(sender, instance, **kwargs):
+    instance.color_photo.delete(False)
+    instance.small_photo.delete(False)
 
 
 def medium_photo_path(instance, filename):
@@ -112,3 +116,10 @@ class Picture(models.Model):
 
     def __str__(self):
         return args_to_str(self.slug, str(self.product))
+
+
+@receiver(post_delete, sender=Picture)
+def picture_post_delete(sender, instance, **kwargs):
+    instance.medium_photo.delete(False)
+    instance.large_photo.delete(False)
+    instance.extralarge_photo.delete(False)

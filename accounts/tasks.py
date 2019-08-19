@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 
 @shared_task
 def send_async_email(user_email, url, token, domain, subject, text, email_template_name, fail_message):
-    host_email = ''.join([settings.EMAIL_HOST_NAME, ' <', settings.EMAIL_HOST_USER, '>'])
+    host_email = ''.join([settings.EMAIL_HOST_NAME, ' <', settings.EMAIL_HOST_ADDRESS, '>'])
     user_email_b64 = urlsafe_base64_encode(force_bytes(user_email))
     action_url = str(reverse_lazy(url, kwargs={
         'user_email_b64': user_email_b64,

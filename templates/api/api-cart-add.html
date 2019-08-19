@@ -1,6 +1,6 @@
 <div class="alert {% if success %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show mt-sm-3 mb-0" role="alert">
     {% if success %}
-        Вы добавили <strong>{{ product.get_color_display|lower }} {{ product.origin.name }}</strong>.
+        Вы добавили <strong>{{ product.get_color_display|lower }} "{{ product.origin.name }}"</strong> ({{ quantity }} шт.).
         <br>
         Нажмите <a href="{% url 'cart' %}" class="alert-link text-color-2"><u>сюда</u></a>, чтобы перейти в корзину.
     {% else %}

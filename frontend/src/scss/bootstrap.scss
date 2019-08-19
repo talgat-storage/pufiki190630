@@ -17,7 +17,8 @@ $theme-colors: (
 $enable-caret: false;
 $enable-responsive-font-sizes: true;
 
-$emphasized-link-hover-darken-percentage: 30%;
+$link-color: map_get($theme-colors, "color-black");
+$link-hover-color: map_get($theme-colors, "color-2");
 
 $carousel-control-color: map_get($theme-colors, "color-gray-700");
 $carousel-transition-duration: 0s;

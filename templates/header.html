@@ -1,59 +1,84 @@
+{% load static %}
+
+{% with request_url=request.get_full_path %}
 <header class="container-fluid container-fluid-max-width px-0 js-header">
-    <div class="d-flex align-items-center px-2 px-sm-3 px-lg-4 py-3 bg-white">
+    <div class="d-flex align-items-end px-2 px-sm-3 px-lg-4 py-3 bg-white">
 
         <div class="d-inline-block d-md-none px-1 px-sm-2 py-1 css-icon-hover css-icon-menu-parent js-header-menu-open-toggler">
             <div class="css-icon css-icon-32px css-icon-menu"></div>
         </div>
 
-        <div class="d-inline-block border border-color-1 rounded bg-color-1 ml-2 ml-sm-3 ml-md-0">
-            <a href="{% url 'home' %}" class="text-decoration-none text-white">
-                <div class="h5 my-0 p-2">
-                    Pufiki.kz
+{#        <div class="d-inline-block border border-color-1 rounded bg-color-1 ml-2 ml-sm-3 ml-md-0">#}
+{#            <a href="{% url 'home' %}" class="text-decoration-none text-white">#}
+{#                <div class="h5 my-0 p-2">#}
+{#                    Pufiki.kz#}
+{#                </div>#}
+{#            </a>#}
+{#        </div>#}
+
+        <div class="d-inline-block ml-2 ml-sm-3 ml-md-0 my-auto py-2">
+            <a href="{% url 'home' %}">
+                <div class="css-header-logo"></div>
+            </a>
+        </div>
+
+{#        <div class="d-inline-block ml-2 ml-sm-3 ml-lg-4">#}
+{#            <a href="{% url 'shop' %}" class="text-decoration-none text-color-2">#}
+{#                <div class="h5 my-0 px-1 px-sm-2">#}
+{#                    Каталог#}
+{#                </div>#}
+{#            </a>#}
+{#        </div>#}
+
+        <div class="d-none d-md-inline-block ml-auto my-auto">
+            {% url 'shop' as url_link %}
+            <a href="{{ url_link }}" class="text-decoration-none">
+                <div class="d-flex align-items-center justify-content-center px-2 py-1 css-icon-shop-parent">
+                    <div class="d-md-inline-block h6 my-0 {% if request_url == url_link %}text-color-2{% endif %}">
+                        Каталог
+                    </div>
+                    <div class="d-inline-block ml-1">
+                        <div class="css-icon css-icon-32px css-icon-shop {% if request_url == url_link %}css-active{% endif %}"></div>
+                    </div>
                 </div>
             </a>
         </div>
 
-        <div class="d-inline-block ml-2 ml-sm-3 ml-lg-4">
-            <a href="{% url 'shop' %}" class="text-decoration-none text-color-2">
-                <div class="h5 my-0 px-1 px-sm-2 py-2">
-                    Каталог
-                </div>
-            </a>
-        </div>
-
-        <div class="d-inline-block ml-auto">
-            <a href="{% url 'cart' %}" class="text-decoration-none text-color-gray-700">
-                <div class="d-flex align-items-center justify-content-center px-0 px-sm-2 py-1 css-icon-shopping-cart-parent">
-                    <div class="d-none d-md-inline-block h6 my-0">
+        <div class="d-inline-block ml-auto ml-md-0 ml-lg-3 my-auto">
+            {% url 'cart' as url_link %}
+            <a href="{{ url_link }}" class="text-decoration-none">
+                <div class="d-flex align-items-center justify-content-center px-0 px-sm-2 py-1 css-icon-shopping-cart-parent css-header-cart-items-count-parent">
+                    <div class="d-none d-md-inline-block h6 my-0 {% if request_url == url_link %}text-color-2{% endif %}">
                         Корзина
                     </div>
                     <div class="d-inline-block">
-                        <div class="css-icon css-icon-32px css-icon-shopping-cart"></div>
+                        <div class="css-icon css-icon-32px css-icon-shopping-cart {% if request_url == url_link %}css-active{% endif %}"></div>
                     </div>
                     <div class="d-inline-block ml-1">
-                        <span class="badge badge-color-gray-600 js-header-cart-items-count">{{ cart_items_count }}</span>
+                        <span class="h6 my-0 badge text-white css-header-cart-items-count js-header-cart-items-count {% if request_url == url_link %}css-active{% endif %}">{{ cart_items_count }}</span>
                     </div>
                 </div>
             </a>
         </div>
 
-        <div class="d-none d-md-inline-block ml-3">
-            <a href="{% url 'support:support' %}" class="text-decoration-none text-color-gray-700">
+        <div class="d-none d-md-inline-block ml-lg-3 my-auto">
+            {% url 'support:support' as url_link %}
+            <a href="{{ url_link }}" class="text-decoration-none">
                 <div class="d-flex align-items-center justify-content-center px-2 py-1 css-icon-help-parent">
-                    <div class="d-inline-block h6 my-0">
+                    <div class="d-inline-block h6 my-0 {% if request_url == url_link %}text-color-2{% endif %}">
                         Поддержка
                     </div>
                     <div class="d-inline-block">
-                        <div class="css-icon css-icon-32px css-icon-help"></div>
+                        <div class="css-icon css-icon-32px css-icon-help {% if request_url == url_link %}css-active{% endif %}"></div>
                     </div>
                 </div>
             </a>
         </div>
 
-        <nav class="d-none d-md-inline-block ml-3">
+        <nav class="d-none d-md-inline-block ml-lg-3 my-auto">
             {% if user.is_authenticated %}
                 <div class="dropdown">
-                    <a href="{% url 'profile:orders' %}" class="text-decoration-none text-color-gray-700 dropdown-toggle" data-toggle="dropdown">
+                    <a href="{% url 'profile:orders' %}" class="text-decoration-none dropdown-toggle" data-toggle="dropdown">
                         <div class="d-flex align-items-center justify-content-center px-2 py-1 css-icon-user-parent">
                             <div class="d-inline-block h6 my-0">
                                 Мой аккаунт
@@ -72,13 +97,14 @@
                     </div>
                 </div>
             {% else %}
-                <a href="{% url 'accounts:login' %}" class="text-decoration-none text-color-gray-700">
+                {% url 'accounts:login' as url_link %}
+                <a href="{{ url_link }}" class="text-decoration-none">
                     <div class="d-flex align-items-center justify-content-center px-2 py-1 css-icon-user-parent">
-                        <div class="d-inline-block h6 my-0 text-nowrap">
+                        <div class="d-inline-block h6 my-0 text-nowrap {% if request_url == url_link %}text-color-2{% endif %}">
                             Войти / Регистрация
                         </div>
                         <div class="d-inline-block">
-                            <div class="css-icon css-icon-32px css-icon-user"></div>
+                            <div class="css-icon css-icon-32px css-icon-user {% if request_url == url_link %}css-active{% endif %}"></div>
                         </div>
                     </div>
                 </a>
@@ -100,13 +126,32 @@
                 </div>
 
                 <div>
-                    <a href="{% url 'support:support' %}" class="text-decoration-none text-color-gray-700">
+                    {% url 'shop' as url_link %}
+                    <a href="{{ url_link }}" class="text-decoration-none">
+                        <div class="d-flex align-items-center justify-content-center py-0 css-icon-shop-parent">
+                            <div class="d-inline-block h6 my-2 {% if request_url == url_link %}text-color-2{% endif %}">
+                                Каталог
+                            </div>
+                            <div class="d-inline-block ml-1">
+                                <div class="css-icon css-icon-32px css-icon-shop {% if request_url == url_link %}css-active{% endif %}"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div>
+                    <hr>
+                </div>
+
+                <div>
+                    {% url 'support:support' as url_link %}
+                    <a href="{{ url_link }}" class="text-decoration-none">
                         <div class="d-flex align-items-center justify-content-center py-0 css-icon-help-parent">
-                            <div class="d-inline-block h6 my-2">
+                            <div class="d-inline-block h6 my-2 {% if request_url == url_link %}text-color-2{% endif %}">
                                 Поддержка
                             </div>
                             <div class="d-inline-block">
-                                <div class="css-icon css-icon-32px css-icon-help"></div>
+                                <div class="css-icon css-icon-32px css-icon-help {% if request_url == url_link %}css-active{% endif %}"></div>
                             </div>
                         </div>
                     </a>
@@ -118,21 +163,21 @@
 
                 {% if user.is_authenticated %}
                     <div>
-                        <a href="{% url 'profile:orders' %}" class="text-decoration-none text-color-gray-700">
+                        <a href="{% url 'profile:orders' %}" class="text-decoration-none">
                             <div class="h6 my-0 text-center py-2">
                                 Мои заказы
                             </div>
                         </a>
                     </div>
                     <div class="mt-3">
-                        <a href="{% url 'profile:chats' %}" class="text-decoration-none text-color-gray-700">
+                        <a href="{% url 'profile:chats' %}" class="text-decoration-none">
                             <div class="h6 my-0 text-center py-2">
                                 Мои сообщения
                             </div>
                         </a>
                     </div>
                     <div class="mt-3">
-                        <a href="{% url 'profile:settings' %}" class="text-decoration-none text-color-gray-700">
+                        <a href="{% url 'profile:settings' %}" class="text-decoration-none">
                             <div class="h6 my-0 text-center py-2">
                                 Мои настройки
                             </div>
@@ -142,7 +187,7 @@
                         <hr>
                     </div>
                     <div>
-                        <a href="{% url 'accounts:logout' %}" class="text-decoration-none text-color-gray-700">
+                        <a href="{% url 'accounts:logout' %}" class="text-decoration-none">
                             <div class="h6 my-0 text-center py-2">
                                 Выйти
                             </div>
@@ -150,13 +195,14 @@
                     </div>
                 {% else %}
                     <div>
-                        <a href="{% url 'accounts:login' %}" class="text-decoration-none text-color-gray-700">
+                        {% url 'accounts:login' as url_link %}
+                        <a href="{{ url_link }}" class="text-decoration-none">
                             <div class="d-flex align-items-center justify-content-center py-0 css-icon-user-parent">
-                                <div class="d-inline-block h6 my-2">
+                                <div class="d-inline-block h6 my-2 {% if request_url == url_link %}text-color-2{% endif %}">
                                     Войти / Регистрация
                                 </div>
                                 <div class="d-inline-block">
-                                    <div class="css-icon css-icon-32px css-icon-user"></div>
+                                    <div class="css-icon css-icon-32px css-icon-user {% if request_url == url_link %}css-active{% endif %}"></div>
                                 </div>
                             </div>
                         </a>
@@ -166,3 +212,4 @@
         </div>
     </nav>
 </header>
+{% endwith %}

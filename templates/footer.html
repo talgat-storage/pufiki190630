@@ -1,42 +1,84 @@
 <footer class="container-fluid container-fluid-max-width">
-    <div class="row bg-color-3 py-4 mt-3">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 offset-lg-1 d-flex flex-column text-center text-sm-left my-3">
-            <div>
-                <span class="border border-color-1 rounded bg-color-1 h5 my-0 p-2 text-white">Pufiki.kz</span>
-            </div>
-            <div class="mt-3">
-                <span class="my-2"><a href="{% url 'home' %}" class="text-white">Главная</a></span>
-            </div>
-            <div class="mt-3">
-                <span class="my-2"><a href="{% url 'shop' %}" class="text-white">Каталог</a></span>
-            </div>
-            <div class="mt-3">
-                <span class="my-2"><a href="{% url 'support:support' %}" class="text-white">Поддержка</a></span>
-            </div>
-            <div class="mt-3">
-                <span class="my-2"><a href="{% url 'accounts:login' %}" class="text-white text-nowrap">Войти / Регистрация</a></span>
+    <div class="row bg-color-3 pt-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 offset-lg-1 order-1 order-sm-1 order-md-1 mt-4 mb-1">
+            <div class="d-inline-block">
+                <div class="h5 my-0 text-white">
+                    Pufiki.kz
+                </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 offset-lg-1 d-flex flex-column text-center text-sm-left my-3">
-            <div>
-                <span class="h5 my-0 py-2 text-white">Популярные вопросы</span>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 offset-lg-1 order-3 order-sm-2 order-md-2 mt-4 mb-1">
+            <div class="d-inline-block">
+                <div class="h5 my-0 text-white">
+                    Популярные вопросы
+                </div>
             </div>
-            <div class="mt-3">
+        </div>
+        <div class="col-12 col-md-4 col-lg-3 offset-lg-1 order-5 order-sm-5 order-md-3 mt-4 mb-1">
+            <div class="d-inline-block">
+                <div class="h5 my-0 text-white">
+                    Контакты
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 offset-lg-1 d-flex flex-row flex-sm-column flex-wrap order-2 order-sm-3 order-md-4">
+            <div class="d-inline-block mr-4 my-2">
+                <a href="{% url 'home' %}" class="text-white">Главная</a>
+            </div>
+            <div class="d-inline-block mr-4 my-2">
+                <a href="{% url 'shop' %}" class="text-white">Каталог</a>
+            </div>
+            <div class="d-inline-block mr-4 my-2">
+                <a href="{% url 'support:support' %}" class="text-white">Поддержка</a>
+            </div>
+            <div class="d-inline-block my-2">
+                <a href="{% url 'accounts:login' %}" class="text-white text-nowrap">Войти / Регистрация</a>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 offset-lg-1 d-flex flex-row flex-sm-column flex-wrap order-4 order-sm-4 order-md-5">
+            <div class="d-inline-block mr-4 my-2">
                 <a href="{% url 'support:question' section_name='product' question_index='0' %}" class="text-white">Продукция</a>
             </div>
-            <div class="mt-3">
+            <div class="d-inline-block mr-4 my-2">
                 <a href="{% url 'support:question' section_name='delivery' question_index='0' %}" class="text-white">Доставка</a>
             </div>
-            <div class="mt-3">
+            <div class="d-inline-block mr-4 my-2">
                 <a href="{% url 'support:question' section_name='payment' question_index='0' %}" class="text-white">Оплата</a>
             </div>
-            <div class="mt-3">
+            <div class="d-inline-block mr-4 my-2">
                 <a href="{% url 'support:question' section_name='return' question_index='0' %}" class="text-white">Возврат или замена</a>
             </div>
+            <div class="d-inline-block my-2">
+                <a href="{% url 'support:support' %}" class="text-white">Задайте Ваш вопрос</a>
+            </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 offset-lg-1 d-flex flex-column text-center text-sm-left my-3">
-            <div>
-                <span class="h5 my-0 py-2 text-white">Контакты</span>
+        <address class="col-12 col-sm-6 col-md-4 col-lg-3 offset-lg-1 d-flex flex-column order-6 order-sm-6 order-md-6 mb-3">
+            <div class="d-inline-block mt-2">
+                <span class="text-white">Эл. почта: <a href="mailto:info@pufiki.kz" class="text-white"><u>info@pufiki.kz</u></a></span>
+            </div>
+            <div class="d-inline-block mt-1">
+                <span class="text-white">Телефон: <a href="tel:+77077807477" class="text-white"><u>+77077807477</u></a></span>
+            </div>
+            <div class="d-inline-block mt-1">
+                <span class="text-white">Пон - Пят: 10:00 - 17:00</span>
+            </div>
+            <div class="d-inline-block mt-1">
+                <a href="{% url 'support:chat' %}" class="text-white"><u>Написать сообщение</u></a>
+            </div>
+        </address>
+        <div class="col-12 col-lg-10 offset-lg-1 mt-4 mt-md-5 order-7">
+            <p class="text-sm-center text-white small my-0">
+                Доставка по Казахстану в течение 1-2 недель. Мы доставляем заказы в Алматы, Нур-Султан (Астана), Актау, Актобе, Атырау, Аксай, Акколь, Балхаш, Жезказган, Караганда, Кокшетау, Костанай, Кызылорда, Талдыкорган, Тараз, Темиртау, Уральск, Усть-Каменогорск, Павлодар, Петропавловск, Семей, Шымкент, Щучинск, Экибастуз и другие регионы.
+            </p>
+        </div>
+{#        <div class="col-12 col-lg-10 offset-lg-1 mt-3 order-8">#}
+{#            <div class="text-center text-white small">#}
+{#                <a href="{% url 'support:terms-of-service' %}" class="text-white">Условия пользования</a>#}
+{#            </div>#}
+{#        </div>#}
+        <div class="col-12 col-lg-10 offset-lg-1 my-3 order-8">
+            <div class="text-center text-white small">
+                &copy; 2019 ИП "KZTECHDEV" (Казахстан)
             </div>
         </div>
     </div>

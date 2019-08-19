@@ -1,11 +1,12 @@
 {% extends 'email/base.html' %}
-{#{% load static %}#}
+{% load static %}
 
 {% block title %}
     Подтверждение Вашего электронного адреса
 {% endblock %}
 
 {% block content %}
+    <img src="{{ domain }}{% static 'img/logo.png' %}" alt="Logo">
     <h2>Добро пожаловать!</h2>
 {#    <img src="{{ domain }}{% static 'img/shopping_cart_125px.png' %}" alt="Image">#}
     <h3 style="font-weight: normal;">Данное письмо отправлено для подтверждения Вашего электронного адреса на сайте <span style="color: #D7263D; font-weight: bold;">Pufiki.kz</span>.</h3>

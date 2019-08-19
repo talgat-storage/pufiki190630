@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block pretitle %}
+    Ошибка {{ status }} |
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid container-fluid-max-width bg-white">
+        <div class="row">
+            <div class="col-12 my-3">
+                <div class="h4">
+                    Ошибка {{ status }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

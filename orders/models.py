@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 
 from accounts.models import User
 from shop.models import Product
@@ -11,9 +11,25 @@ from pufiki190630.utilities import generate_slug_and_save, args_to_str
 DEFAULT_SLUG_LENGTH = 6
 
 
+class Address(models.Model):
+    PHONE_ERROR_MESSAGE = 'Пожалуйста, введите номер телефона в формате 87001112233 или +77001112233'
+    PHONE_REGEX_VALIDATOR = RegexValidator(
+        regex=r'^(8|(\+7))\d{10}$',
+        message=PHONE_ERROR_MESSAGE,
+        code='invalid_phone_number'
+    )
+
+    city = models.CharField(max_length=32, default='', blank=True)
+    street = models.CharField(max_length=32, default='', blank=True)
+    house = models.CharField(max_length=16, default='', blank=True)
+    flat = models.CharField(max_length=16, default='', blank=True)
+    phone = models.CharField(max_length=12, validators=[PHONE_REGEX_VALIDATOR])
+
+    def __str__(self):
+        return args_to_str(self.city, self.phone)
+
+
 class Order(models.Model):
-    PHONE_ERROR_MESSAGE = _('Please enter a valid phone number. For example, 87001112233')
-    PHONE_REGEX_VALIDATOR = RegexValidator(regex=r'^8\d{10}$', message=PHONE_ERROR_MESSAGE, code='invalid_phone_number')
     PAYMENT_METHOD_CHOICES = (
         (1, _('Cash')),
         (2, _('Card')),
@@ -25,15 +41,14 @@ class Order(models.Model):
 
     # Details
     is_fast_delivery = models.BooleanField(default=False)
-    phone = models.CharField(max_length=11, validators=[PHONE_REGEX_VALIDATOR])
-    address = models.TextField(max_length=254)
-    comment = models.TextField(max_length=254, blank=True, default='')
+    comment = models.TextField(max_length=128, blank=True, default='')
     payment_method = models.PositiveSmallIntegerField(choices=PAYMENT_METHOD_CHOICES, default=1)
+    address = models.ForeignKey(Address, on_delete=models.SET_DEFAULT, null=True, default=None)
 
     products = models.ManyToManyField(Product, through='OrderProduct')
     total_to_pay = models.PositiveIntegerField(default=0)
 
-    bank_id = models.CharField(max_length=36, default='')
+    bank_id = models.CharField(max_length=36, default='', blank=True)
 
     date_created = models.DateTimeField(default=timezone.now)
     is_valid = models.BooleanField(default=False)

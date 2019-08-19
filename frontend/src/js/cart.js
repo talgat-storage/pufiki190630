@@ -25,11 +25,11 @@ module.exports = function () {
         }
 
         var delivery_price = $('.js-cart-delivery-price');
-        delivery_price.html(next_state === 'true' ? '2900' : '0');
+        delivery_price.html(next_state === 'true' ? '5550' : '1750');
 
         var summary_total = $('.js-cart-summary-total');
         var total = parseInt(summary_total.attr('data-total'));
-        summary_total.html(next_state === 'true' ? total + 2900 : total);
+        summary_total.html(next_state === 'true' ? total + 5550 : total + 1750);
 
         $.post(api_cart_delivery, {
             'checked': next_state

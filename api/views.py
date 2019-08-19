@@ -85,6 +85,7 @@ class CartAddView(View):
         context['success'] = success
         if success:
             context['product'] = product
+            context['quantity'] = quantity
 
         alert = render_to_string('api/api-cart-add.html', context)
 

@@ -65,6 +65,13 @@ function copyImages(cb) {
     cb();
 }
 
+function copyFavicon(cb) {
+    gulp.src('src/favicon/*')
+        .pipe(gulp.dest('dist/favicon'));
+
+    cb();
+}
+
 function watch(cb) {
     gulp.watch('src/js/*', processJS);
     gulp.watch('src/scss/*', processSCSS);
@@ -77,6 +84,7 @@ exports.js = gulp.series(processJS);
 exports.scss = gulp.series(processSCSS);
 exports.icons = gulp.series(copyIcons);
 exports.img = gulp.series(copyImages);
-exports.build = gulp.series(processJS, processSCSS, copyIcons, copyImages);
-exports.default = gulp.series(clean, processJS, processSCSS, copyIcons, copyImages);
-exports.watch = gulp.series(clean, processJS, processSCSS, copyIcons, copyImages, watch);
+exports.favicon = gulp.series(copyFavicon);
+exports.build = gulp.series(processJS, processSCSS, copyIcons, copyImages, copyFavicon);
+exports.default = gulp.series(clean, processJS, processSCSS, copyIcons, copyImages, copyFavicon);
+exports.watch = gulp.series(clean, processJS, processSCSS, copyIcons, copyImages, copyFavicon, watch);

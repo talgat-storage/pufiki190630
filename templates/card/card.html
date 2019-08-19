@@ -16,7 +16,8 @@
     </div>
 
     <div class="d-block py-1 mx-3">
-        <a href="{{ origin.get_absolute_url }}{% if expanded_colors == "true" %}?color={{ selected_product.color }}{% endif %}" class="text-color-2 text-decoration-none js-card-product-link" data-origin-url="{{ origin.get_absolute_url }}">
+        <a href="{{ origin.get_absolute_url }}" class="text-color-2 text-decoration-none js-card-product-link" data-origin-url="{{ origin.get_absolute_url }}">
+        {# if expanded_colors == "true" ?color={{ selected_product.color }}{% endif %} #}
         <div class="h5 my-0">
         <u>
             {{ origin.name }}
@@ -38,6 +39,7 @@
 
         {% if expanded_colors == "false" %}
         <small class="my-0 text-muted">
+            На выбор
             {{ number_of_products }}
             {% with remainder=number_of_products|modulo:10 %}
                 {% if remainder == 0 or remainder >= 5 %}цветов{% elif remainder == 1 %}цвет{% else %}цвета{% endif %}

@@ -32,15 +32,17 @@
             <hr class="my-0">
         </div>
         <div class="d-flex flex-wrap mt-1 mb-2">
+            {% with selected_product=product %}
             {% for product in products %}
             <div class="d-inline-block mr-1 mt-1">
                 <a href="{{ origin.get_absolute_url }}?color={{ product.color }}">
-                    <div class="css-icon css-icon-hover css-icon-34px rounded border border-color-gray-300">
+                    <div class="css-icon css-icon-hover css-icon-34px rounded border {% if selected_product.slug == product.slug %}border-color-2{% else %}border-color-gray-300{% endif %}">
                         <img class="d-block w-100 rounded" src="{{ product.color_photo.url }}" alt="Product {{ product.slug }}">
                     </div>
                 </a>
             </div>
             {% endfor %}
+            {% endwith %}
         </div>
     </div>
 

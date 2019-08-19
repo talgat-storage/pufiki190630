@@ -49,7 +49,7 @@ class UserPasswordResetForm(PasswordResetForm):
 
         for user in self.get_users(user_email):
             token = token_generator.make_token(user)
-            # Send email to user using Celery
+            # Send email to user
             send_async_email.delay(
                 user_email,
                 'accounts:password-set',

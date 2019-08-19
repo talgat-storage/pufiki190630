@@ -5,10 +5,6 @@
     {{ origin.name }} |
 {% endblock %}
 
-{% block canonical_link %}
-    <link rel="canonical" href="{{ origin.get_absolute_url }}">
-{% endblock %}
-
 {% block content %}
     <aside class="container-fluid container-fluid-max-width">
         {% with home_url='home' shop_url='shop' %}
@@ -36,10 +32,10 @@
             <div class="col-12 col-md-8 d-flex flex-column px-0">
                 <div class="d-block bg-white">
                     {% with collapse_id="origin-collapse-description" collapse_name="Описание" %}
-                        {% include 'collapse.html' with expanded="false" extra_style="css-origin-collapse px-3 py-3" font="h6 my-0" %}
+                        {% include 'collapse.html' with expanded="true" extra_style="css-origin-collapse px-3 py-3" font="h6 my-0" %}
 
-                        <div id="{{ collapse_id }}" class="collapse px-3 py-3 js-collapsible">
-                            <p class="my-0">
+                        <div id="{{ collapse_id }}" class="collapse show px-3 py-3 js-collapsible">
+                            <p class="my-0 text-justify">
                                 {{ origin.description }}
                             </p>
                         </div>

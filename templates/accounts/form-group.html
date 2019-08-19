@@ -1,13 +1,22 @@
 {% load add_css %}
 
-<div class="form-group">
-    <label for="{{ field.id_for_label }}" class="h5 font-weight-normal">{{ text }}</label>
+<div class="form-group {{ form_group_class }}">
+    <label for="{{ field.id_for_label }}" class="{{ label_class }} {% if label_font_size %}{{ label_font_size }}{% else %}h5{% endif %} font-weight-normal">{{ text }}</label>
     {% if field.errors %}
         {{ field|add_css:"form-control is-invalid" }}
     {% else %}
         {{ field|add_css:"form-control" }}
     {% endif %}
-    <small class="form-text text-muted">{{ help_text }}</small>
+    {% if datalist %}
+        <datalist id="{{ datalist.id }}">
+            {% for option in datalist.options %}
+                <option value="{{ option }}"></option>
+            {% endfor %}
+        </datalist>
+    {% endif %}
+    {% if help_text %}
+        <small class="form-text text-muted">{{ help_text }}</small>
+    {% endif %}
     {% for error in field.errors %}
         <div class="invalid-feedback">
             {{ error }}

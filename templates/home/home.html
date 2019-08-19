@@ -8,8 +8,8 @@
             <div class="col-12 p-0">
                 <div class="css-home-showcase-wrapper">
                     <picture>
-                        <source media="(max-width: 575.98px)" srcset="{% static 'img/new-home-showcase-mobile.jpg' %}">
-                        <img class="d-block w-100" src="{% static 'img/new-home-showcase-desktop.jpg' %}" alt="Парень с книгой удобно расположился на кресло-мешке, бинбэге или пуфике">
+                        <source media="(max-width: 575.98px)" srcset="{% static 'img/home-showcase-mobile.jpg' %}">
+                        <img class="d-block w-100" src="{% static 'img/home-showcase-desktop.jpg' %}" alt="Парень с книгой удобно расположился на кресло-мешке, бинбэге или пуфике">
                     </picture>
                     <div class="css-home-showcase-text d-flex flex-column justify-content-center px-3 pl-sm-0 pr-md-4 pr-lg-5">
                         {% include 'home/home-showcase-text.html' %}
@@ -84,29 +84,29 @@
     </section>
 
 {#    Counter #}
-    <section class="container-fluid container-fluid-max-width my-3">
-        <div class="row">
-            <div class="col-12 d-flex align-items-center justify-content-center bg-white py-4">
-                <div class="d-inline-block">
-                    <div class="h3 my-0 font-weight-normal text-center">
-                        Мы уже доставили <span class="h3 my-0">{{ delivered_order_count }}</span> заказа нашим покупателям!
-                    </div>
-                </div>
-                <div class="d-inline-block ml-1">
-                    <img class="css-width-50px p-1" src="{% static 'img/smiling_filled_125px.png' %}" alt="Улыбка">
-                </div>
-            </div>
-        </div>
-    </section>
+{#    <section class="container-fluid container-fluid-max-width my-3">#}
+{#        <div class="row">#}
+{#            <div class="col-12 d-flex align-items-center justify-content-center bg-white py-4">#}
+{#                <div class="d-inline-block">#}
+{#                    <div class="h3 my-0 font-weight-normal text-center">#}
+{#                        Мы уже доставили <span class="h3 my-0">{{ delivered_order_count }}</span> заказа нашим покупателям!#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="d-inline-block ml-1">#}
+{#                    <img class="css-width-50px p-1" src="{% static 'img/smiling_filled_125px.png' %}" alt="Улыбка">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
 
 {#    Product Description #}
     <section class="container-fluid container-fluid-max-width">
     <div class="row">
         <div class="col-12 col-sm-6 col-lg-5 px-sm-0 order-1 my-3">
-            <img class="d-block w-100" src="{% static 'img/new-home-showcase.jpg' %}" alt="Красивый и гармоничный кресло-мешок, бинбэг или пуфик">
+            <img class="d-block w-100" src="{% static 'img/home-beautiful.jpg' %}" alt="Красивый и гармоничный кресло-мешок, бинбэг или пуфик">
         </div>
         <div class="col-12 col-sm-6 col-lg-5 px-sm-0 order-3 order-sm-4 my-3">
-            <img class="d-block w-100" src="{% static 'img/new-home-showcase.jpg' %}" alt="Удобный и безопасный кресло-мешок, бинбэг или пуфик">
+            <img class="d-block w-100" src="{% static 'img/home-comfortable.jpg' %}" alt="Удобный и безопасный кресло-мешок, бинбэг или пуфик">
         </div>
         <div class="col-12 col-sm-6 col-lg-5 pl-md-5 d-flex flex-column justify-content-center order-2 my-3">
             <div class="h5">Красиво</div>

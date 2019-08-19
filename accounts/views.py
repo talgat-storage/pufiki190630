@@ -44,7 +44,7 @@ def signup_view(request):
                 cache_context['signup_user'] = user
                 cache.set(user_email, cache_context, 3600)  # One hour
 
-                # Send email to user using Celery
+                # Send email to user
                 send_async_email.delay(
                     user_email,
                     'accounts:activate',

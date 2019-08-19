@@ -1,4 +1,5 @@
 {% load static %}
+{% load math %}
 
 <div class="d-flex flex-column bg-color-gray-300 p-3">
     <div class="h4 my-0">
@@ -31,7 +32,7 @@
             Доставка:
         </div>
         <div class="h6 my-0">
-            <span class="js-cart-delivery-price">{% if is_fast_delivery %}2900{% else %}0{% endif %}</span> тг.
+            <span class="js-cart-delivery-price">{% if is_fast_delivery %}5550{% else %}1750{% endif %}</span> тг.
         </div>
     </div>
     <div class="d-block">
@@ -42,7 +43,7 @@
             Итого:
         </div>
         <div class="h6 my-0">
-            <span class="js-cart-summary-total" data-total="{{ total }}">{% if is_fast_delivery %}{{ total|add:"2900" }}{% else %}{{ total }}{% endif %}</span> тг.
+            <span class="js-cart-summary-total" data-total="{{ total }}">{% if is_fast_delivery %}{{ total|add:"5550" }}{% else %}{{ total|add:"1750" }}{% endif %}</span> тг.
         </div>
     </div>
     <div class="mt-3">

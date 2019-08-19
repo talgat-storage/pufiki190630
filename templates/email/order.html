@@ -1,0 +1,14 @@
+{% extends 'email/base.html' %}
+{% load static %}
+
+{% block title %}
+    Подтверждение Вашего заказа
+{% endblock %}
+
+{% block content %}
+    <img src="{{ domain }}{% static 'img/logo.png' %}" alt="Logo">
+    <h2>Спасибо!</h2>
+    <h3 style="font-weight: normal;">Ваш заказ успешно оформлен и принят в обработку.</h3>
+    <h3 style="font-weight: normal;">Номер заказа: <span style="font-weight: bold;">{{ order_slug }}</span>.</h3>
+    <h3 style="font-weight: normal;">Хорошего Вам дня!</h3>
+{% endblock %}
